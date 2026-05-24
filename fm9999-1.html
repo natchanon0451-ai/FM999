@@ -78,6 +78,7 @@
         <select id="setup-league-select" onchange="updateSetupTeamDropdown()" style="font-size: 16px; padding: 5px;">
             <option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</option>
             <option value="LALIGA">🇪🇸 La Liga</option>
+            <option value="SERIEA">🇮🇹 Serie A</option>
          </select>
         <select id="team-select" style="font-size: 16px; padding: 5px; margin-left: 5px;"></select>
     </div>
@@ -177,7 +178,7 @@
         <h2 style="text-align: center; margin-top: 0; color: #22c55e;">🛒 ตลาดซื้อขายนักเตะ</h2>
         <div style="font-size: 14px; text-align: center; color: #94a3b8; margin-bottom: 12px;">💰 งบปัจจุบัน: <b style="color: #22c55e;"><span id="modal-budget">0</span>M</b></div>
         <div style="display: flex; gap: 10px; margin-bottom: 15px; justify-content: center; flex-wrap: wrap; background: #0f172a; padding: 10px; border-radius: 6px;">
-            <div><span style="font-size:12px; color:#94a3b8;">เลือกลีก:</span> <select id="market-league-filter" onchange="updateMarketTeamFilterDropdown()"><option value="ALL">ทุกลีก</option><option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 PL</option><option value="LALIGA">🇪🇸 La Liga</option></select></div>
+            <div><span style="font-size:12px; color:#94a3b8;">เลือกลีก:</span> <select id="market-league-filter" onchange="updateMarketTeamFilterDropdown()"><option value="ALL">ทุกลีก</option><option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 PL</option><option value="LALIGA">🇪🇸 La Liga</option><option value="SERIEA">🇮🇹 Serie A</option></select></div>
             <div><span style="font-size:12px; color:#94a3b8;">สโมสร:</span> <select id="market-team-filter" onchange="renderMarket(true)"><option value="ALL">ทุกสโมสร</option></select></div>
             <div><span style="font-size:12px; color:#94a3b8;">ตำแหน่ง:</span> <select id="market-role-filter" onchange="renderMarket(true)"><option value="ALL">ทุกตำแหน่ง</option><option value="GK">GK</option><option value="DF">DF</option><option value="MF">MF</option><option value="FW">FW</option></select></div>
         </div>
@@ -191,7 +192,7 @@
     <div class="modal-content" style="width: 700px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
             <h2 style="margin: 0; color: #eab308;">🏆 ตารางคะแนน</h2>
-            <div><button id="tab-btn-pl" class="league-title-btn active" onclick="switchTableLeague('PL')">🏴󠁧󠁢󠁥󠁮󠁧󠁿 PL</button><button id="tab-btn-laliga" class="league-title-btn" onclick="switchTableLeague('LALIGA')">🇪🇸 La Liga</button></div>
+            <div><button id="tab-btn-pl" class="league-title-btn active" onclick="switchTableLeague('PL')">🏴󠁧󠁢󠁥󠁮󠁧󠁿 PL</button><button id="tab-btn-laliga" class="league-title-btn" onclick="switchTableLeague('LALIGA')">🇪🇸 La Liga</button><button id="tab-btn-seriea" class="league-title-btn" onclick="switchTableLeague('SERIEA')">🇮🇹 Serie A</button></div>
         </div>
         <div style="overflow-x: auto;">
             <table><thead><tr><th>อันดับ</th><th>ทีม</th><th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>GD</th><th>แต้ม</th></tr></thead><tbody id="league-table-body"></tbody></table>
@@ -205,7 +206,7 @@
         <h2 style="text-align: center; margin-top: 0; color: #f59e0b;">🏛️ หอเกียรติยศสโมสร</h2>
         <div style="display: grid; grid-template-columns: 340px 1fr; gap: 15px; margin-top: 15px; height: 50vh;">
             <div style="overflow-y: auto; background: #0f172a; padding: 8px; border-radius: 6px;">
-                <div style="margin-bottom: 8px; text-align: center;"><select id="trophy-league-filter" onchange="renderTrophyLeaderboard()" style="width: 95%;"><option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 แชมป์ Premier League</option><option value="LALIGA">🇪🇸 แชมป์ La Liga</option></select></div>
+                <div style="margin-bottom: 8px; text-align: center;"><select id="trophy-league-filter" onchange="renderTrophyLeaderboard()" style="width: 95%;"><option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 แชมป์ Premier League</option><option value="LALIGA">🇪🇸 แชมป์ La Liga</option><option value="SERIEA">🇮🇹 แชมป์ Serie A</option></select></div>
                 <table style="font-size: 11px; width: 100%;"><thead><tr><th>ทีม</th><th>ถ้วยรวม</th></tr></thead><tbody id="trophy-leaderboard-body"></tbody></table>
             </div>
             <div id="cabinet-display" style="background: #020617; border: 2px solid #334155; border-radius: 6px; padding: 15px; overflow-y: auto; text-align: center; color:#94a3b8;">
@@ -297,6 +298,28 @@
             "Leganes": [{name:"Soriano", role:"GK", age:27}, {name:"Dmitrovic", role:"GK", age:32}, {name:"Saenz", role:"DF", age:27}, {name:"Gonzalez", role:"DF", age:29}, {name:"Rosier", role:"DF", age:28}, {name:"Hernandez", role:"DF", age:26}, {name:"Neyou", role:"MF", age:27}, {name:"Cisse", role:"MF", age:23}, {name:"Brasanac", role:"MF", age:32}, {name:"Tapia", role:"MF", age:29}, {name:"Oscar", role:"MF", age:26}, {name:"Raba", role:"FW", age:28}, {name:"Garcia", role:"FW", age:23}, {name:"Cruz", role:"FW", age:23}, {name:"Haller", role:"FW", age:30}],
             "Valladolid": [{name:"Hein", role:"GK", age:22}, {name:"Ferreira", role:"GK", age:26}, {name:"Boyomo", role:"DF", age:22}, {name:"Sanchez", role:"DF", age:27}, {name:"Perez", role:"DF", age:28}, {name:"Rosa", role:"DF", age:24}, {name:"Comert", role:"DF", age:26}, {name:"Perez", role:"MF", age:23}, {name:"Juric", role:"MF", age:23}, {name:"Amallah", role:"MF", age:27}, {name:"Meseguer", role:"MF", age:25}, {name:"Moro", role:"FW", age:21}, {name:"Sylla", role:"FW", age:30}, {name:"Ndiaye", role:"FW", age:28}, {name:"Latasa", role:"FW", age:23}],
             "Espanyol": [{name:"Garcia", role:"GK", age:23}, {name:"Pacheco", role:"GK", age:32}, {name:"Cabrera", role:"DF", age:33}, {name:"Kumbulla", role:"DF", age:24}, {name:"El Hilali", role:"DF", age:21}, {name:"Romero", role:"DF", age:24}, {name:"Gragera", role:"MF", age:24}, {name:"Kral", role:"MF", age:26}, {name:"Lozano", role:"MF", age:25}, {name:"Aguado", role:"MF", age:28}, {name:"Puado", role:"FW", age:26}, {name:"Veliz", role:"FW", age:20}, {name:"Carreras", role:"FW", age:22}, {name:"Cardona", role:"FW", age:29}, {name:"Milla", role:"FW", age:31}]
+        },
+        "SERIEA": {
+            "Inter Milan": [{name:"Sommer", role:"GK", age:35}, {name:"Di Gennaro", role:"GK", age:35}, {name:"Acerbi", role:"DF", age:36}, {name:"De Vrij", role:"DF", age:33}, {name:"Bastoni", role:"DF", age:25}, {name:"Darmian", role:"DF", age:35}, {name:"Dumfries", role:"DF", age:28}, {name:"Carlos Augusto", role:"DF", age:26}, {name:"Bisseck", role:"DF", age:24}, {name:"Barella", role:"MF", age:27}, {name:"Calhanoglu", role:"MF", age:30}, {name:"Mkhitaryan", role:"MF", age:35}, {name:"Frattesi", role:"MF", age:25}, {name:"Zielinski", role:"MF", age:30}, {name:"Asllani", role:"MF", age:22}, {name:"Lautaro Martinez", role:"FW", age:26}, {name:"Thuram", role:"FW", age:27}, {name:"Correa", role:"FW", age:29}, {name:"Taremi", role:"FW", age:32}],
+            "AC Milan": [{name:"Maignan", role:"GK", age:29}, {name:"Sportiello", role:"GK", age:32}, {name:"Calabria", role:"DF", age:27}, {name:"Tomori", role:"DF", age:27}, {name:"Thiaw", role:"DF", age:23}, {name:"Hernandez", role:"DF", age:26}, {name:"Gabbia", role:"DF", age:24}, {name:"Terracciano", role:"DF", age:24}, {name:"Reijnders", role:"MF", age:26}, {name:"Musah", role:"MF", age:22}, {name:"Loftus-Cheek", role:"MF", age:28}, {name:"Bennacer", role:"MF", age:26}, {name:"Zeroli", role:"MF", age:19}, {name:"Leao", role:"FW", age:25}, {name:"Morata", role:"FW", age:31}, {name:"Pulisic", role:"FW", age:26}, {name:"Chukwueze", role:"FW", age:25}, {name:"Abraham", role:"FW", age:26}, {name:"Okafor", role:"FW", age:24}],
+            "Juventus": [{name:"Di Gregorio", role:"GK", age:27}, {name:"Perin", role:"GK", age:32}, {name:"Bremer", role:"DF", age:27}, {name:"Gatti", role:"DF", age:26}, {name:"Danilo", role:"DF", age:33}, {name:"Cambiaso", role:"DF", age:24}, {name:"Cabal", role:"DF", age:23}, {name:"Savona", role:"DF", age:20}, {name:"McKennie", role:"MF", age:26}, {name:"Locatelli", role:"MF", age:26}, {name:"Fagioli", role:"MF", age:23}, {name:"Douglas Luiz", role:"MF", age:27}, {name:"Koopmeiners", role:"MF", age:26}, {name:"Vlahovic", role:"FW", age:24}, {name:"Yildiz", role:"FW", age:19}, {name:"Conceicao", role:"FW", age:22}, {name:"Iling", role:"FW", age:20}, {name:"Weah", role:"FW", age:24}],
+            "Napoli": [{name:"Meret", role:"GK", age:27}, {name:"Caprile", role:"GK", age:23}, {name:"Rrahmani", role:"DF", age:28}, {name:"Buongiorno", role:"DF", age:25}, {name:"Di Lorenzo", role:"DF", age:31}, {name:"Olivera", role:"DF", age:27}, {name:"Juan Jesus", role:"DF", age:33}, {name:"Mazzocchi", role:"DF", age:29}, {name:"Lobotka", role:"MF", age:29}, {name:"Anguissa", role:"MF", age:28}, {name:"McTominay", role:"MF", age:27}, {name:"Gilmour", role:"MF", age:23}, {name:"Folorunsho", role:"MF", age:26}, {name:"Lukaku", role:"FW", age:31}, {name:"Politano", role:"FW", age:31}, {name:"Kvaratskhelia", role:"FW", age:23}, {name:"Neres", role:"FW", age:28}, {name:"Ngonge", role:"FW", age:24}],
+            "Atalanta": [{name:"Carnesecchi", role:"GK", age:24}, {name:"Rossi", role:"GK", age:29}, {name:"Djimsiti", role:"DF", age:31}, {name:"Scalvini", role:"DF", age:20}, {name:"Kolasinac", role:"DF", age:31}, {name:"Zappacosta", role:"DF", age:32}, {name:"Toloi", role:"DF", age:34}, {name:"Bellanova", role:"DF", age:24}, {name:"De Roon", role:"MF", age:33}, {name:"Ederson", role:"MF", age:25}, {name:"Pasalic", role:"MF", age:29}, {name:"Samardzic", role:"MF", age:22}, {name:"Brescianini", role:"MF", age:24}, {name:"Lookman", role:"FW", age:27}, {name:"Scamacca", role:"FW", age:25}, {name:"De Ketelaere", role:"FW", age:23}, {name:"Retegui", role:"FW", age:25}, {name:"Zaniolo", role:"FW", age:25}],
+            "Roma": [{name:"Svilar", role:"GK", age:25}, {name:"Ryan", role:"GK", age:28}, {name:"Mancini", role:"DF", age:29}, {name:"N'Dicka", role:"DF", age:24}, {name:"Angelino", role:"DF", age:27}, {name:"Celik", role:"DF", age:27}, {name:"Hummels", role:"DF", age:35}, {name:"Kristensen", role:"DF", age:27}, {name:"Pellegrini", role:"MF", age:28}, {name:"Paredes", role:"MF", age:30}, {name:"Cristante", role:"MF", age:29}, {name:"Pisilli", role:"MF", age:19}, {name:"Le Fee", role:"MF", age:24}, {name:"Dybala", role:"FW", age:30}, {name:"Dovbyk", role:"FW", age:27}, {name:"Baldanzi", role:"FW", age:21}, {name:"El Shaarawy", role:"FW", age:31}, {name:"Soule", role:"FW", age:21}],
+            "Lazio": [{name:"Provedel", role:"GK", age:30}, {name:"Mandas", role:"GK", age:23}, {name:"Gila", role:"DF", age:23}, {name:"Romagnoli", role:"DF", age:29}, {name:"Marusic", role:"DF", age:31}, {name:"Hysaj", role:"DF", age:30}, {name:"Pellegrini", role:"DF", age:25}, {name:"Tavares", role:"DF", age:24}, {name:"Guendouzi", role:"MF", age:25}, {name:"Rovella", role:"MF", age:22}, {name:"Dele-Bashiru", role:"MF", age:23}, {name:"Vecino", role:"MF", age:33}, {name:"Cataldi", role:"MF", age:30}, {name:"Zaccagni", role:"FW", age:29}, {name:"Pedro", role:"FW", age:37}, {name:"Isaksen", role:"FW", age:23}, {name:"Castellanos", role:"FW", age:26}, {name:"Noslin", role:"FW", age:26}],
+            "Fiorentina": [{name:"De Gea", role:"GK", age:33}, {name:"Terracciano", role:"GK", age:34}, {name:"Comuzzo", role:"DF", age:19}, {name:"Ranieri", role:"DF", age:23}, {name:"Biraghi", role:"DF", age:32}, {name:"Dodo", role:"DF", age:26}, {name:"Pongracic", role:"DF", age:27}, {name:"Quarta", role:"DF", age:29}, {name:"Bove", role:"MF", age:22}, {name:"Amrabat", role:"MF", age:27}, {name:"Richardson", role:"MF", age:24}, {name:"Adli", role:"MF", age:24}, {name:"Mandragora", role:"MF", age:27}, {name:"Gudmundsson", role:"FW", age:27}, {name:"Kouame", role:"FW", age:27}, {name:"Beltran", role:"FW", age:24}, {name:"Sottil", role:"FW", age:25}, {name:"Colpani", role:"FW", age:25}],
+            "Bologna": [{name:"Skorupski", role:"GK", age:33}, {name:"Bagnolini", role:"GK", age:22}, {name:"Beukema", role:"DF", age:26}, {name:"Lucumi", role:"DF", age:26}, {name:"Posch", role:"DF", age:27}, {name:"Kristiansen", role:"DF", age:25}, {name:"Erlic", role:"DF", age:27}, {name:"Miranda", role:"DF", age:25}, {name:"Ferguson", role:"MF", age:23}, {name:"Freuler", role:"MF", age:32}, {name:"Moro", role:"MF", age:22}, {name:"Fabbian", role:"MF", age:21}, {name:"Urbanski", role:"MF", age:21}, {name:"Castro", role:"FW", age:20}, {name:"Ndoye", role:"FW", age:24}, {name:"Orsolini", role:"FW", age:27}, {name:"Odgaard", role:"FW", age:24}, {name:"Dallinga", role:"FW", age:23}],
+            "Torino": [{name:"Milinkovic-Savic", role:"GK", age:27}, {name:"Paleari", role:"GK", age:29}, {name:"Coco", role:"DF", age:23}, {name:"Maripan", role:"DF", age:32}, {name:"Rodriguez", role:"DF", age:32}, {name:"Vojvoda", role:"DF", age:28}, {name:"Sosa", role:"DF", age:26}, {name:"Masina", role:"DF", age:31}, {name:"Ricci", role:"MF", age:23}, {name:"Ilic", role:"MF", age:23}, {name:"Vlasic", role:"MF", age:27}, {name:"Gineitis", role:"MF", age:20}, {name:"Linetty", role:"MF", age:29}, {name:"Adams", role:"FW", age:28}, {name:"Zapata", role:"FW", age:33}, {name:"Sanabria", role:"FW", age:28}, {name:"Pellegri", role:"FW", age:24}, {name:"Karamoh", role:"FW", age:27}],
+            "Monza": [{name:"Turati", role:"GK", age:24}, {name:"Pizzignacco", role:"GK", age:27}, {name:"Izzo", role:"DF", age:32}, {name:"Pablo Mari", role:"DF", age:31}, {name:"Carboni", role:"DF", age:20}, {name:"Kyriakopoulos", role:"DF", age:29}, {name:"D'Ambrosio", role:"DF", age:36}, {name:"Ciurria", role:"DF", age:29}, {name:"Pessina", role:"MF", age:27}, {name:"Bondo", role:"MF", age:22}, {name:"Birindelli", role:"MF", age:26}, {name:"Sensi", role:"MF", age:29}, {name:"Valoti", role:"MF", age:31}, {name:"Djuric", role:"FW", age:32}, {name:"Mota Carvalho", role:"FW", age:24}, {name:"Caprari", role:"FW", age:30}, {name:"Vignato", role:"FW", age:23}, {name:"Maldini", role:"FW", age:22}],
+            "Genoa": [{name:"Martinez", role:"GK", age:22}, {name:"Gollini", role:"GK", age:30}, {name:"De Winter", role:"DF", age:22}, {name:"Vasquez", role:"DF", age:29}, {name:"Bani", role:"DF", age:32}, {name:"Martin", role:"DF", age:24}, {name:"Sabelli", role:"DF", age:30}, {name:"Matturro", role:"DF", age:18}, {name:"Badelj", role:"MF", age:35}, {name:"Thorsby", role:"MF", age:29}, {name:"Malinovskyi", role:"MF", age:31}, {name:"Frendrup", role:"MF", age:24}, {name:"Bohinen", role:"MF", age:24}, {name:"Vitinha", role:"FW", age:24}, {name:"Ekuban", role:"FW", age:31}, {name:"Messias", role:"FW", age:33}, {name:"Pinamonti", role:"FW", age:25}, {name:"Ekhator", role:"FW", age:19}],
+            "Cagliari": [{name:"Scuffet", role:"GK", age:28}, {name:"Sherri", role:"GK", age:24}, {name:"Luperto", role:"DF", age:29}, {name:"Mina", role:"DF", age:29}, {name:"Zappa", role:"DF", age:25}, {name:"Augello", role:"DF", age:30}, {name:"Obert", role:"DF", age:22}, {name:"Wieteska", role:"DF", age:28}, {name:"Deiola", role:"MF", age:30}, {name:"Prati", role:"MF", age:24}, {name:"Makoumbou", role:"MF", age:26}, {name:"Gaetano", role:"MF", age:23}, {name:"Nandez", role:"MF", age:29}, {name:"Luvumbo", role:"FW", age:22}, {name:"Lapadula", role:"FW", age:34}, {name:"Petagna", role:"FW", age:34}, {name:"Viola", role:"FW", age:26}, {name:"Shomurodov", role:"FW", age:27}],
+            "Lecce": [{name:"Falcone", role:"GK", age:27}, {name:"Brancolini", role:"GK", age:23}, {name:"Gendrey", role:"DF", age:25}, {name:"Baschirotto", role:"DF", age:27}, {name:"Gaspar", role:"DF", age:24}, {name:"Dorgu", role:"DF", age:19}, {name:"Guilbert", role:"DF", age:24}, {name:"Jean", role:"DF", age:24}, {name:"Blin", role:"MF", age:28}, {name:"Ramadani", role:"MF", age:28}, {name:"Oudin", role:"MF", age:27}, {name:"Berisha", role:"MF", age:22}, {name:"Kaba", role:"MF", age:24}, {name:"Krstovic", role:"FW", age:23}, {name:"Almqvist", role:"FW", age:26}, {name:"Sansone", role:"FW", age:33}, {name:"Pierret", role:"FW", age:25}, {name:"Banda", role:"FW", age:22}],
+            "Empoli": [{name:"Vasquez", role:"GK", age:27}, {name:"Perisan", role:"GK", age:24}, {name:"Ismajli", role:"DF", age:28}, {name:"Goglichidze", role:"DF", age:20}, {name:"Cacace", role:"DF", age:24}, {name:"Ebuehi", role:"DF", age:25}, {name:"Viti", role:"DF", age:22}, {name:"Marianucci", role:"DF", age:20}, {name:"Henderson", role:"MF", age:29}, {name:"Grassi", role:"MF", age:30}, {name:"Fazzini", role:"MF", age:22}, {name:"Maleh", role:"MF", age:26}, {name:"Belardinelli", role:"MF", age:21}, {name:"Gyasi", role:"FW", age:32}, {name:"Solbakken", role:"FW", age:26}, {name:"Colombo", role:"FW", age:22}, {name:"Ekong", role:"FW", age:24}, {name:"Pellegri", role:"FW", age:24}],
+            "Venezia": [{name:"Stankovic", role:"GK", age:22}, {name:"Joronen", role:"GK", age:31}, {name:"Idzes", role:"DF", age:24}, {name:"Svoboda", role:"DF", age:26}, {name:"Haps", role:"DF", age:30}, {name:"Candela", role:"DF", age:21}, {name:"Altare", role:"DF", age:26}, {name:"Zerbin", role:"DF", age:25}, {name:"Busio", role:"MF", age:23}, {name:"Tessmann", role:"MF", age:23}, {name:"Duncan", role:"MF", age:30}, {name:"Bjarkason", role:"MF", age:24}, {name:"Nicolussi Caviglia", role:"MF", age:24}, {name:"Pohjanpalo", role:"FW", age:29}, {name:"Oristanio", role:"FW", age:22}, {name:"Gytkjaer", role:"FW", age:32}, {name:"Ellertsson", role:"FW", age:24}, {name:"Yeboah", role:"FW", age:25}],
+            "Parma": [{name:"Suzuki", role:"GK", age:28}, {name:"Chichizola", role:"GK", age:33}, {name:"Balogh", role:"DF", age:24}, {name:"Delprato", role:"DF", age:24}, {name:"Valenti", role:"DF", age:24}, {name:"Coulibaly", role:"DF", age:30}, {name:"Circati", role:"DF", age:22}, {name:"Osorio", role:"DF", age:24}, {name:"Hernani", role:"MF", age:30}, {name:"Estevez", role:"MF", age:29}, {name:"Cyprien", role:"MF", age:30}, {name:"Bernabe", role:"MF", age:22}, {name:"Keita", role:"MF", age:29}, {name:"Bonny", role:"FW", age:20}, {name:"Mihaila", role:"FW", age:23}, {name:"Man", role:"FW", age:25}, {name:"Almqvist", role:"FW", age:26}, {name:"Cancellieri", role:"FW", age:22}],
+            "Como": [{name:"Reina", role:"GK", age:42}, {name:"Audero", role:"GK", age:27}, {name:"Dossena", role:"DF", age:28}, {name:"Goldaniga", role:"DF", age:31}, {name:"Iovine", role:"DF", age:21}, {name:"Moreno", role:"DF", age:28}, {name:"Kempf", role:"DF", age:29}, {name:"Barba", role:"DF", age:30}, {name:"Sergi Roberto", role:"MF", age:32}, {name:"Engelhardt", role:"MF", age:22}, {name:"Da Cunha", role:"MF", age:24}, {name:"Caqueret", role:"MF", age:24}, {name:"Braunoder", role:"MF", age:21}, {name:"Strefezza", role:"FW", age:27}, {name:"Paz", role:"FW", age:22}, {name:"Cutrone", role:"FW", age:27}, {name:"Gabrielloni", role:"FW", age:29}, {name:"Cerri", role:"FW", age:28}],
+            "Udinese": [{name:"Okoye", role:"GK", age:23}, {name:"Sava", role:"GK", age:26}, {name:"Bijol", role:"DF", age:26}, {name:"Kristensen", role:"DF", age:27}, {name:"Ehizibue", role:"DF", age:30}, {name:"Kabasele", role:"DF", age:33}, {name:"Touré", role:"DF", age:23}, {name:"Zemura", role:"DF", age:24}, {name:"Lovric", role:"MF", age:25}, {name:"Walace", role:"MF", age:29}, {name:"Payero", role:"MF", age:25}, {name:"Ekkelenkamp", role:"MF", age:24}, {name:"Giannetti", role:"MF", age:25}, {name:"Thauvin", role:"FW", age:31}, {name:"Lucca", role:"FW", age:24}, {name:"Brenner", role:"FW", age:24}, {name:"Davis", role:"FW", age:27}, {name:"Iker Bravo", role:"FW", age:19}],
+            "Verona": [{name:"Montipo", role:"GK", age:29}, {name:"Berardi", role:"GK", age:25}, {name:"Dawidowicz", role:"DF", age:29}, {name:"Magnani", role:"DF", age:30}, {name:"Tchatchoua", role:"DF", age:26}, {name:"Faraoni", role:"DF", age:33}, {name:"Coppola", role:"DF", age:22}, {name:"Ghilardi", role:"DF", age:23}, {name:"Dani Silva", role:"MF", age:28}, {name:"Serdar", role:"MF", age:27}, {name:"Suslov", role:"MF", age:22}, {name:"Belahyane", role:"MF", age:20}, {name:"Duda", role:"MF", age:27}, {name:"Tengstedt", role:"FW", age:23}, {name:"Lazovic", role:"FW", age:34}, {name:"Noslin", role:"FW", age:26}, {name:"Sarr", role:"FW", age:23}, {name:"Swiderski", role:"FW", age:27}]
         }
     };
     
@@ -310,9 +333,12 @@
         "Mbappe": 91, "Haaland": 91, "Rodri": 91, "Bellingham": 90, "Vinicius Jr": 90, "De Bruyne": 90,
         "Salah": 89, "Van Dijk": 89, "Alisson": 89, "Courtois": 89, "Ter Stegen": 89, "Odegaard": 89, "Ruben Dias": 89,
         "Lewandowski": 88, "Griezmann": 88, "Valverde": 88, "B.Silva": 88, "Foden": 88, "Ederson": 88, "Oblak": 88, "Rudiger": 88,
+        "Lautaro Martinez": 88, "Barella": 87, "Calhanoglu": 87, "Bastoni": 86, "Maignan": 87,
         "Son Heung-min": 87, "Saka": 87, "Declan Rice": 87, "Saliba": 87, "B.Fernandes": 87, "De Jong": 87,
         "Carvajal": 86, "Modric": 86, "Rodrygo": 86, "Pedri": 86, "A.Arnold": 86, "Mac Allister": 86, "Gabriel": 86, "Guimaraes": 86,
         "Militao": 85, "Tchouameni": 85, "Araujo": 85, "Kounde": 85, "Olmo": 85, "Raphinha": 85, "Julian Alvarez": 85, "Cole Palmer": 85, "Raya": 85, "Robertson": 85, "Isak": 85,
+        "Kvaratskhelia": 87, "Lookman": 86, "Retegui": 85, "De Ketelaere": 85, "Dybala": 85, "Vlahovic": 84, "Leao": 85, "Thuram": 84, "Scamacca": 83, "Pulisic": 84,
+        "Koopmeiners": 85, "Guendouzi": 83, "Reijnders": 83, "Ederson": 84, "Zaccagni": 83, "Buongiorno": 83, "Lucca": 81, "Ndoye": 81, "De Roon": 81,
         "Camavinga": 84, "L.Martinez": 84, "De Ligt": 84, "Casemiro": 84, "Luis Diaz": 84, "Jota": 84, "Akanji": 84, "Gvardiol": 84, "Walker": 84, "White": 84, "Partey": 84, "Havertz": 84, "Nkunku": 84, "Romero": 84, "Maddison": 84, "Vicario": 84, "Gimenez": 84, "De Paul": 84, "Gavi": 84, "Grealish": 84,
         "Onana": 83, "Konate": 83, "Gakpo": 83, "Szoboszlai": 83, "Ake": 83, "Kovacic": 83, "Martinelli": 83, "Trossard": 83, "Enzo": 83, "Caicedo": 83, "James": 83, "Porro": 83, "Koke": 83,
         "Dalot": 82, "Shaw": 82, "Nunez": 82, "Timber": 82, "Lamine Yamal": 82, "Savinho": 82,
@@ -330,7 +356,11 @@
         "Brighton": 78, "West Ham": 78, "Real Betis": 78, "Girona": 78, "Sevilla": 77,
         "Crystal Palace": 76, "Fulham": 76, "Everton": 76, "Brentford": 76, "Bournemouth": 76, "Forest": 76,
         "Valencia": 76, "Celta Vigo": 75, "Osasuna": 75, "Mallorca": 75, "Getafe": 75,
-        "Leicester": 74, "Southampton": 74, "Wolves": 74, "Ipswich": 73, "Alaves": 74, "Rayo Vallecano": 74, "Las Palmas": 74, "Leganes": 73, "Valladolid": 73, "Espanyol": 73
+        "Leicester": 74, "Southampton": 74, "Wolves": 74, "Ipswich": 73, "Alaves": 74, "Rayo Vallecano": 74, "Las Palmas": 74, "Leganes": 73, "Valladolid": 73, "Espanyol": 73,
+        "Inter Milan": 84, "AC Milan": 82, "Juventus": 82, "Napoli": 82, "Atalanta": 83,
+        "Roma": 80, "Lazio": 79, "Fiorentina": 79, "Bologna": 78, "Torino": 76,
+        "Monza": 74, "Genoa": 73, "Cagliari": 73, "Lecce": 72, "Empoli": 72,
+        "Venezia": 71, "Parma": 71, "Como": 72, "Udinese": 73, "Verona": 72
     };
 
     function getRealisticPower(team, name) {
@@ -601,7 +631,7 @@
         const teamSelect = document.getElementById('market-team-filter');
         teamSelect.innerHTML = '<option value="ALL">ทุกสโมสร</option>';
         let teams = [];
-        if (league === 'ALL') { teams = [...Object.keys(leagueData['PL']), ...Object.keys(leagueData['LALIGA'])]; } 
+        if (league === 'ALL') { teams = [...Object.keys(leagueData['PL']), ...Object.keys(leagueData['LALIGA']), ...Object.keys(leagueData['SERIEA'])]; } 
         else { teams = Object.keys(leagueData[league]); }
         teams.forEach(t => { teamSelect.innerHTML += `<option value="${t}">${t}</option>`; });
         renderMarket(true);
@@ -999,18 +1029,23 @@
         if (currentMatchday >= 38) {
             let plTeams = Object.keys(leagueTable).filter(t => leagueTable[t].league === 'PL').map(t => ({name: t, ...leagueTable[t]})).sort((a,b) => (b.pts - a.pts) || ((b.gf-b.ga) - (a.gf-a.ga)));
             let laTeams = Object.keys(leagueTable).filter(t => leagueTable[t].league === 'LALIGA').map(t => ({name: t, ...leagueTable[t]})).sort((a,b) => (b.pts - a.pts) || ((b.gf-b.ga) - (a.gf-a.ga)));
-            let plChamp = plTeams[0].name; let laChamp = laTeams[0].name;
+            let saTeams = Object.keys(leagueTable).filter(t => leagueTable[t].league === 'SERIEA').map(t => ({name: t, ...leagueTable[t]})).sort((a,b) => (b.pts - a.pts) || ((b.gf-b.ga) - (a.gf-a.ga)));
+            let plChamp = plTeams[0] ? plTeams[0].name : '-'; let laChamp = laTeams[0] ? laTeams[0].name : '-'; let saChamp = saTeams[0] ? saTeams[0].name : '-';
 
             let plPlayers = allPlayers.filter(p => leagueTable[p.team] && leagueTable[p.team].league === 'PL').sort((a,b) => b.stats.goals - a.stats.goals);
             let laPlayers = allPlayers.filter(p => leagueTable[p.team] && leagueTable[p.team].league === 'LALIGA').sort((a,b) => b.stats.goals - a.stats.goals);
+            let saPlayers = allPlayers.filter(p => leagueTable[p.team] && leagueTable[p.team].league === 'SERIEA').sort((a,b) => b.stats.goals - a.stats.goals);
             let plTopScorer = plPlayers[0];
             let laTopScorer = laPlayers[0];
+            let saTopScorer = saPlayers[0];
 
             allPlayers.forEach(p => {
                 if(p.team === plChamp) p.stats.trophies.push(`🏆 แชมป์ Premier League (ซีซั่น ${currentSeason})`);
                 if(p.team === laChamp) p.stats.trophies.push(`🏆 แชมป์ La Liga (ซีซั่น ${currentSeason})`);
-                if(p.id === plTopScorer.id && p.stats.goals > 0) p.stats.trophies.push(`🥇 ดาวซัลโว Premier League ซีซั่น ${currentSeason} (⚽ ${p.stats.goals} ประตู)`);
-                if(p.id === laTopScorer.id && p.stats.goals > 0) p.stats.trophies.push(`🥇 ดาวซัลโว La Liga ซีซั่น ${currentSeason} (⚽ ${p.stats.goals} ประตู)`);
+                if(p.team === saChamp) p.stats.trophies.push(`🏆 แชมป์ Serie A (ซีซั่น ${currentSeason})`);
+                if(plTopScorer && p.id === plTopScorer.id && p.stats.goals > 0) p.stats.trophies.push(`🥇 ดาวซัลโว Premier League ซีซั่น ${currentSeason} (⚽ ${p.stats.goals} ประตู)`);
+                if(laTopScorer && p.id === laTopScorer.id && p.stats.goals > 0) p.stats.trophies.push(`🥇 ดาวซัลโว La Liga ซีซั่น ${currentSeason} (⚽ ${p.stats.goals} ประตู)`);
+                if(saTopScorer && p.id === saTopScorer.id && p.stats.goals > 0) p.stats.trophies.push(`🥇 ดาวซัลโว Serie A ซีซั่น ${currentSeason} (⚽ ${p.stats.goals} ประตู)`);
                 
                 let avg = p.stats.appearances > 0 ? (p.stats.totalRating / p.stats.appearances) : 0;
                 p.stats.history.push({ season: currentSeason, team: p.team, appearances: p.stats.appearances, goals: p.stats.goals, assists: p.stats.assists, cleanSheets: p.stats.cleanSheets, avgRating: avg });
@@ -1035,11 +1070,15 @@
             document.getElementById('summary-content').innerHTML = `
                 <div style="background:#0f172a; padding:10px; border-radius:6px; margin-bottom:10px; border-left:4px solid #3b82f6;">
                     <b style="color:#38bdf8;">🏴󠁧󠁢󠁥󠁮󠁧󠁿 แชมป์ Premier League:</b> <span style="font-size:18px;">${plChamp}</span><br>
-                    <span style="font-size:12px; color:#fbbf24;">🥇 ดาวซัลโว: ${plTopScorer.name} (${plTopScorer.team}) - ⚽ ${plTopScorer.stats.goals} ประตู</span>
+                    <span style="font-size:12px; color:#fbbf24;">🥇 ดาวซัลโว: ${plTopScorer ? plTopScorer.name + ' (' + plTopScorer.team + ') - ⚽ ' + plTopScorer.stats.goals + ' ประตู' : '-'}</span>
                 </div>
                 <div style="background:#0f172a; padding:10px; border-radius:6px; margin-bottom:10px; border-left:4px solid #ef4444;">
                     <b style="color:#f87171;">🇪🇸 แชมป์ La Liga:</b> <span style="font-size:18px;">${laChamp}</span><br>
-                    <span style="font-size:12px; color:#fbbf24;">🥇 ดาวซัลโว: ${laTopScorer.name} (${laTopScorer.team}) - ⚽ ${laTopScorer.stats.goals} ประตู</span>
+                    <span style="font-size:12px; color:#fbbf24;">🥇 ดาวซัลโว: ${laTopScorer ? laTopScorer.name + ' (' + laTopScorer.team + ') - ⚽ ' + laTopScorer.stats.goals + ' ประตู' : '-'}</span>
+                </div>
+                <div style="background:#0f172a; padding:10px; border-radius:6px; margin-bottom:10px; border-left:4px solid #22c55e;">
+                    <b style="color:#4ade80;">🇮🇹 แชมป์ Serie A:</b> <span style="font-size:18px;">${saChamp}</span><br>
+                    <span style="font-size:12px; color:#fbbf24;">🥇 ดาวซัลโว: ${saTopScorer ? saTopScorer.name + ' (' + saTopScorer.team + ') - ⚽ ' + saTopScorer.stats.goals + ' ประตู' : '-'}</span>
                 </div>
             `;
             document.getElementById('season-summary-modal').style.display = 'flex';
@@ -1080,7 +1119,7 @@
             let targetPlayer = mySquad[Math.floor(Math.random() * mySquad.length)];
             if (xi.find(x => x.id === targetPlayer.id)) return;
 
-            let randomLeague = Math.random() > 0.5 ? 'PL' : 'LALIGA';
+            let randomLeague = Math.random() < 0.33 ? 'PL' : Math.random() < 0.5 ? 'LALIGA' : 'SERIEA';
             let aiTeams = Object.keys(leagueData[randomLeague]);
             let aiTeamName = aiTeams[Math.floor(Math.random() * aiTeams.length)];
             
@@ -1203,7 +1242,8 @@
     
     function switchTableLeague(lg) {
         document.querySelectorAll('.league-title-btn').forEach(btn => btn.classList.remove('active'));
-        document.getElementById(lg === 'PL' ? 'tab-btn-pl' : 'tab-btn-laliga').classList.add('active');
+        let tabId = lg === 'PL' ? 'tab-btn-pl' : lg === 'LALIGA' ? 'tab-btn-laliga' : 'tab-btn-seriea';
+        document.getElementById(tabId).classList.add('active');
         
         let sorted = Object.keys(leagueTable).filter(t => leagueTable[t].league === lg).map(t => ({name: t, ...leagueTable[t]})).sort((a,b) => (b.pts - a.pts) || ((b.gf-b.ga) - (a.gf-a.ga)));
         let html = '';
@@ -1259,6 +1299,899 @@
         render();
         renderYouthAcademy();
     }
+</script><script>
+    // 1. สร้าง Modal หน้าต่างแสดงผล FA Cup และฝังเข้าไปใน Body อัตโนมัติ
+    document.body.insertAdjacentHTML('beforeend', `
+        <div id="facup-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:1001; align-items:center; justify-content:center;">
+            <div class="modal-content" style="width: 700px; border: 2px solid #ec4899; text-align: center;">
+                <h2 style="color: #ec4899; margin-top: 0;">🏆 มหากาพย์ฟุตบอลถ้วย FA Cup</h2>
+                <div style="font-size: 14px; color: #94a3b8; margin-bottom: 15px;">สถานะ: <b id="cup-round-title" style="color:white;">รอบ 32 ทีมสุดท้าย</b></div>
+                
+                <div id="cup-fixtures" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-height: 50vh; overflow-y: auto; padding: 10px; background: #0f172a; border-radius: 6px; margin-bottom: 15px;">
+                    </div>
+                
+                <div id="cup-action-area" style="margin-top: 15px;"></div>
+                <button onclick="document.getElementById('facup-modal').style.display='none'" style="width: 100%; margin-top: 10px; padding: 10px; background: #475569; border: none; color: white; font-weight: bold; border-radius: 4px;">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+    `);
+
+    // 2. สร้างปุ่มลัดเข้า FA Cup บน Header แถบเมนูด้านบน
+    setTimeout(() => {
+        let navBar = document.querySelector('.header-box > div > div:nth-child(3)');
+        if (navBar) {
+            let cupBtn = document.createElement('button');
+            cupBtn.innerHTML = "🏆 FA Cup";
+            cupBtn.style.background = "#ec4899";
+            cupBtn.style.color = "white";
+            cupBtn.style.marginLeft = "5px";
+            cupBtn.onclick = openFaCupModal;
+            navBar.appendChild(cupBtn);
+        }
+    }, 500);
+
+    // 3. Logic ควบคุม FA Cup
+    let cupState = { round: 5, fixtures: [], teams: [], winner: null };
+
+    // เตรียมสายการแข่งขัน
+    function initFaCup() {
+        let allT = Object.keys(leagueTable).filter(t => t !== myCurrentTeamName);
+        allT = allT.sort(() => Math.random() - 0.5).slice(0, 31); // ดึงทีม AI มา 31 ทีม
+        cupState.teams = [myCurrentTeamName, ...allT].sort(() => Math.random() - 0.5); // รวมทีมเราเป็น 32 ทีม
+        cupState.round = 5; 
+        cupState.winner = null;
+        generateCupFixtures();
+    }
+
+    function generateCupFixtures() {
+        cupState.fixtures = [];
+        for (let i = 0; i < cupState.teams.length; i += 2) {
+            cupState.fixtures.push({ home: cupState.teams[i], away: cupState.teams[i+1] });
+        }
+    }
+
+    function getCupRoundName(r) {
+        if(r === 5) return "รอบ 32 ทีมสุดท้าย";
+        if(r === 4) return "รอบ 16 ทีมสุดท้าย";
+        if(r === 3) return "รอบ 8 ทีม (Quarter-Final)";
+        if(r === 2) return "รอบรองชนะเลิศ (Semi-Final)";
+        if(r === 1) return "รอบชิงชนะเลิศ (Final)";
+        return "จบการแข่งขันฤดูกาลนี้";
+    }
+
+    function openFaCupModal() {
+        document.getElementById('facup-modal').style.display = 'flex';
+        document.getElementById('cup-round-title').innerText = getCupRoundName(cupState.round);
+        
+        let fixturesHTML = "";
+        let isUserAlive = false;
+        let userFixture = null;
+
+        if (cupState.round === 0) {
+            fixturesHTML = `<div style="grid-column: span 2; padding: 20px; font-size: 18px; color: #fbbf24;">🏆 แชมป์ FA Cup ซีซั่นนี้: <b>${cupState.winner}</b></div>`;
+        } else {
+            cupState.fixtures.forEach(f => {
+                let isMyMatch = (f.home === myCurrentTeamName || f.away === myCurrentTeamName);
+                if (isMyMatch) { isUserAlive = true; userFixture = f; }
+                
+                fixturesHTML += `
+                    <div style="background: ${isMyMatch ? '#3b82f6' : '#1e293b'}; border: 1px solid ${isMyMatch ? '#60a5fa' : '#334155'}; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: bold; color: white;">
+                        <span style="display:inline-block; width:40%; text-align:right;">${f.home}</span> 
+                        <span style="color:#ec4899; margin:0 5px;">VS</span> 
+                        <span style="display:inline-block; width:40%; text-align:left;">${f.away}</span>
+                    </div>
+                `;
+            });
+        }
+        document.getElementById('cup-fixtures').innerHTML = fixturesHTML;
+
+        let actionArea = document.getElementById('cup-action-area');
+        if (cupState.round === 0) {
+            actionArea.innerHTML = "";
+        } else if (isUserAlive) {
+            actionArea.innerHTML = `<button onclick="startCupLiveMatch('${userFixture.home}', '${userFixture.away}')" style="width: 100%; padding: 12px; background: #ec4899; border: none; color: white; font-weight: bold; border-radius: 4px; font-size: 16px; cursor: pointer;">⚽ แข่งขัน FA Cup นัดนี้!</button>`;
+        } else {
+            actionArea.innerHTML = `<button onclick="simulateCupRound()" style="width: 100%; padding: 12px; background: #eab308; border: none; color: black; font-weight: bold; border-radius: 4px; font-size: 16px; cursor: pointer;">⏩ จำลองผลรอบนี้</button>`;
+        }
+    }
+
+    // ฟังก์ชันจำลองผลสำหรับคู่ที่ AI เตะกันเอง (มีสถิติ)
+    function simulateCupMatchAI(t1Name, t2Name) {
+        let g1 = Math.floor(Math.random() * 4);
+        let g2 = Math.floor(Math.random() * 4);
+        if (g1 === g2) { if (Math.random() > 0.5) g1++; else g2++; } // ถ้าเสมอ สุ่มดวลจุดโทษ
+        
+        let t1Players = allPlayers.filter(p => p.team === t1Name && p.ban === 0 && p.injury === 0).sort((a,b)=>b.p-a.p).slice(0,11);
+        let t2Players = allPlayers.filter(p => p.team === t2Name && p.ban === 0 && p.injury === 0).sort((a,b)=>b.p-a.p).slice(0,11);
+        if(t1Players.length < 11) t1Players = allPlayers.filter(p => p.team === t1Name).slice(0,11);
+        if(t2Players.length < 11) t2Players = allPlayers.filter(p => p.team === t2Name).slice(0,11);
+        
+        t1Players.forEach(p => { if(p.stats) p.stats.appearances++; });
+        t2Players.forEach(p => { if(p.stats) p.stats.appearances++; });
+        
+        for(let j=0; j<g1; j++){ let s=pickScorer(t1Players); if(s&&s.stats) s.stats.goals++; }
+        for(let j=0; j<g2; j++){ let s=pickScorer(t2Players); if(s&&s.stats) s.stats.goals++; }
+        if(g2===0) t1Players.forEach(p => { if(p.role==='GK'||p.role==='DF') p.stats.cleanSheets++; });
+        if(g1===0) t2Players.forEach(p => { if(p.role==='GK'||p.role==='DF') p.stats.cleanSheets++; });
+        
+        return g1 > g2 ? t1Name : t2Name;
+    }
+
+    function simulateCupRound() {
+        document.getElementById('facup-modal').style.display = 'none';
+        processCupRoundResults();
+    }
+
+    // ประมวลผลผลลัพธ์ของรอบปัจจุบัน
+    function processCupRoundResults(userHomeGoals, userAwayGoals) {
+        let nextRoundTeams = [];
+        let isFinal = (cupState.round === 1);
+        let userFixture = cupState.fixtures.find(f => f.home === myCurrentTeamName || f.away === myCurrentTeamName);
+        
+        cupState.fixtures.forEach(f => {
+            if (f === userFixture && userHomeGoals !== undefined) {
+                let winner = "";
+                if (userHomeGoals === userAwayGoals) {
+                    if (Math.random() > 0.5) userHomeGoals++; else userAwayGoals++;
+                    addNews(`🤯 FA Cup ดวลจุดโทษ! ${userHomeGoals > userAwayGoals ? f.home : f.away} ชนะจุดโทษเข้ารอบหลังเสมอในเวลา ${Math.min(userHomeGoals,userAwayGoals)}-${Math.min(userHomeGoals,userAwayGoals)}`);
+                }
+                
+                winner = userHomeGoals > userAwayGoals ? f.home : f.away;
+                nextRoundTeams.push(winner);
+                
+                if (winner === myCurrentTeamName) {
+                    let prize = (6 - cupState.round) * 5;
+                    budget = parseFloat((budget + prize).toFixed(1));
+                    addNews(`✅ ทีมเราผ่านเข้ารอบ FA Cup รับเงินลิขสิทธิ์ ${prize}M!`);
+                } else {
+                    addNews(`❌ ทีมเราตกรอบ FA Cup อย่างน่าเสียดาย!`);
+                }
+                if(isFinal) cupState.winner = winner;
+
+            } else {
+                let winnerAI = simulateCupMatchAI(f.home, f.away);
+                nextRoundTeams.push(winnerAI);
+                if(isFinal) cupState.winner = winnerAI;
+            }
+        });
+        
+        if (isFinal) {
+            allPlayers.forEach(p => {
+                if (p.team === cupState.winner) p.stats.trophies.push(`🏆 แชมป์ FA Cup (ซีซั่น ${currentSeason})`);
+            });
+            addNews(`🏆 <b>[ข่าวโลก]</b> <b>${cupState.winner}</b> ผงาดคว้าแชมป์ FA Cup ไปครองสำเร็จ!`);
+            if(cupState.winner === myCurrentTeamName) {
+                budget = parseFloat((budget + 50).toFixed(1));
+                alert("🎉 ยินดีด้วยบอส! สโมสรคว้าแชมป์ FA Cup รับเงินอัดฉีด 50M!");
+            }
+            cupState.round = 0; 
+        } else {
+            cupState.round--;
+            cupState.teams = nextRoundTeams;
+            generateCupFixtures();
+        }
+        render();
+        openFaCupModal();
+    }
+
+    // 4. ระบบแข่งขัน Live Match สำหรับบอลถ้วย (อิงพื้นฐานเดิมแต่แยกผลลัพธ์)
+    function startCupLiveMatch(homeTeam, awayTeam) {
+        if (xi.length < 11) return alert("⚠️ จัดตัวจริงให้ครบ 11 คนก่อนลงแข่งนะครับบอส!");
+        document.getElementById('facup-modal').style.display = 'none';
+
+        let oppName = (homeTeam === myCurrentTeamName) ? awayTeam : homeTeam;
+        let myPower = Math.floor(xi.reduce((sum, p) => sum + p.p, 0) / 11);
+        
+        let oppPlayers = allPlayers.filter(p => p.team === oppName && p.ban === 0 && p.injury === 0).sort((a,b)=>b.p-a.p).slice(0,11);
+        if(oppPlayers.length < 11) oppPlayers = allPlayers.filter(p => p.team === oppName).slice(0,11);
+        let oppPower = Math.floor(oppPlayers.reduce((sum, p) => sum + p.p, 0) / (oppPlayers.length || 1));
+        
+        let matchEvents = [];
+        currentMatchScorers = [];
+        currentMatchAssisters = [];
+        
+        let myTotalGoals = 0; let oppTotalGoals = 0;
+        for (let min = 1; min <= 90; min++) {
+            let myChance = Math.max(0.005, (myPower * 0.00035) + ((myPower - oppPower) * 0.00015));
+            let oppChance = Math.max(0.005, (oppPower * 0.00035) + ((oppPower - myPower) * 0.00015));
+            
+            if(Math.random() < myChance) {
+                myTotalGoals++;
+                let scorer = pickScorer(xi); currentMatchScorers.push(scorer);
+                let possibleAssists = xi.filter(x => x.id !== scorer.id && x.role !== 'GK');
+                if(possibleAssists.length > 0 && Math.random() < 0.7) currentMatchAssisters.push(possibleAssists[Math.floor(Math.random() * possibleAssists.length)]);
+                matchEvents.push({ minute: min, isHome: homeTeam===myCurrentTeamName, type: 'goal', html: `<span class="event-goal">⚽ <b>[GOAL]</b> ${scorer.name} (${scorer.role}) ${getGoalDescription(scorer.role)}</span>` });
+            }
+            if(Math.random() < oppChance) {
+                oppTotalGoals++;
+                let scorer = pickScorer(oppPlayers); currentMatchScorers.push(scorer);
+                let possibleAssists = oppPlayers.filter(x => x.id !== scorer.id && x.role !== 'GK');
+                if(possibleAssists.length > 0 && Math.random() < 0.7) currentMatchAssisters.push(possibleAssists[Math.floor(Math.random() * possibleAssists.length)]);
+                matchEvents.push({ minute: min, isHome: homeTeam!==myCurrentTeamName, type: 'goal', html: `<span class="event-goal">⚽ <b>[GOAL]</b> [${oppName}] ${scorer.name} (${scorer.role}) ${getGoalDescription(scorer.role)}</span>` });
+            }
+        }
+
+        matchEvents.sort((a, b) => a.minute - b.minute);
+        
+        document.getElementById('live-matchday-title').innerText = `🏆 FA Cup - ${getCupRoundName(cupState.round)}`;
+        document.getElementById('live-home-name').innerText = homeTeam;
+        document.getElementById('live-away-name').innerText = awayTeam;
+        document.getElementById('live-score-display').innerText = "0 - 0";
+        document.getElementById('live-events-log').innerHTML = "<div style='color:#ec4899; font-weight:bold; text-align:center;'>เริ่มการแข่งขันน็อคเอาต์! แพ้คัดออก!</div><br>";
+        document.getElementById('live-close-btn').style.display = "none";
+        document.getElementById('live-match-modal').style.display = "flex";
+        
+        let currentSec = 0; let homeScore = 0; let awayScore = 0;
+        let matchTimer = setInterval(() => {
+            currentSec++; let gameMinute = currentSec * 6; if(gameMinute > 90) gameMinute = 90;
+            document.getElementById('live-game-minute').innerText = gameMinute;
+            
+            matchEvents.forEach(ev => {
+                if(ev.minute > (gameMinute - 6) && ev.minute <= gameMinute && !ev.shown) {
+                    ev.shown = true;
+                    if(ev.type === 'goal') {
+                        if(ev.isHome) homeScore++; else awayScore++;
+                        document.getElementById('live-score-display').innerText = `${homeScore} - ${awayScore}`;
+                    }
+                    document.getElementById('live-events-log').innerHTML = ev.html + "<br>" + document.getElementById('live-events-log').innerHTML;
+                }
+            });
+
+            if (currentSec >= 15) {
+                clearInterval(matchTimer);
+                
+                // ถ้ายิงเท่ากันช่วงจบ 90 นาที ต้องมีการดวลจุดโทษตัดสิน!
+                if (homeScore === awayScore) {
+                    let isHomeWinPen = Math.random() > 0.5;
+                    if(isHomeWinPen) homeScore++; else awayScore++;
+                    document.getElementById('live-events-log').innerHTML = `<div style='color:#eab308; font-weight:bold; padding: 10px; border: 1px solid #eab308; border-radius: 4px; text-align:center;'>🎯 เสมอในเวลา! ทีมฝั่ง ${isHomeWinPen ? 'เหย้า' : 'เยือน'} แม่นกว่า เอาชนะการดวลจุดโทษไปได้!</div><br>` + document.getElementById('live-events-log').innerHTML;
+                    document.getElementById('live-score-display').innerText = `${homeScore} - ${awayScore}`;
+                }
+
+                document.getElementById('live-game-minute').innerText = "90 (จบเกม)";
+                
+                // ให้ปุ่มปิด Modal ทำงานสำหรับการแข่ง Cup แทนลีก
+                let closeBtn = document.getElementById('live-close-btn');
+                closeBtn.style.display = "block";
+                closeBtn.onclick = function() {
+                    document.getElementById('live-match-modal').style.display = "none";
+                    closeBtn.onclick = closeLiveMatchModal; // คืนค่า onclick กลับเป็นบอลลีกปกติ
+                    
+                    // อัปเดตสถิตินักเตะและเคลียร์เจ็บ/แบน 1 นัด (แบบบอลลีก)
+                    xi.forEach(p => p.stats.appearances++);
+                    oppPlayers.forEach(p => { if(p.stats) p.stats.appearances++; });
+                    currentMatchScorers.forEach(p => { if(p.stats) p.stats.goals++; });
+                    currentMatchAssisters.forEach(p => { if(p.stats) p.stats.assists++; });
+                    
+                    allPlayers.forEach(p => { 
+                        if(p.ban > 0) p.ban--; if(p.injury > 0) p.injury--; 
+                        if(p.newBan) { p.ban = p.newBan; p.newBan = 0; }
+                        if(p.newInjury) { p.injury = p.newInjury; p.newInjury = 0; }
+                    });
+                    xi = xi.filter(p => p.ban === 0 && p.injury === 0);
+
+                    processCupRoundResults(homeScore, awayScore);
+                };
+            }
+        }, 1000);
+    }
+
+    // 5. Hook เข้ากับระบบเริ่มเกม และ ตอนจบซีซั่น (Hooking System)
+    const gemini_originalInitGame = initGame;
+    initGame = function() {
+        gemini_originalInitGame();
+        initFaCup(); // สร้างสายการแข่งขันบอลถ้วยทุกครั้งที่กดเริ่ม
+    };
+
+    const gemini_originalCloseSeasonSummary = closeSeasonSummary;
+    closeSeasonSummary = function() {
+        gemini_originalCloseSeasonSummary();
+        initFaCup(); // เริ่มทัวร์นาเมนต์บอลถ้วยใหม่พร้อมกับฤดูกาลใหม่
+    };
+</script><script>
+    // 1. ใส่ประวัติศาสตร์ถ้วยรางวัลเริ่มต้นให้กับทีมต่างๆ เพื่อความสมจริง
+    const historicalTrophies = {
+        "Man City": ["🏆 แชมป์ พรีเมียร์ลีก (x7)", "⭐ แชมป์ ยูฟ่า แชมเปียนส์ลีก (x1)", "🏅 แชมป์ FA Cup (x6)"],
+        "Man United": ["🏆 แชมป์ พรีเมียร์ลีก (x20)", "⭐ แชมป์ ยูฟ่า แชมเปียนส์ลีก (x3)", "🏅 แชมป์ FA Cup (x12)"],
+        "Liverpool": ["🏆 แชมป์ พรีเมียร์ลีก (x19)", "⭐ แชมป์ ยูฟ่า แชมเปียนส์ลีก (x6)", "🏅 แชมป์ FA Cup (x8)"],
+        "Arsenal": ["🏆 แชมป์ พรีเมียร์ลีก (x13)", "🏅 แชมป์ FA Cup (x14)"],
+        "Chelsea": ["🏆 แชมป์ พรีเมียร์ลีก (x6)", "⭐ แชมป์ ยูฟ่า แชมเปียนส์ลีก (x2)", "🏅 แชมป์ FA Cup (x8)"],
+        "Tottenham": ["🏅 แชมป์ FA Cup (x8)", "🥈 รองแชมป์ UCL (x1)"],
+        "Real Madrid": ["🏆 แชมป์ ลา ลีกา (x35)", "⭐ แชมป์ ยูฟ่า แชมเปียนส์ลีก (x14)", "👑 ถ้วย โกปา เดล เรย์ (x20)"],
+        "Barcelona": ["🏆 แชมป์ ลา ลา กา (x27)", "⭐ แชมป์ ยูฟ่า แชมเปียนส์ลีก (x5)", "👑 ถ้วย โกปา เดล เรย์ (x31)"],
+        "Atletico Madrid": ["🏆 แชมป์ ลา ลีกา (x11)", "🌍 แชมป์ ยูโรป้า ลีก (x3)"]
+    };
+
+    // ฟังก์ชันเคลียร์และเซ็ตอัปถ้วยรางวัลเริ่มต้นให้ทุกทีมในระบบ
+    function setupGlobalTrophyRooms() {
+        Object.keys(leagueTable).forEach(team => {
+            if (!leagueTable[team].trophies) {
+                // ดึงจากประวัติศาสตร์ หรือถ้าไม่มีให้เป็นทีมสร้างชื่อใหม่
+                leagueTable[team].trophies = historicalTrophies[team] ? [...historicalTrophies[team]] : ["🔰 สโมสรเกียรติยศท้องถิ่น"];
+            }
+        });
+    }
+
+    // 2. สร้างหน้าต่าง Modal สำหรับหอเกียรติยศรวม
+    document.body.insertAdjacentHTML('beforeend', `
+        <div id="global-hof-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15, 23, 42, 0.95); z-index:1002; align-items:center; justify-content:center;">
+            <div class="modal-content" style="width: 650px; border: 2px solid #3b82f6; background: #1e293b; padding: 20px; border-radius: 8px; color: white;">
+                <h2 style="color: #3b82f6; margin-top: 0; text-align:center;">🏛️ หอเกียรติยศและตู้โชว์สโมสรโลก</h2>
+                
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <label style="margin-right: 10px; color: #94a3b8;">เลือกสโมสรที่ต้องการดู: </label>
+                    <select id="hof-team-select" onchange="renderTeamTrophyRoom(this.value)" style="background: #0f172a; color: white; border: 1px solid #475569; padding: 8px; border-radius: 4px; width: 250px; font-weight: bold;">
+                        </select>
+                </div>
+
+                <div class="grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; height: 40vh; overflow-y: auto; background: #0f172a; padding: 15px; border-radius: 6px;">
+                    <div>
+                        <h4 style="color: #eab308; margin-top: 0; border-bottom: 1px solid #334155; padding-bottom: 5px;">🏆 ตู้โชว์ถ้วยรางวัล</h4>
+                        <div id="hof-trophies-list" style="font-size: 13px; line-height: 2;"></div>
+                    </div>
+                    <div>
+                        <h4 style="color: #60a5fa; margin-top: 0; border-bottom: 1px solid #334155; padding-bottom: 5px;">⭐ นักเตะระดับซุปตาร์ในทีม</h4>
+                        <div id="hof-stars-list" style="font-size: 13px; line-height: 1.8;"></div>
+                    </div>
+                </div>
+
+                <button onclick="document.getElementById('global-hof-modal').style.display='none'" style="width: 100%; margin-top: 15px; padding: 10px; background: #ef4444; border: none; color: white; font-weight: bold; border-radius: 4px; cursor:pointer;">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+    `);
+
+    // 3. ฝังปุ่มเข้าเมนูด้านบนข้างๆ ปุ่ม FA Cupเดิม
+    setTimeout(() => {
+        setupGlobalTrophyRooms();
+        let navBar = document.querySelector('.header-box > div > div:nth-child(3)');
+        if (navBar) {
+            let hofBtn = document.createElement('button');
+            hofBtn.innerHTML = "🏛️ หอเกียรติยศสโมสร";
+            hofBtn.style.background = "#3b82f6";
+            hofBtn.style.color = "white";
+            hofBtn.style.marginLeft = "5px";
+            hofBtn.onclick = openGlobalHofModal;
+            navBar.appendChild(hofBtn);
+        }
+    }, 600);
+
+    // 4. เปิดและแสดงผลข้อมูลหอเกียรติยศ
+    function openGlobalHofModal() {
+        setupGlobalTrophyRooms(); // รีเช็คเผื่อมีทีมใหม่หรือตัวแปรล้างค่า
+        let selectNode = document.getElementById('hof-team-select');
+        selectNode.innerHTML = ""; // ล้างตัวเลือกเก่า
+
+        // แบ่งกลุ่มตามลีกเพื่อให้บอสเลือกดูง่าย
+        ['PL', 'LALIGA'].forEach(lg => {
+            let group = document.createElement('optgroup');
+            group.label = lg === 'PL' ? "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League" : "🇪🇸 La Liga";
+            
+            Object.keys(leagueTable).filter(t => leagueTable[t].league === lg).sort().forEach(team => {
+                let opt = document.createElement('option');
+                opt.value = team;
+                opt.innerText = team === myCurrentTeamName ? `⭐ ${team} (ทีมของบอส)` : team;
+                group.appendChild(opt);
+            });
+            selectNode.appendChild(group);
+        });
+
+        // ให้แสดงผลทีมเราเป็นทีมแรกตอนเปิดหน้าต่าง
+        selectNode.value = myCurrentTeamName;
+        renderTeamTrophyRoom(myCurrentTeamName);
+
+        document.getElementById('global-hof-modal').style.display = 'flex';
+    }
+
+    // ฟังก์ชันเรนเดอร์ถ้วยรางวัลและนักเตะซุปตาร์ของทีมที่ถูกเลือก
+    function renderTeamTrophyRoom(teamName) {
+        let teamData = leagueTable[teamName];
+        if (!teamData) return;
+
+        // เรนเดอร์รายการถ้วยรางวัล
+        let trophiesHTML = "";
+        if (teamData.trophies && teamData.trophies.length > 0) {
+            teamData.trophies.forEach(tr => {
+                trophiesHTML += `<div style="padding: 3px 0; border-bottom: 1px dashed #1e293b;">${tr}</div>`;
+            });
+        } else {
+            trophiesHTML = `<span style="color:#64748b;">ยังไม่มีถ้วยรางวัลในตู้โชว์</span>`;
+        }
+        document.getElementById('hof-trophies-list').innerHTML = trophiesHTML;
+
+        // ดึงนักเตะดาวเด่นที่พลังสูงสุด 3 คนของทีมนั้นมาโชว์
+        let teamPlayers = allPlayers.filter(p => p.team === teamName).sort((a,b) => b.p - a.p).slice(0, 3);
+        let starsHTML = "";
+        if (teamPlayers.length > 0) {
+            teamPlayers.forEach((p, idx) => {
+                starsHTML += `
+                    <div style="background:#1e293b; padding:8px; margin-bottom:6px; border-radius:4px; display:flex; justify-content:space-between;">
+                        <span>🏅 ${idx+1}. <b>${p.name}</b> (${p.role})</span>
+                        <span style="color:#eab308; font-weight:bold;">⚡พลัง ${p.p}</span>
+                    </div>`;
+            });
+        } else {
+            starsHTML = `<span style="color:#64748b;">ไม่มีข้อมูลผู้เล่น</span>`;
+        }
+        document.getElementById('hof-stars-list').innerHTML = starsHTML;
+    }
+
+    // 5. Hook เข้าระบบจบซีซั่นดั้งเดิม เพื่อแจกถ้วยรางวัลแชมป์ลีกลงตู้โชว์แบบอัตโนมัติ
+    const gemini_hofOriginalCloseSeasonSummary = closeSeasonSummary;
+    closeSeasonSummary = function() {
+        setupGlobalTrophyRooms();
+
+        // คำนวณหาแชมป์ของแต่ละลีกเพื่อยัดถ้วยรางวัลใส่ตู้โชว์
+        ['PL', 'LALIGA'].forEach(lg => {
+            let sorted = Object.keys(leagueTable)
+                .filter(t => leagueTable[t].league === lg)
+                .map(t => ({name: t, ...leagueTable[t]}))
+                .sort((a,b) => (b.pts - a.pts) || ((b.gf-b.ga) - (a.gf-a.ga)));
+            
+            if (sorted.length > 0) {
+                let championName = sorted[0].name;
+                if (!leagueTable[championName].trophies) leagueTable[championName].trophies = [];
+                leagueTable[championName].trophies.unshift(`🏆 แชมป์ ${lg} (ซีซั่น ${currentSeason})`);
+            }
+        });
+
+        // ตรวจสอบแชมป์ FA Cup จากระบบเก่าเพื่อยัดใส่ตู้โชว์สโมสรด้วย (ถ้ามีแข่ง)
+        if (window.cupState && window.cupState.winner) {
+            let cupChamp = window.cupState.winner;
+            if (leagueTable[cupChamp]) {
+                if (!leagueTable[cupChamp].trophies) leagueTable[cupChamp].trophies = [];
+                let faTrophyText = `🏅 แชมป์ FA Cup (ซีซั่น ${currentSeason})`;
+                // ป้องกันการยัดซ้ำ
+                if (!leagueTable[cupChamp].trophies.includes(faTrophyText)) {
+                    leagueTable[cupChamp].trophies.unshift(faTrophyText);
+                }
+            }
+        }
+
+        // รันโค้ดปิดซีซั่นเดิมของตัวเกม
+        gemini_hofOriginalCloseSeasonSummary();
+    };
+</script><script>
+    // 1. ฟังก์ชันเซ็ตอัปตู้โชว์ถ้วยรางวัลแบบว่างเปล่า (เริ่มนับความสำเร็จใหม่ในยุคของบอส)
+    function setupGlobalTrophyRooms() {
+        if (typeof leagueTable !== 'undefined') {
+            Object.keys(leagueTable).forEach(team => {
+                if (!leagueTable[team].trophies) {
+                    leagueTable[team].trophies = [];
+                }
+            });
+        }
+    }
+
+    // 2. สร้างหน้าต่าง Modal สำหรับหอเกียรติยศรวม
+    document.body.insertAdjacentHTML('beforeend', `
+        <div id="global-hof-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15, 23, 42, 0.95); z-index:1002; align-items:center; justify-content:center;">
+            <div class="modal-content" style="width: 650px; border: 2px solid #3b82f6; background: #1e293b; padding: 20px; border-radius: 8px; color: white; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                <h2 style="color: #3b82f6; margin-top: 0; text-align:center; font-size: 22px;">🏛️ หอเกียรติยศและตู้โชว์สโมสรโลก</h2>
+                
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <label style="margin-right: 10px; color: #94a3b8; font-size: 14px;">เลือกสโมสรที่ต้องการดู: </label>
+                    <select id="hof-team-select" onchange="renderTeamTrophyRoom(this.value)" style="background: #0f172a; color: white; border: 1px solid #475569; padding: 8px; border-radius: 4px; width: 260px; font-weight: bold; font-size: 14px;">
+                        </select>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; height: 42vh; overflow-y: auto; background: #0f172a; padding: 15px; border-radius: 6px;">
+                    <div>
+                        <h4 style="color: #eab308; margin-top: 0; border-bottom: 1px solid #334155; padding-bottom: 5px; font-size: 15px;">🏆 ตู้โชว์ถ้วยรางวัลในยุคบอส</h4>
+                        <div id="hof-trophies-list" style="font-size: 13px; line-height: 2;"></div>
+                    </div>
+                    <div>
+                        <h4 style="color: #60a5fa; margin-top: 0; border-bottom: 1px solid #334155; padding-bottom: 5px; font-size: 15px;">⭐ นักเตะระดับซุปตาร์ประจำทีม</h4>
+                        <div id="hof-stars-list" style="font-size: 13px; line-height: 1.8;"></div>
+                    </div>
+                </div>
+
+                <button onclick="document.getElementById('global-hof-modal').style.display='none'" style="width: 100%; margin-top: 15px; padding: 10px; background: #ef4444; border: none; color: white; font-weight: bold; border-radius: 4px; cursor:pointer; font-size: 14px;">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+    `);
+
+    // 3. แทรกปุ่ม "🏛️ หอเกียรติยศสโมสร" ไปที่แถบเมนูด้านบนข้างๆ ปุ่มถ้วยรางวัลเดิม
+    setTimeout(() => {
+        setupGlobalTrophyRooms();
+        let navContainer = document.querySelector('.header-box > div > div:nth-child(3)');
+        if (!navContainer) {
+            let anyBtn = document.querySelector('button[onclick*="Market"]') || document.querySelector('button[onclick*="Table"]');
+            if (anyBtn) navContainer = anyBtn.parentElement;
+        }
+        
+        if (navContainer) {
+            let hofBtn = document.createElement('button');
+            hofBtn.innerHTML = "🏛️ หอเกียรติยศสโมสร";
+            hofBtn.style.background = "#3b82f6";
+            hofBtn.style.color = "white";
+            hofBtn.style.marginLeft = "5px";
+            hofBtn.onclick = openGlobalHofModal;
+            navContainer.appendChild(hofBtn);
+        }
+    }, 800);
+
+    // 4. เปิดหน้าต่างและดึงรายชื่อสโมสรทุกลีก
+    function openGlobalHofModal() {
+        setupGlobalTrophyRooms();
+        let selectNode = document.getElementById('hof-team-select');
+        selectNode.innerHTML = ""; 
+
+        const leagues = {
+            'PL': "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League",
+            'LALIGA': "🇪🇸 La Liga"
+        };
+
+        Object.keys(leagues).forEach(lg => {
+            let group = document.createElement('optgroup');
+            group.label = leagues[lg];
+            
+            Object.keys(leagueTable)
+                .filter(t => leagueTable[t].league === lg)
+                .sort()
+                .forEach(team => {
+                    let opt = document.createElement('option');
+                    opt.value = team;
+                    opt.innerText = team === myCurrentTeamName ? `⭐ ${team} (ทีมของบอส)` : team;
+                    group.appendChild(opt);
+                });
+            selectNode.appendChild(group);
+        });
+
+        selectNode.value = myCurrentTeamName;
+        renderTeamTrophyRoom(myCurrentTeamName);
+
+        document.getElementById('global-hof-modal').style.display = 'flex';
+    }
+
+    // 5. ฟังก์ชันเรนเดอร์ข้อมูลถ้วยรางวัลและซุปตาร์แบบดึงข้อมูลสด (Dynamic)
+    function renderTeamTrophyRoom(teamName) {
+        let teamData = leagueTable[teamName];
+        if (!teamData) return;
+
+        // เรนเดอร์ถ้วยรางวัลที่ได้จากการแข่งขันจริงในเซฟนี้
+        let trophiesHTML = "";
+        if (teamData.trophies && teamData.trophies.length > 0) {
+            teamData.trophies.forEach(tr => {
+                trophiesHTML += `<div style="padding: 4px 0; border-bottom: 1px dashed #334155; color: #f8fafc;">${tr}</div>`;
+            });
+        } else {
+            trophiesHTML = `<span style="color:#64748b; font-style: italic;">ยังไม่มีถ้วยรางวัลในตู้โชว์<br>(เริ่มนับความสำเร็จใหม่ในยุคของบอส)</span>`;
+        }
+        document.getElementById('hof-trophies-list').innerHTML = trophiesHTML;
+
+        // เรนเดอร์นักเตะซุปตาร์ 3 อันดับแรก (เช็คสังกัดปัจจุบันทันที)
+        let teamPlayers = [];
+        if (teamName === myCurrentTeamName) {
+            // ดึงสดจากสควอดของบอสโดยตรง เผื่อเพิ่งกดซื้อเข้ามาจะได้โชว์ทันที
+            teamPlayers = [...mySquad];
+        } else {
+            // ดึงจากฐานข้อมูลกลางที่สังกัดทีมอื่นๆ
+            teamPlayers = allPlayers.filter(p => p.team === teamName);
+        }
+
+        // เรียงจากพลังสูงสุด และเอาแค่ Top 3 คนแรก
+        teamPlayers.sort((a, b) => b.p - a.p);
+        let topStars = teamPlayers.slice(0, 3);
+
+        let starsHTML = "";
+        if (topStars.length > 0) {
+            topStars.forEach((p, idx) => {
+                starsHTML += `
+                    <div style="background:#1e293b; padding:8px; margin-bottom:6px; border-radius:4px; display:flex; justify-content:space-between; align-items:center; border-left: 3px solid #60a5fa;">
+                        <span><b>${idx+1}. ${p.name}</b> <small style="color:#94a3b8;">(${p.role})</small></span>
+                        <span style="color:#eab308; font-weight:bold; background:#0f172a; padding:2px 6px; border-radius:4px; font-size:12px;">⚡ ${p.p}</span>
+                    </div>`;
+            });
+        } else {
+            starsHTML = `<span style="color:#64748b; font-style: italic;">ไม่มีข้อมูลผู้เล่นในสโมสรนี้</span>`;
+        }
+        document.getElementById('hof-stars-list').innerHTML = starsHTML;
+    }
+
+    // 6. ดักจับระบบซื้อนักเตะ (buyPlayer) เพื่อเปลี่ยนสังกัดของซุปตาร์มาเป็นทีมบอสแบบ 100%
+    if (typeof buyPlayer === 'function') {
+        const originalBuyPlayer = buyPlayer;
+        buyPlayer = function(id, price) {
+            originalBuyPlayer(id, price); // รันโค้ดซื้อเดิมของเกม
+            
+            // ค้นหานักเตะและอัปเดตค่า .team ให้ย้ายมาทีมบอสเรียบร้อยสมบูรณ์
+            let player = allPlayers.find(x => x.id === id);
+            if (player && typeof mySquad !== 'undefined' && mySquad.some(x => x.id === id)) {
+                player.team = myCurrentTeamName;
+                
+                // รีเฟรชหน้าต่างหอเกียรติยศให้เห็นผลทันทีหากเปิดหน้าต่างค้างอยู่
+                if (document.getElementById('global-hof-modal').style.display === 'flex') {
+                    let currentSelect = document.getElementById('hof-team-select').value;
+                    renderTeamTrophyRoom(currentSelect);
+                }
+            }
+        };
+    }
+
+    // 7. ดักจับระบบจบฤดูกาล (closeSeasonSummary) เพื่อแจกถ้วยรางวัลจริงเข้าสู่ระบบ
+    if (typeof closeSeasonSummary === 'function') {
+        const originalCloseSeasonSummary = closeSeasonSummary;
+        closeSeasonSummary = function() {
+            setupGlobalTrophyRooms();
+
+            // แจกแชมป์พรีเมียร์ลีก และ ลาลีกา ของฤดูกาลนี้
+            ['PL', 'LALIGA'].forEach(lg => {
+                let sortedTeams = Object.keys(leagueTable)
+                    .filter(t => leagueTable[t].league === lg)
+                    .map(t => ({name: t, ...leagueTable[t]}))
+                    .sort((a,b) => (b.pts - a.pts) || ((b.gf-b.ga) - (a.gf-a.ga)));
+                
+                if (sortedTeams.length > 0) {
+                    let champName = sortedTeams[0].name;
+                    if (!leagueTable[champName].trophies) leagueTable[champName].trophies = [];
+                    
+                    let leagueNameText = lg === 'PL' ? 'Premier League 🏴󠁧󠁢󠁥󠁮󠁧󠁿' : 'La Liga 🇪🇸';
+                    leagueTable[champName].trophies.unshift(`🏆 แชมป์ ${leagueNameText} (ซีซั่น ${currentSeason})`);
+                }
+            });
+
+            // แจกแชมป์ FA Cup (ถ้ามีระบบฟุตบอลถ้วยรันอยู่)
+            if (window.cupState && window.cupState.winner) {
+                let cupChamp = window.cupState.winner;
+                if (leagueTable[cupChamp]) {
+                    if (!leagueTable[cupChamp].trophies) leagueTable[cupChamp].trophies = [];
+                    let faTrophyText = `🏅 แชมป์ FA Cup 🏆 (ซีซั่น ${currentSeason})`;
+                    
+                    if (!leagueTable[cupChamp].trophies.includes(faTrophyText)) {
+                        leagueTable[cupChamp].trophies.unshift(faTrophyText);
+                    }
+                }
+            }
+
+            originalCloseSeasonSummary(); // รันโค้ดปิดฤดูกาลเดิมของเกม
+        };
+    }
+</script><script>
+    // 1. เปลี่ยนการจัดสาย FA Cup ให้ดึงมาเฉพาะทีมจาก Premier League เท่านั้น
+    if (typeof initFaCup === 'function') {
+        initFaCup = function() {
+            // กรองเอาเฉพาะทีมในพรีเมียร์ลีก
+            let plTeams = Object.keys(leagueTable).filter(t => leagueTable[t].league === 'PL');
+            let userInPL = plTeams.includes(myCurrentTeamName);
+            
+            let selectedTeams = [];
+            if (userInPL) {
+                // หากบอสคุมทีม PL: นำทีมบอส + ทีม AI ใน PL สุ่มมา 15 ทีม (รวมเป็น 16 ทีม)
+                let otherPL = plTeams.filter(t => t !== myCurrentTeamName).sort(() => Math.random() - 0.5).slice(0, 15);
+                selectedTeams = [myCurrentTeamName, ...otherPL];
+            } else {
+                // หากบอสคุมทีม La Liga: สุ่มทีม PL มาเตะกันเอง 16 ทีม (บอสทำหน้าที่เป็นผู้ชมกดจำลองผล)
+                selectedTeams = plTeams.sort(() => Math.random() - 0.5).slice(0, 16);
+            }
+            
+            // เริ่มการแข่งขันที่รอบ 16 ทีมสุดท้าย (Round 4)
+            cupState.teams = selectedTeams.sort(() => Math.random() - 0.5);
+            cupState.round = 4; 
+            cupState.winner = null;
+            generateCupFixtures();
+        };
+    }
+
+    // 2. ดักจับตอนจบการแข่งขัน FA Cup เพื่ออัปเดตถ้วยรางวัลลงตู้โชว์ทันทีที่รู้ผลแชมป์!
+    if (typeof processCupRoundResults === 'function') {
+        const originalProcessCupRoundResults = processCupRoundResults;
+        processCupRoundResults = function(userHomeGoals, userAwayGoals) {
+            
+            // รันการจำลองและตัดสินผลแบบเดิม
+            originalProcessCupRoundResults(userHomeGoals, userAwayGoals);
+            
+            // หลังจากรันจบ ตรวจสอบว่าได้แชมป์ FA Cup รึยัง (รอบ 0 คือได้แชมป์แล้ว)
+            if (cupState.round === 0 && cupState.winner) {
+                let cupChamp = cupState.winner;
+                
+                // เตรียมตู้โชว์ของทีมแชมป์ให้พร้อม และยัดถ้วยรางวัลลงไป
+                if (typeof leagueTable[cupChamp] !== 'undefined') {
+                    if (!leagueTable[cupChamp].trophies) {
+                        leagueTable[cupChamp].trophies = [];
+                    }
+                    
+                    let faTrophyText = `🏅 แชมป์ FA Cup 🏆 (ซีซั่น ${currentSeason})`;
+                    
+                    // ป้องกันการแอดซ้ำซ้อน
+                    if (!leagueTable[cupChamp].trophies.includes(faTrophyText)) {
+                        leagueTable[cupChamp].trophies.unshift(faTrophyText);
+                    }
+                }
+            }
+        };
+    }
+</script><script>
+    setTimeout(() => {
+        // 1. ลิงก์ฟังก์ชันปุ่มเดิมให้เปิดหน้าต่างตู้โชว์สโมสรโลกอันใหม่ล่าสุดแทน
+        window.openTrophyModal = function() {
+            if (typeof openGlobalHofModal === 'function') {
+                openGlobalHofModal();
+            }
+        };
+
+        // 2. ค้นหาปุ่ม "✨ ถ้วย" ตัวเก่า แล้วเปลี่ยนชื่อ+ดีไซน์ให้เป็นปุ่มหลักอันเดียวที่สมบูรณ์แบบ
+        let originalTrophyBtn = document.querySelector("button[onclick='openTrophyModal()']");
+        if (originalTrophyBtn) {
+            originalTrophyBtn.innerHTML = "🏛️ หอเกียรติยศและตู้โชว์สโมสรโลก";
+            originalTrophyBtn.style.background = "#3b82f6"; // ปรับสีน้ำเงินหรูหราเข้ากับระบบใหม่
+            originalTrophyBtn.style.color = "white";
+        }
+
+        // 3. ตามลบปุ่มหอเกียรติยศอันที่ถูกสร้างซ้ำซ้อนจากโค้ดชุดก่อนหน้าออกไปทั้งหมด
+        let allNavButtons = document.querySelectorAll('.header-box button');
+        allNavButtons.forEach(btn => {
+            if (btn !== originalTrophyBtn && (btn.innerText.includes("หอเกียรติยศ") || btn.innerText.includes("ตู้โชว์"))) {
+                btn.remove();
+            }
+        });
+    }, 1000); // ตั้งเวลาทำงานหลังจากโหลดหน้าต่างเสร็จ 1 วินาที เพื่อตามกวาดล้างตัวซ้ำซ้อนได้อย่างหมดจด
+</script><script>
+    // 1. คลังสกิลภาษาอังกฤษ แยกตามตำแหน่งอย่างเด็ดขาด (100% Role-Matched)
+    const skillDB = {
+        GK: ["The Wall", "Cat Reflexes", "Sweeper Keeper", "Penalty Specialist"],
+        DF: ["Absolute Tank", "Tackle Master", "Aerial Threat", "Defensive Leader"],
+        MF: ["Playmaker", "Box-to-Box", "Set-Piece Expert", "Long Shot Sniper", "Tempo Controller"],
+        FW: ["Clinical Poacher", "Target Man", "Speedster", "Fox in the Box", "False 9"]
+    };
+
+    // 2. ฐานข้อมูลนักเตะระดับโลก (ปรับสกิลเป็นภาษาอังกฤษและตรงตำแหน่ง)
+    const realisticSkillsDB = {
+        // กองหน้า (FW) - พลังเยอะได้ 2 สกิล
+        "Haaland": ["Clinical Poacher", "Target Man"],
+        "Mbappe": ["Speedster", "Clinical Poacher"],
+        "Lewandowski": ["Clinical Poacher", "Fox in the Box"],
+        "Vinicius Jr": ["Speedster", "False 9"],
+        "Salah": ["Speedster", "Clinical Poacher"],
+        "Son Heung-min": ["Speedster", "Clinical Poacher"],
+        "Griezmann": ["False 9", "Fox in the Box"],
+        "Isak": ["Speedster", "Fox in the Box"],
+        "Watkins": ["Speedster", "Clinical Poacher"],
+        "Saka": ["Speedster", "Fox in the Box"],
+        
+        // กองกลาง (MF) - พลังเยอะได้ 2 สกิล
+        "De Bruyne": ["Playmaker", "Long Shot Sniper"],
+        "Bellingham": ["Box-to-Box", "Tempo Controller"],
+        "Rodri": ["Tempo Controller", "Box-to-Box"],
+        "B.Fernandes": ["Playmaker", "Long Shot Sniper"],
+        "Odegaard": ["Playmaker", "Tempo Controller"],
+        "Pedri": ["Playmaker", "Tempo Controller"],
+        "Valverde": ["Box-to-Box", "Long Shot Sniper"],
+        "Declan Rice": ["Box-to-Box", "Tempo Controller"],
+        "Mac Allister": ["Tempo Controller", "Playmaker"],
+        
+        // กองหลัง (DF) - พลังเยอะได้ 2 สกิล
+        "Van Dijk": ["Defensive Leader", "Absolute Tank"],
+        "Ruben Dias": ["Absolute Tank", "Tackle Master"],
+        "Saliba": ["Tackle Master", "Defensive Leader"],
+        "Rudiger": ["Absolute Tank", "Tackle Master"],
+        "A.Arnold": ["Tackle Master", "Aerial Threat"],
+        
+        // ผู้รักษาประตู (GK) - พลังเยอะได้ 2 สกิล
+        "Alisson": ["Cat Reflexes", "Sweeper Keeper"],
+        "Ederson": ["Sweeper Keeper", "The Wall"],
+        "Courtois": ["The Wall", "Cat Reflexes"],
+        "Martinez": ["Penalty Specialist", "Cat Reflexes"]
+    };
+
+    // 3. ฟังก์ชันคำนวณและแจกสกิลใหม่ตามเงื่อนไขของบอส
+    if (typeof assignSkillsToPlayer !== 'undefined' || true) {
+        assignSkillsToPlayer = function(player) {
+            if (!player || !player.role) return;
+            
+            player.skills = []; // ล้างสกิลเก่าออกเพื่ออัปเดตใหม่ให้ถูกต้อง
+
+            // กรองหาว่าเป็นซุปตาร์ตัวจริงไหม
+            let isSuperstar = false;
+            for (let nameKey in realisticSkillsDB) {
+                if (player.name.includes(nameKey)) {
+                    player.skills = [...realisticSkillsDB[nameKey]];
+                    isSuperstar = true;
+                    break;
+                }
+            }
+
+            // ถ้านักเตะทั่วไป หรือเด็กปั้นเยาวชน: คำนวณตามตำแหน่งและระดับพลัง
+            if (!isSuperstar) {
+                let roleSkills = skillDB[player.role];
+                if (roleSkills && roleSkills.length > 0) {
+                    // เงื่อนไขพลัง: พลัง >= 85 ได้ 2 สกิล / พลังน้อยกว่า 85 ได้ 1 สกิล
+                    let numSkillsToGive = (player.p >= 85) ? 2 : 1;
+
+                    // สุ่มดึงสกิลจากตำแหน่งของตัวเอง
+                    let shuffled = [...roleSkills].sort(() => 0.5 - Math.random());
+                    player.skills = shuffled.slice(0, numSkillsToGive);
+                }
+            }
+        };
+
+        // 4. สั่งให้ระบบรีเซ็ตและคำนวณสกิลให้นักเตะทุกคนในเซฟทันที
+        setTimeout(() => {
+            if (typeof allPlayers !== 'undefined') allPlayers.forEach(p => assignSkillsToPlayer(p));
+            if (typeof youthPlayers !== 'undefined') youthPlayers.forEach(p => assignSkillsToPlayer(p));
+            if (typeof renderSquad === 'function') renderSquad();
+            if (typeof renderXi === 'function') renderXi();
+        }, 600);
+    }
+
+    // 5. ปรับหน้าต่างการ์ดนักเตะให้แสดงผลสกิลภาษาอังกฤษสไตล์โมเดิร์น
+    if (typeof renderPlayerCard === 'function') {
+        renderPlayerCard = function(p, inXi = false) {
+            let status = '';
+            if (p.ban > 0) status += `<span style="color:#ef4444; margin-left:5px;">🟥 Ban(${p.ban})</span>`;
+            if (p.injury > 0) status += `<span style="color:#f97316; margin-left:5px;">🚑 Inj(${p.injury})</span>`;
+
+            let newSellBtn = (!inXi && p.team === myCurrentTeamName) ? `<button style="background:#ef4444; border:none; color:white; padding:2px 5px; border-radius:3px; cursor:pointer;" onclick="customSellPlayer(${p.id}, event)">💰 ขาย</button>` : '';
+
+            // แสดงผลป้ายสกิลภาษาอังกฤษ
+            let skillsHTML = '';
+            if (p.skills && p.skills.length > 0) {
+                p.skills.forEach(skill => {
+                    skillsHTML += `<span style="display:inline-block; background:#0f172a; border:1px solid #38bdf8; color:#38bdf8; font-size:9px; padding:1px 5px; border-radius:3px; margin-right:3px; margin-top:3px; font-weight:600; letter-spacing:0.3px;">⭐ ${skill}</span>`;
+                });
+            }
+
+            return `
+            <div class="card draggable" draggable="true" ondragstart="dragStart(event, ${p.id})" id="card-${p.id}" style="flex-direction: column; align-items: stretch;">
+                <div style="display:flex; justify-content: space-between; align-items:center;">
+                    <div style="display:flex; align-items:center;">
+                        <span class="badge ${p.role}">${p.role}</span>
+                        <b>${p.name}</b> <span style="font-size:10px; color:#94a3b8; margin-left:4px;">(${p.age}y)</span> ${status}
+                    </div>
+                    <div style="display:flex; align-items:center;">
+                        <span style="color:#eab308; font-weight:bold; margin-right:5px;">⚡${p.p}</span>
+                        ${newSellBtn}
+                    </div>
+                </div>
+                ${skillsHTML ? `<div style="margin-top:2px; display:flex; flex-wrap:wrap;">${skillsHTML}</div>` : ''}
+            </div>`;
+        };
+    }
+</script><script>
+    // ฟังก์ชันอัจฉริยะสำหรับสแกนและฉีดป้ายสกิลเข้าไปในหน้าสถิติผู้เล่น
+    function injectSkillsToStatsUI() {
+        // ค้นหาช่องข้อความในตาราง (td) หรือป้ายชื่อที่อาจเป็นชื่อนักเตะในหน้าสถิติ
+        let statsCells = document.querySelectorAll('td, th, b, .stats-row, .player-link');
+        
+        statsCells.forEach(cell => {
+            // ป้องกันการฉีดซ้ำซ้อนถ้าช่องนี้ถูกประมวลผลไปแล้ว
+            if (cell.getAttribute('data-skills-applied') === 'true') return;
+            
+            let cellText = cell.innerText.trim();
+            if (!cellText || cellText.length < 2) return;
+            
+            // ค้นหาตรวจสอบรายชื่อนักเตะว่าตรงกับฐานข้อมูลหลักหรือดาวรุ่งไหม
+            let targetPlayer = null;
+            if (typeof allPlayers !== 'undefined') {
+                targetPlayer = allPlayers.find(p => p.name === cellText);
+            }
+            if (!targetPlayer && typeof youthPlayers !== 'undefined') {
+                targetPlayer = youthPlayers.find(p => p.name === cellText);
+            }
+            
+            // หากตรงกับชื่อนักเตะในเซฟเกม และนักเตะคนนั้นมีสกิลติดตัวอยู่
+            if (targetPlayer && targetPlayer.skills && targetPlayer.skills.length > 0) {
+                let badgesHTML = '<div class="stats-skill-box" style="display:flex; flex-wrap:wrap; gap:2px; margin-top:2px; justify-content:flex-start;">';
+                targetPlayer.skills.forEach(skill => {
+                    badgesHTML += `<span style="display:inline-block; background:#0f172a; border:1px solid #38bdf8; color:#38bdf8; font-size:8px; padding:1px 3px; border-radius:2px; font-weight:600; line-height:1.1; scale:0.95;">⭐ ${skill}</span>`;
+                });
+                badgesHTML += '</div>';
+                
+                // จัดโครงสร้างในช่องตารางใหม่ ให้ชื่ออยู่ด้านบน และมีสกิลเรียงสวยๆ อยู่ด้านล่าง
+                cell.innerHTML = `<div style="font-weight:600; color:#f8fafc;">${cellText}</div>${badgesHTML}`;
+                cell.setAttribute('data-skills-applied', 'true');
+            }
+        });
+    }
+
+    // เปิดระบบวนลูปตรวจจับประสิทธิภาพสูง ทุกๆ 400ms 
+    // ทำให้ไม่ว่าบอสจะกดเปลี่ยนหน้าสถิติ, จัดอันดับดาซัลโว หรือเปลี่ยนฤดูกาล สกิลจะโผล่ตามไปโชว์ทุกที่ทันที!
+    setInterval(injectSkillsToStatsUI, 400);
+
+    // ช่วยดักจับการคลิกเมาส์ทั่วหน้าจอ เพื่อกระตุ้นให้สกิลเรนเดอร์ไวขึ้นทันใจเมื่อเปิดหน้าต่างสถิติ
+    document.addEventListener('click', () => {
+        setTimeout(injectSkillsToStatsUI, 60);
+        setTimeout(injectSkillsToStatsUI, 200);
+    });
 </script>
 </body>
 </html>
