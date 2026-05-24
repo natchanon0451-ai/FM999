@@ -95,6 +95,7 @@
                 <button onclick="showLeagueTable()" style="background: #eab308; color: #000; margin-left: 5px;">🏆 ตาราง</button>
                 <button onclick="openTrophyModal()" style="background: #f59e0b; color: #000; margin-left: 5px;">✨ ถ้วย</button>
                 <button onclick="openYouthModal()" style="background: #a855f7; color: #fff; margin-left: 5px;">👦 เยาวชน</button>
+                <button onclick="skipSeason()" style="background: #f97316; color: #fff; margin-left: 5px; border: 2px solid #fdba74; font-size: 13px;">⏭️ ข้ามซีซั่น</button>
             </div>
         </div>
         <div class="stat-bar">
@@ -1112,6 +1113,216 @@
         let opponents = Object.keys(leagueData[myCurrentLeague]).filter(t => t !== myCurrentTeamName);
         schedule = [...opponents, ...opponents].sort(() => Math.random() - 0.5);
         render();
+    }
+
+    function skipSeason() {
+        const remaining = 38 - currentMatchday + 1;
+        if (!confirm(`⏭️ ข้ามฤดูกาลที่เหลือ?\n\nยังเหลือ ${remaining} นัด (นัดที่ ${currentMatchday}–38)\nระบบจะจำลองผลการแข่งขันทั้งหมดทันทีและประกาศแชมป์!\n\nกด OK เพื่อยืนยัน`)) return;
+
+        // จำลองนัดที่เหลือทีละแมตช์เดย์
+        for (let md = 0; md < remaining; md++) {
+            const oppName = schedule[currentMatchday - 1 + md];
+            if (!oppName) continue;
+
+            // คำนวณพลังทีมเรา
+            const activeXi = xi.length >= 7
+                ? xi
+                : mySquad.filter(p => p.ban === 0 && p.injury === 0).sort((a, b) => b.p - a.p).slice(0, 11);
+            const myPower = activeXi.length > 0
+                ? activeXi.reduce((s, p) => s + p.p, 0) / activeXi.length
+                : 70;
+
+            // คำนวณพลังคู่แข่ง
+            let oppPlayers = allPlayers.filter(p => p.team === oppName && p.ban === 0 && p.injury === 0).sort((a, b) => b.p - a.p).slice(0, 11);
+            if (oppPlayers.length < 7) oppPlayers = allPlayers.filter(p => p.team === oppName).sort((a, b) => b.p - a.p).slice(0, 11);
+            const oppPower = oppPlayers.length > 0 ? oppPlayers.reduce((s, p) => s + p.p, 0) / oppPlayers.length : 70;
+
+            // คำนวณโอกาสชนะตามส่วนต่างพลัง
+            const diff = myPower - oppPower;
+            const winProb = Math.max(0.15, Math.min(0.72, 0.42 + diff / 80));
+            const rand = Math.random();
+
+            let myG, oppG;
+            if (rand < winProb) {
+                myG = Math.floor(Math.random() * 3) + 1;
+                oppG = Math.floor(Math.random() * Math.max(1, myG));
+                if (oppG >= myG) oppG = myG - 1;
+            } else if (rand < winProb + 0.2) {
+                myG = Math.floor(Math.random() * 3);
+                oppG = myG;
+            } else {
+                oppG = Math.floor(Math.random() * 3) + 1;
+                myG = Math.floor(Math.random() * Math.max(1, oppG));
+                if (myG >= oppG) myG = oppG - 1;
+            }
+
+            // อัปเดตตารางคะแนนนัดของเรา
+            const myT = leagueTable[myCurrentTeamName];
+            const opT = leagueTable[oppName];
+            myT.p++; opT.p++;
+            myT.gf += myG; myT.ga += oppG;
+            opT.gf += oppG; opT.ga += myG;
+            if (myG > oppG) { myT.w++; opT.l++; myT.pts += 3; budget = parseFloat((budget + 5).toFixed(1)); }
+            else if (myG < oppG) { myT.l++; opT.w++; opT.pts += 3; }
+            else { myT.d++; opT.d++; myT.pts++; opT.pts++; budget = parseFloat((budget + 2).toFixed(1)); }
+
+            // อัปเดตสถิตินักเตะทีมเรา
+            activeXi.forEach(p => {
+                if (p.stats) p.stats.appearances++;
+                if (oppG === 0 && (p.role === 'GK' || p.role === 'DF') && p.stats) p.stats.cleanSheets++;
+            });
+            for (let g = 0; g < myG; g++) {
+                const scorer = pickScorer(activeXi);
+                if (scorer && scorer.stats) scorer.stats.goals++;
+                const pool = activeXi.filter(x => x.id !== scorer?.id && x.role !== 'GK');
+                if (pool.length > 0 && Math.random() < 0.7) {
+                    const a = pool[Math.floor(Math.random() * pool.length)];
+                    if (a && a.stats) a.stats.assists++;
+                }
+            }
+            // อัปเดตสถิตินักเตะคู่แข่ง
+            oppPlayers.forEach(p => {
+                if (p.stats) p.stats.appearances++;
+                if (myG === 0 && (p.role === 'GK' || p.role === 'DF') && p.stats) p.stats.cleanSheets++;
+            });
+            for (let g = 0; g < oppG; g++) {
+                const scorer = pickScorer(oppPlayers);
+                if (scorer && scorer.stats) scorer.stats.goals++;
+                const pool = oppPlayers.filter(x => x.id !== scorer?.id && x.role !== 'GK');
+                if (pool.length > 0 && Math.random() < 0.7) {
+                    const a = pool[Math.floor(Math.random() * pool.length)];
+                    if (a && a.stats) a.stats.assists++;
+                }
+            }
+
+            // จำลองทีมอื่นๆ ในทุกลีก
+            ["PL", "LALIGA", "SERIEA"].forEach(lg => {
+                let teams = Object.keys(leagueTable).filter(t => leagueTable[t].league === lg);
+                if (lg === myCurrentLeague) teams = teams.filter(t => t !== myCurrentTeamName && t !== oppName);
+                teams = teams.sort(() => Math.random() - 0.5);
+                for (let i = 0; i < teams.length; i += 2) {
+                    if (!teams[i + 1]) break;
+                    const t1n = teams[i], t2n = teams[i + 1];
+                    const t1 = leagueTable[t1n], t2 = leagueTable[t2n];
+                    t1.p++; t2.p++;
+                    const g1 = Math.floor(Math.random() * 4), g2 = Math.floor(Math.random() * 4);
+                    t1.gf += g1; t1.ga += g2; t2.gf += g2; t2.ga += g1;
+                    if (g1 > g2) { t1.w++; t2.l++; t1.pts += 3; }
+                    else if (g1 < g2) { t1.l++; t2.w++; t2.pts += 3; }
+                    else { t1.d++; t2.d++; t1.pts++; t2.pts++; }
+
+                    let t1p = allPlayers.filter(p => p.team === t1n && p.ban === 0 && p.injury === 0).sort((a, b) => b.p - a.p).slice(0, 11);
+                    let t2p = allPlayers.filter(p => p.team === t2n && p.ban === 0 && p.injury === 0).sort((a, b) => b.p - a.p).slice(0, 11);
+                    if (t1p.length < 11) t1p = allPlayers.filter(p => p.team === t1n).slice(0, 11);
+                    if (t2p.length < 11) t2p = allPlayers.filter(p => p.team === t2n).slice(0, 11);
+                    t1p.forEach(p => { if (p.stats) p.stats.appearances++; });
+                    t2p.forEach(p => { if (p.stats) p.stats.appearances++; });
+                    if (g2 === 0) t1p.forEach(p => { if ((p.role === 'GK' || p.role === 'DF') && p.stats) p.stats.cleanSheets++; });
+                    if (g1 === 0) t2p.forEach(p => { if ((p.role === 'GK' || p.role === 'DF') && p.stats) p.stats.cleanSheets++; });
+                    for (let j = 0; j < g1; j++) { const s = pickScorer(t1p); if (s && s.stats) s.stats.goals++; }
+                    for (let j = 0; j < g2; j++) { const s = pickScorer(t2p); if (s && s.stats) s.stats.goals++; }
+                }
+            });
+        }
+
+        // ตั้งค่า matchday เป็น 38 แล้วเรียก end-of-season
+        currentMatchday = 38;
+
+        // ลดแบน/เจ็บ
+        allPlayers.forEach(p => {
+            if (p.ban > 0) p.ban--; if (p.injury > 0) p.injury--;
+            if (p.newBan) { p.ban = p.newBan; p.newBan = 0; }
+            if (p.newInjury) { p.injury = p.newInjury; p.newInjury = 0; }
+        });
+        youthPlayers.forEach(p => {
+            if (p.ban > 0) p.ban--; if (p.injury > 0) p.injury--;
+            if (p.newBan) { p.ban = p.newBan; p.newBan = 0; }
+            if (p.newInjury) { p.injury = p.newInjury; p.newInjury = 0; }
+        });
+        xi = xi.filter(p => p.ban === 0 && p.injury === 0);
+
+        // หาแชมป์และดาวซัลโวทุกลีก
+        const sortedPL  = Object.keys(leagueTable).filter(t => leagueTable[t].league === 'PL').map(t => ({name:t,...leagueTable[t]})).sort((a,b)=>(b.pts-a.pts)||((b.gf-b.ga)-(a.gf-a.ga)));
+        const sortedLA  = Object.keys(leagueTable).filter(t => leagueTable[t].league === 'LALIGA').map(t => ({name:t,...leagueTable[t]})).sort((a,b)=>(b.pts-a.pts)||((b.gf-b.ga)-(a.gf-a.ga)));
+        const sortedSA  = Object.keys(leagueTable).filter(t => leagueTable[t].league === 'SERIEA').map(t => ({name:t,...leagueTable[t]})).sort((a,b)=>(b.pts-a.pts)||((b.gf-b.ga)-(a.gf-a.ga)));
+        const plChamp = sortedPL[0]?.name || '-';
+        const laChamp = sortedLA[0]?.name || '-';
+        const saChamp = sortedSA[0]?.name || '-';
+
+        const plTopScorer = allPlayers.filter(p => leagueTable[p.team]?.league === 'PL').sort((a,b)=>b.stats.goals-a.stats.goals)[0];
+        const laTopScorer = allPlayers.filter(p => leagueTable[p.team]?.league === 'LALIGA').sort((a,b)=>b.stats.goals-a.stats.goals)[0];
+        const saTopScorer = allPlayers.filter(p => leagueTable[p.team]?.league === 'SERIEA').sort((a,b)=>b.stats.goals-a.stats.goals)[0];
+
+        // แจกถ้วย/รางวัล + อัปเดตประวัติ + พัฒนาพลัง + รีเซ็ตสถิติ
+        allPlayers.forEach(p => {
+            if (p.team === plChamp) p.stats.trophies.push(`🏆 แชมป์ Premier League (ซีซั่น ${currentSeason})`);
+            if (p.team === laChamp) p.stats.trophies.push(`🏆 แชมป์ La Liga (ซีซั่น ${currentSeason})`);
+            if (p.team === saChamp) p.stats.trophies.push(`🏆 แชมป์ Serie A (ซีซั่น ${currentSeason})`);
+            if (plTopScorer && p.id === plTopScorer.id && p.stats.goals > 0) p.stats.trophies.push(`🥇 ดาวซัลโว PL ซีซั่น ${currentSeason} (⚽${p.stats.goals})`);
+            if (laTopScorer && p.id === laTopScorer.id && p.stats.goals > 0) p.stats.trophies.push(`🥇 ดาวซัลโว La Liga ซีซั่น ${currentSeason} (⚽${p.stats.goals})`);
+            if (saTopScorer && p.id === saTopScorer.id && p.stats.goals > 0) p.stats.trophies.push(`🥇 ดาวซัลโว Serie A ซีซั่น ${currentSeason} (⚽${p.stats.goals})`);
+
+            const avg = p.stats.appearances > 0 ? p.stats.totalRating / p.stats.appearances : 0;
+            p.stats.history.push({ season: currentSeason, team: p.team, appearances: p.stats.appearances, goals: p.stats.goals, assists: p.stats.assists, cleanSheets: p.stats.cleanSheets, avgRating: avg });
+
+            if (p.age < 24) { p.p += p.stats.appearances > 10 ? Math.floor(Math.random()*3)+1 : Math.floor(Math.random()*2); }
+            else if (p.age >= 24 && p.age <= 29) { if (avg > 7.0) p.p += Math.floor(Math.random()*2); }
+            else if (p.age >= 32) { p.p -= Math.floor(Math.random()*2)+1; }
+            if (p.p > 99) p.p = 99;
+
+            p.stats.appearances = 0; p.stats.goals = 0; p.stats.assists = 0;
+            p.stats.cleanSheets = 0; p.stats.totalRating = 0;
+            p.age++;
+        });
+        youthPlayers.forEach(p => p.age++);
+        youthPlayers = youthPlayers.filter(p => p.age <= 20);
+
+        // ตรวจสอบว่าทีมเราเป็นแชมป์ไหม
+        const isOurChamp = (myCurrentLeague === 'PL' && plChamp === myCurrentTeamName)
+            || (myCurrentLeague === 'LALIGA' && laChamp === myCurrentTeamName)
+            || (myCurrentLeague === 'SERIEA' && saChamp === myCurrentTeamName);
+
+        // สร้าง HTML สรุปผล
+        const myRank = (() => {
+            const sorted = (myCurrentLeague === 'PL' ? sortedPL : myCurrentLeague === 'LALIGA' ? sortedLA : sortedSA);
+            return sorted.findIndex(t => t.name === myCurrentTeamName) + 1;
+        })();
+        const myFinalStats = leagueTable[myCurrentTeamName];
+
+        document.getElementById('summary-season-num').innerText = currentSeason;
+        document.getElementById('summary-content').innerHTML = `
+            ${isOurChamp ? `<div style="background:linear-gradient(135deg,#854d0e,#ca8a04); padding:15px; border-radius:8px; text-align:center; margin-bottom:12px; border:2px solid #fbbf24; animation: pulse 1s infinite;">
+                <div style="font-size:36px;">🏆🎉🥳</div>
+                <div style="font-size:20px; font-weight:bold; color:#fef08a;">ยินดีด้วยบอส! ทีม ${myCurrentTeamName} คว้าแชมป์!</div>
+            </div>` : `<div style="background:#1e293b; padding:12px; border-radius:8px; margin-bottom:12px; border-left:4px solid ${myRank <= 4 ? '#22c55e' : '#94a3b8'}; text-align:center;">
+                <div style="font-size:16px; color:#f8fafc;">📊 ทีมเราจบอันดับที่ <b style="color:${myRank<=4?'#22c55e':myRank<=10?'#eab308':'#ef4444'}; font-size:22px;">${myRank}</b> ด้วย <b>${myFinalStats.pts}</b> แต้ม</div>
+            </div>`}
+            <div style="background:#0f172a; padding:10px; border-radius:6px; margin-bottom:10px; border-left:4px solid #3b82f6;">
+                <b style="color:#38bdf8;">🏴󠁧󠁢󠁥󠁮󠁧󠁿 แชมป์ Premier League:</b> <span style="font-size:18px; font-weight:bold;">${plChamp}</span> (${sortedPL[0]?.pts || 0} แต้ม)<br>
+                <span style="font-size:12px; color:#fbbf24;">🥇 ดาวซัลโว: ${plTopScorer ? plTopScorer.name+' ('+plTopScorer.team+') ⚽'+plTopScorer.stats.goals : '-'}</span>
+            </div>
+            <div style="background:#0f172a; padding:10px; border-radius:6px; margin-bottom:10px; border-left:4px solid #ef4444;">
+                <b style="color:#f87171;">🇪🇸 แชมป์ La Liga:</b> <span style="font-size:18px; font-weight:bold;">${laChamp}</span> (${sortedLA[0]?.pts || 0} แต้ม)<br>
+                <span style="font-size:12px; color:#fbbf24;">🥇 ดาวซัลโว: ${laTopScorer ? laTopScorer.name+' ('+laTopScorer.team+') ⚽'+laTopScorer.stats.goals : '-'}</span>
+            </div>
+            <div style="background:#0f172a; padding:10px; border-radius:6px; margin-bottom:10px; border-left:4px solid #22c55e;">
+                <b style="color:#4ade80;">🇮🇹 แชมป์ Serie A:</b> <span style="font-size:18px; font-weight:bold;">${saChamp}</span> (${sortedSA[0]?.pts || 0} แต้ม)<br>
+                <span style="font-size:12px; color:#fbbf24;">🥇 ดาวซัลโว: ${saTopScorer ? saTopScorer.name+' ('+saTopScorer.team+') ⚽'+saTopScorer.stats.goals : '-'}</span>
+            </div>
+            <div style="background:#1e293b; padding:8px; border-radius:6px; font-size:12px; color:#94a3b8; text-align:center;">
+                ⏭️ <i>ข้ามฤดูกาลด้วยระบบ Skip Season — จำลองครบ 38 นัดแล้ว</i>
+            </div>
+        `;
+
+        // บันทึกถ้วยลงประวัติสโมสร
+        if (typeof trophyHistory !== 'undefined') {
+            if (plChamp !== '-') { if (!trophyHistory['PL']) trophyHistory['PL'] = {}; trophyHistory['PL'][plChamp] = (trophyHistory['PL'][plChamp] || 0) + 1; }
+            if (laChamp !== '-') { if (!trophyHistory['LALIGA']) trophyHistory['LALIGA'] = {}; trophyHistory['LALIGA'][laChamp] = (trophyHistory['LALIGA'][laChamp] || 0) + 1; }
+            if (saChamp !== '-') { if (!trophyHistory['SERIEA']) trophyHistory['SERIEA'] = {}; trophyHistory['SERIEA'][saChamp] = (trophyHistory['SERIEA'][saChamp] || 0) + 1; }
+        }
+
+        addNews(`⏭️ <b>[ข้ามซีซั่น]</b> ผลสุดท้าย: PL→${plChamp} | La Liga→${laChamp} | Serie A→${saChamp}`);
+        document.getElementById('season-summary-modal').style.display = 'flex';
     }
 
     function checkAITransferOffers() {
