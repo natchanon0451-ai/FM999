@@ -79,6 +79,8 @@
             <option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</option>
             <option value="LALIGA">🇪🇸 La Liga</option>
             <option value="SERIEA">🇮🇹 Serie A</option>
+            <option value="BL">🇩🇪 Bundesliga</option>
+            <option value="LIGUE1">🇫🇷 Ligue 1</option>
          </select>
         <select id="team-select" style="font-size: 16px; padding: 5px; margin-left: 5px;"></select>
     </div>
@@ -178,7 +180,7 @@
         <h2 style="text-align: center; margin-top: 0; color: #22c55e;">🛒 ตลาดซื้อขายนักเตะ</h2>
         <div style="font-size: 14px; text-align: center; color: #94a3b8; margin-bottom: 12px;">💰 งบปัจจุบัน: <b style="color: #22c55e;"><span id="modal-budget">0</span>M</b></div>
         <div style="display: flex; gap: 10px; margin-bottom: 15px; justify-content: center; flex-wrap: wrap; background: #0f172a; padding: 10px; border-radius: 6px;">
-            <div><span style="font-size:12px; color:#94a3b8;">เลือกลีก:</span> <select id="market-league-filter" onchange="updateMarketTeamFilterDropdown()"><option value="ALL">ทุกลีก</option><option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 PL</option><option value="LALIGA">🇪🇸 La Liga</option><option value="SERIEA">🇮🇹 Serie A</option></select></div>
+            <div><span style="font-size:12px; color:#94a3b8;">เลือกลีก:</span> <select id="market-league-filter" onchange="updateMarketTeamFilterDropdown()"><option value="ALL">ทุกลีก</option><option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 PL</option><option value="LALIGA">🇪🇸 La Liga</option><option value="SERIEA">🇮🇹 Serie A</option><option value="BL">🇩🇪 Bundesliga</option><option value="LIGUE1">🇫🇷 Ligue 1</option></select></div>
             <div><span style="font-size:12px; color:#94a3b8;">สโมสร:</span> <select id="market-team-filter" onchange="renderMarket(true)"><option value="ALL">ทุกสโมสร</option></select></div>
             <div><span style="font-size:12px; color:#94a3b8;">ตำแหน่ง:</span> <select id="market-role-filter" onchange="renderMarket(true)"><option value="ALL">ทุกตำแหน่ง</option><option value="GK">GK</option><option value="DF">DF</option><option value="MF">MF</option><option value="FW">FW</option></select></div>
         </div>
@@ -192,7 +194,7 @@
     <div class="modal-content" style="width: 700px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
             <h2 style="margin: 0; color: #eab308;">🏆 ตารางคะแนน</h2>
-            <div><button id="tab-btn-pl" class="league-title-btn active" onclick="switchTableLeague('PL')">🏴󠁧󠁢󠁥󠁮󠁧󠁿 PL</button><button id="tab-btn-laliga" class="league-title-btn" onclick="switchTableLeague('LALIGA')">🇪🇸 La Liga</button><button id="tab-btn-seriea" class="league-title-btn" onclick="switchTableLeague('SERIEA')">🇮🇹 Serie A</button></div>
+            <div><button id="tab-btn-pl" class="league-title-btn active" onclick="switchTableLeague('PL')">🏴󠁧󠁢󠁥󠁮󠁧󠁿 PL</button><button id="tab-btn-laliga" class="league-title-btn" onclick="switchTableLeague('LALIGA')">🇪🇸 La Liga</button><button id="tab-btn-seriea" class="league-title-btn" onclick="switchTableLeague('SERIEA')">🇮🇹 Serie A</button><button id="tab-btn-bl" class="league-title-btn" onclick="switchTableLeague('BL')">🇩🇪 Bundesliga</button><button id="tab-btn-ligue1" class="league-title-btn" onclick="switchTableLeague('LIGUE1')">🇫🇷 Ligue 1</button></div>
         </div>
         <div style="overflow-x: auto;">
             <table><thead><tr><th>อันดับ</th><th>ทีม</th><th>แข่ง</th><th>ชนะ</th><th>เสมอ</th><th>แพ้</th><th>ได้</th><th>เสีย</th><th>GD</th><th>แต้ม</th></tr></thead><tbody id="league-table-body"></tbody></table>
@@ -206,7 +208,7 @@
         <h2 style="text-align: center; margin-top: 0; color: #f59e0b;">🏛️ หอเกียรติยศสโมสร</h2>
         <div style="display: grid; grid-template-columns: 340px 1fr; gap: 15px; margin-top: 15px; height: 50vh;">
             <div style="overflow-y: auto; background: #0f172a; padding: 8px; border-radius: 6px;">
-                <div style="margin-bottom: 8px; text-align: center;"><select id="trophy-league-filter" onchange="renderTrophyLeaderboard()" style="width: 95%;"><option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 แชมป์ Premier League</option><option value="LALIGA">🇪🇸 แชมป์ La Liga</option><option value="SERIEA">🇮🇹 แชมป์ Serie A</option></select></div>
+                <div style="margin-bottom: 8px; text-align: center;"><select id="trophy-league-filter" onchange="renderTrophyLeaderboard()" style="width: 95%;"><option value="PL">🏴󠁧󠁢󠁥󠁮󠁧󠁿 แชมป์ Premier League</option><option value="LALIGA">🇪🇸 แชมป์ La Liga</option><option value="SERIEA">🇮🇹 แชมป์ Serie A</option><option value="BL">🇩🇪 แชมป์ Bundesliga</option><option value="LIGUE1">🇫🇷 แชมป์ Ligue 1</option></select></div>
                 <table style="font-size: 11px; width: 100%;"><thead><tr><th>ทีม</th><th>ถ้วยรวม</th></tr></thead><tbody id="trophy-leaderboard-body"></tbody></table>
             </div>
             <div id="cabinet-display" style="background: #020617; border: 2px solid #334155; border-radius: 6px; padding: 15px; overflow-y: auto; text-align: center; color:#94a3b8;">
@@ -320,6 +322,46 @@
             "Como": [{name:"Reina", role:"GK", age:42}, {name:"Audero", role:"GK", age:27}, {name:"Dossena", role:"DF", age:28}, {name:"Goldaniga", role:"DF", age:31}, {name:"Iovine", role:"DF", age:21}, {name:"Moreno", role:"DF", age:28}, {name:"Kempf", role:"DF", age:29}, {name:"Barba", role:"DF", age:30}, {name:"Sergi Roberto", role:"MF", age:32}, {name:"Engelhardt", role:"MF", age:22}, {name:"Da Cunha", role:"MF", age:24}, {name:"Caqueret", role:"MF", age:24}, {name:"Braunoder", role:"MF", age:21}, {name:"Strefezza", role:"FW", age:27}, {name:"Paz", role:"FW", age:22}, {name:"Cutrone", role:"FW", age:27}, {name:"Gabrielloni", role:"FW", age:29}, {name:"Cerri", role:"FW", age:28}],
             "Udinese": [{name:"Okoye", role:"GK", age:23}, {name:"Sava", role:"GK", age:26}, {name:"Bijol", role:"DF", age:26}, {name:"Kristensen", role:"DF", age:27}, {name:"Ehizibue", role:"DF", age:30}, {name:"Kabasele", role:"DF", age:33}, {name:"Touré", role:"DF", age:23}, {name:"Zemura", role:"DF", age:24}, {name:"Lovric", role:"MF", age:25}, {name:"Walace", role:"MF", age:29}, {name:"Payero", role:"MF", age:25}, {name:"Ekkelenkamp", role:"MF", age:24}, {name:"Giannetti", role:"MF", age:25}, {name:"Thauvin", role:"FW", age:31}, {name:"Lucca", role:"FW", age:24}, {name:"Brenner", role:"FW", age:24}, {name:"Davis", role:"FW", age:27}, {name:"Iker Bravo", role:"FW", age:19}],
             "Verona": [{name:"Montipo", role:"GK", age:29}, {name:"Berardi", role:"GK", age:25}, {name:"Dawidowicz", role:"DF", age:29}, {name:"Magnani", role:"DF", age:30}, {name:"Tchatchoua", role:"DF", age:26}, {name:"Faraoni", role:"DF", age:33}, {name:"Coppola", role:"DF", age:22}, {name:"Ghilardi", role:"DF", age:23}, {name:"Dani Silva", role:"MF", age:28}, {name:"Serdar", role:"MF", age:27}, {name:"Suslov", role:"MF", age:22}, {name:"Belahyane", role:"MF", age:20}, {name:"Duda", role:"MF", age:27}, {name:"Tengstedt", role:"FW", age:23}, {name:"Lazovic", role:"FW", age:34}, {name:"Noslin", role:"FW", age:26}, {name:"Sarr", role:"FW", age:23}, {name:"Swiderski", role:"FW", age:27}]
+        },
+        "BL": {
+            "Bayern Munich": [{name:"Neuer", role:"GK", age:39}, {name:"Peretz", role:"GK", age:25}, {name:"Kim Min-Jae", role:"DF", age:28}, {name:"Upamecano", role:"DF", age:27}, {name:"Davies", role:"DF", age:24}, {name:"Guerreiro", role:"DF", age:30}, {name:"Dier", role:"DF", age:31}, {name:"Boey", role:"DF", age:23}, {name:"Kimmich", role:"MF", age:30}, {name:"Goretzka", role:"MF", age:30}, {name:"Laimer", role:"MF", age:27}, {name:"Pavlovic", role:"MF", age:20}, {name:"Muller T", role:"MF", age:36}, {name:"Maycon Cardozo", role:"MF", age:17}, {name:"Kane", role:"FW", age:32}, {name:"Musiala", role:"FW", age:22}, {name:"Sane", role:"FW", age:29}, {name:"Gnabry", role:"FW", age:29}, {name:"Tel", role:"FW", age:20}],
+            "Bayer Leverkusen": [{name:"Hradecky", role:"GK", age:35}, {name:"Lomb", role:"GK", age:29}, {name:"Tah", role:"DF", age:29}, {name:"Tapsoba", role:"DF", age:25}, {name:"Frimpong", role:"DF", age:24}, {name:"Grimaldo", role:"DF", age:28}, {name:"Hincapie", role:"DF", age:23}, {name:"Xhaka", role:"MF", age:32}, {name:"Andrich", role:"MF", age:30}, {name:"Palacios", role:"MF", age:22}, {name:"Wirtz", role:"MF", age:22}, {name:"Adli", role:"MF", age:24}, {name:"Boniface", role:"FW", age:23}, {name:"Schick", role:"FW", age:29}, {name:"Hofmann", role:"FW", age:31}, {name:"Terrier", role:"FW", age:28}],
+            "Borussia Dortmund": [{name:"Kobel", role:"GK", age:27}, {name:"Lotka", role:"GK", age:24}, {name:"Schlotterbeck", role:"DF", age:26}, {name:"Sule", role:"DF", age:30}, {name:"Ryerson", role:"DF", age:27}, {name:"Bensebaini", role:"DF", age:30}, {name:"Couto", role:"DF", age:22}, {name:"Brandt", role:"MF", age:29}, {name:"Can", role:"MF", age:31}, {name:"Sabitzer", role:"MF", age:31}, {name:"Nmecha", role:"MF", age:25}, {name:"Guirassy", role:"FW", age:29}, {name:"Adeyemi", role:"FW", age:23}, {name:"Gittens", role:"FW", age:21}, {name:"Fullkrug", role:"FW", age:32}, {name:"Duranville", role:"FW", age:20}],
+            "RB Leipzig": [{name:"Gulacsi", role:"GK", age:34}, {name:"Vandevoordt", role:"GK", age:22}, {name:"Orban", role:"DF", age:31}, {name:"Simakan", role:"DF", age:24}, {name:"Henrichs", role:"DF", age:28}, {name:"Raum", role:"DF", age:26}, {name:"Klostermann", role:"DF", age:29}, {name:"Kampl", role:"MF", age:33}, {name:"Schlager", role:"MF", age:27}, {name:"Haidara", role:"MF", age:27}, {name:"Simons", role:"MF", age:22}, {name:"Baumgartner", role:"MF", age:26}, {name:"Openda", role:"FW", age:24}, {name:"Sesko", role:"FW", age:22}, {name:"Werner", role:"FW", age:29}, {name:"Nusa", role:"FW", age:20}, {name:"Poulsen", role:"FW", age:31}],
+            "Stuttgart": [{name:"Nubel", role:"GK", age:28}, {name:"Fernandez C", role:"GK", age:23}, {name:"Anton", role:"DF", age:28}, {name:"Zagadou", role:"DF", age:27}, {name:"Vagnoman", role:"DF", age:25}, {name:"Mittelstadt", role:"DF", age:23}, {name:"Stergiou", role:"DF", age:23}, {name:"Ito", role:"DF", age:27}, {name:"Karazor", role:"MF", age:29}, {name:"Stiller", role:"MF", age:23}, {name:"Millot", role:"MF", age:24}, {name:"Fuhrich", role:"FW", age:27}, {name:"Undav", role:"FW", age:27}, {name:"Demirovic", role:"FW", age:26}, {name:"Silas", role:"FW", age:24}, {name:"Woltemade", role:"FW", age:23}],
+            "Eintracht Frankfurt": [{name:"Trapp", role:"GK", age:34}, {name:"Kaua Santos", role:"GK", age:22}, {name:"Tuta", role:"DF", age:26}, {name:"Koch", role:"DF", age:28}, {name:"Theate", role:"DF", age:24}, {name:"Collins", role:"DF", age:23}, {name:"Kristovic", role:"DF", age:22}, {name:"Skhiri", role:"MF", age:30}, {name:"Larsson", role:"MF", age:27}, {name:"Chaibi", role:"MF", age:23}, {name:"Gotze", role:"MF", age:33}, {name:"Ekitike", role:"FW", age:22}, {name:"Uzun", role:"FW", age:19}, {name:"Ngankam", role:"FW", age:23}, {name:"Dina Ebimbe", role:"FW", age:24}, {name:"Fares", role:"DF", age:28}],
+            "Freiburg": [{name:"Atubolu", role:"GK", age:22}, {name:"Muller C", role:"GK", age:32}, {name:"Ginter", role:"DF", age:31}, {name:"Lienhart", role:"DF", age:29}, {name:"Sildillia", role:"DF", age:22}, {name:"Kubler", role:"DF", age:30}, {name:"Keitel", role:"DF", age:23}, {name:"Eggestein", role:"MF", age:27}, {name:"Grifo", role:"MF", age:31}, {name:"Doan", role:"MF", age:27}, {name:"Jeong", role:"MF", age:26}, {name:"Gregoritsch", role:"FW", age:30}, {name:"Weisshaupt", role:"FW", age:23}, {name:"Adamu", role:"FW", age:23}, {name:"Horing", role:"FW", age:22}, {name:"Kyereh", role:"FW", age:28}],
+            "Hoffenheim": [{name:"Baumann", role:"GK", age:34}, {name:"Draschner", role:"GK", age:22}, {name:"Vogt", role:"DF", age:33}, {name:"Akpoguma", role:"DF", age:29}, {name:"Kaderabek", role:"DF", age:31}, {name:"Nsoki", role:"DF", age:25}, {name:"Skov", role:"DF", age:28}, {name:"Grillitsch", role:"MF", age:29}, {name:"Becker", role:"MF", age:26}, {name:"Stach", role:"MF", age:28}, {name:"Samassekou", role:"MF", age:29}, {name:"Kramaric", role:"FW", age:33}, {name:"Beier", role:"FW", age:22}, {name:"Bebou", role:"FW", age:31}, {name:"Weghorst", role:"FW", age:32}, {name:"Hlozek", role:"FW", age:22}],
+            "Werder Bremen": [{name:"Zetterer", role:"GK", age:28}, {name:"Lewald", role:"GK", age:25}, {name:"Friedl", role:"DF", age:27}, {name:"Veljkovic", role:"DF", age:30}, {name:"Pieper", role:"DF", age:26}, {name:"Jung", role:"DF", age:29}, {name:"Stage", role:"DF", age:27}, {name:"Weiser", role:"MF", age:31}, {name:"Grull", role:"MF", age:26}, {name:"Schmid", role:"MF", age:24}, {name:"Rapp", role:"MF", age:28}, {name:"Ducksch", role:"FW", age:30}, {name:"Bittencourt", role:"FW", age:29}, {name:"Njinmah", role:"FW", age:22}, {name:"Burke", role:"FW", age:24}, {name:"Deman", role:"FW", age:20}],
+            "Augsburg": [{name:"Labrovic", role:"GK", age:29}, {name:"Finn", role:"GK", age:24}, {name:"Gumny", role:"DF", age:27}, {name:"Uduokhai", role:"DF", age:27}, {name:"Oxford", role:"DF", age:23}, {name:"Iago", role:"DF", age:31}, {name:"Bauer T", role:"DF", age:28}, {name:"Winther", role:"DF", age:26}, {name:"Maier", role:"MF", age:26}, {name:"Dorsch", role:"MF", age:27}, {name:"Engels A", role:"MF", age:22}, {name:"Caligiuri", role:"MF", age:35}, {name:"Tietz", role:"FW", age:24}, {name:"Vargas", role:"FW", age:24}, {name:"Beljo", role:"FW", age:24}, {name:"Berisha A", role:"FW", age:31}],
+            "Union Berlin": [{name:"Ronnow", role:"GK", age:32}, {name:"Volkov", role:"GK", age:22}, {name:"Doekhi", role:"DF", age:26}, {name:"Jaeckel", role:"DF", age:26}, {name:"Trimmel", role:"DF", age:36}, {name:"Gosens", role:"DF", age:30}, {name:"Schafer", role:"DF", age:28}, {name:"Khedira", role:"MF", age:26}, {name:"Haberer", role:"MF", age:29}, {name:"Rothe", role:"MF", age:21}, {name:"Kemlein", role:"MF", age:21}, {name:"Leite", role:"MF", age:23}, {name:"Skov Olsen", role:"FW", age:26}, {name:"Behrens", role:"FW", age:32}, {name:"Jordan", role:"FW", age:26}, {name:"Kevin Volland", role:"FW", age:34}],
+            "Wolfsburg": [{name:"Casteels", role:"GK", age:32}, {name:"Klinger", role:"GK", age:24}, {name:"Lacroix", role:"DF", age:24}, {name:"Bornauw", role:"DF", age:26}, {name:"Maehle", role:"DF", age:28}, {name:"Baku", role:"DF", age:26}, {name:"Roggow", role:"DF", age:23}, {name:"Arnold", role:"MF", age:29}, {name:"Gerhardt", role:"MF", age:29}, {name:"Svanberg", role:"MF", age:27}, {name:"Wimmer", role:"MF", age:24}, {name:"Wind", role:"FW", age:26}, {name:"Tomas", role:"FW", age:26}, {name:"Kaminski", role:"FW", age:25}, {name:"Amoura", role:"FW", age:26}, {name:"Zundel", role:"FW", age:21}],
+            "Gladbach": [{name:"Nicolas", role:"GK", age:28}, {name:"Sippel", role:"GK", age:35}, {name:"Scally", role:"DF", age:23}, {name:"Elvedi", role:"DF", age:28}, {name:"Friedrich A", role:"DF", age:28}, {name:"Netz", role:"DF", age:22}, {name:"Lainer", role:"DF", age:31}, {name:"Itakura", role:"DF", age:28}, {name:"Kone", role:"MF", age:22}, {name:"Weigl", role:"MF", age:30}, {name:"Reitz", role:"MF", age:26}, {name:"Hack", role:"MF", age:22}, {name:"Plea", role:"FW", age:31}, {name:"Cvancara", role:"FW", age:25}, {name:"Honorat", role:"FW", age:27}, {name:"Kleindienst", role:"FW", age:28}],
+            "Heidenheim": [{name:"Muller K", role:"GK", age:35}, {name:"Funk", role:"GK", age:26}, {name:"Mainka", role:"DF", age:27}, {name:"Theuerkauf", role:"DF", age:28}, {name:"Traore B", role:"DF", age:28}, {name:"Busch", role:"DF", age:29}, {name:"Goller", role:"DF", age:27}, {name:"Gimber", role:"DF", age:31}, {name:"Beste", role:"MF", age:25}, {name:"Maloney", role:"MF", age:25}, {name:"Schimmer", role:"MF", age:24}, {name:"Niemeyer", role:"MF", age:27}, {name:"Pieringer", role:"FW", age:25}, {name:"Breithaupt", role:"FW", age:23}, {name:"Schumacher C", role:"FW", age:22}, {name:"Kaya", role:"FW", age:23}],
+            "Mainz": [{name:"Zentner", role:"GK", age:29}, {name:"Philipp", role:"GK", age:25}, {name:"Niakhate", role:"DF", age:28}, {name:"Bell", role:"DF", age:23}, {name:"Widmer", role:"DF", age:30}, {name:"Alexander", role:"DF", age:25}, {name:"Fernandes M", role:"DF", age:28}, {name:"van den Berg", role:"DF", age:24}, {name:"Kohr", role:"MF", age:30}, {name:"Lee JS", role:"MF", age:26}, {name:"Latza", role:"MF", age:36}, {name:"Skarke", role:"MF", age:27}, {name:"Burkardt", role:"FW", age:23}, {name:"Ingvartsen", role:"FW", age:27}, {name:"Caci", role:"FW", age:27}, {name:"Amiri", role:"FW", age:27}],
+            "Bochum": [{name:"Riemann", role:"GK", age:35}, {name:"Drewes", role:"GK", age:31}, {name:"Oermann", role:"DF", age:25}, {name:"Ordets", role:"DF", age:29}, {name:"Bernardo B", role:"DF", age:33}, {name:"Stafylidis", role:"DF", age:30}, {name:"Lampropoulos", role:"DF", age:35}, {name:"Gamboa", role:"DF", age:36}, {name:"Losilla", role:"MF", age:36}, {name:"Stojilkovic", role:"MF", age:24}, {name:"Rexhbecaj", role:"MF", age:26}, {name:"Tesche", role:"MF", age:34}, {name:"Hofmann K", role:"FW", age:29}, {name:"Zoller", role:"FW", age:29}, {name:"Antwi-Adjei", role:"FW", age:31}, {name:"Broschinski", role:"FW", age:23}],
+            "St. Pauli": [{name:"Vasilj", role:"GK", age:28}, {name:"Golenia", role:"GK", age:24}, {name:"Wahl", role:"DF", age:30}, {name:"Ziereis", role:"DF", age:31}, {name:"Saliakas", role:"DF", age:28}, {name:"Paqarada", role:"DF", age:29}, {name:"Metcalfe", role:"DF", age:24}, {name:"Nemeth", role:"DF", age:26}, {name:"Irvine", role:"MF", age:32}, {name:"Hartel", role:"MF", age:30}, {name:"Guilavogui", role:"MF", age:34}, {name:"Kern", role:"MF", age:23}, {name:"Amenyido", role:"FW", age:29}, {name:"Afolabi", role:"FW", age:25}, {name:"Saad", role:"FW", age:25}, {name:"Eggestein J", role:"FW", age:28}],
+            "Holstein Kiel": [{name:"Dahne", role:"GK", age:29}, {name:"Weiner", role:"GK", age:23}, {name:"Ivezic", role:"DF", age:25}, {name:"Puchacz", role:"DF", age:27}, {name:"Rosenboom", role:"DF", age:28}, {name:"Becker S", role:"DF", age:28}, {name:"Drescher", role:"DF", age:25}, {name:"Holtby", role:"MF", age:34}, {name:"Remberg", role:"MF", age:26}, {name:"Pichler", role:"MF", age:28}, {name:"Gigovic", role:"MF", age:21}, {name:"Roschke", role:"MF", age:24}, {name:"Machino", role:"FW", age:26}, {name:"Skrzybski", role:"FW", age:33}, {name:"Porath", role:"FW", age:24}, {name:"Bernecker", role:"FW", age:25}]
+        },
+        "LIGUE1": {
+            "PSG": [{name:"Donnarumma", role:"GK", age:25}, {name:"Safonov", role:"GK", age:24}, {name:"Marquinhos", role:"DF", age:30}, {name:"Hakimi", role:"DF", age:26}, {name:"Beraldo", role:"DF", age:20}, {name:"Pacho", role:"DF", age:23}, {name:"Hernandez L", role:"DF", age:28}, {name:"Mendes N", role:"DF", age:22}, {name:"Vitinha", role:"MF", age:24}, {name:"Fabian Ruiz", role:"MF", age:28}, {name:"Zaire-Emery", role:"MF", age:18}, {name:"Lee Kang-in", role:"MF", age:23}, {name:"Joao Neves", role:"MF", age:19}, {name:"Dembele", role:"FW", age:27}, {name:"Barcola", role:"FW", age:22}, {name:"Ramos G", role:"FW", age:23}, {name:"Kolo Muani", role:"FW", age:26}, {name:"Asensio", role:"FW", age:28}],
+            "Monaco": [{name:"Majecki", role:"GK", age:24}, {name:"Nubel", role:"GK", age:28}, {name:"Vanderson", role:"DF", age:23}, {name:"Salisu", role:"DF", age:25}, {name:"Maripan M", role:"DF", age:31}, {name:"Caio Henrique", role:"DF", age:27}, {name:"Zakaria M", role:"DF", age:27}, {name:"Camara S", role:"DF", age:23}, {name:"Golovin", role:"MF", age:28}, {name:"Akliouche", role:"MF", age:22}, {name:"Minamino", role:"MF", age:29}, {name:"Magassa", role:"MF", age:21}, {name:"Ben Seghir", role:"MF", age:19}, {name:"Ben Yedder", role:"FW", age:34}, {name:"Balogun F", role:"FW", age:23}, {name:"Embolo", role:"FW", age:27}, {name:"Ilenikhena", role:"FW", age:17}],
+            "Marseille": [{name:"Pau Lopez", role:"GK", age:29}, {name:"Blanco R", role:"GK", age:30}, {name:"Murillo C", role:"DF", age:22}, {name:"Mbemba", role:"DF", age:30}, {name:"Lirola", role:"DF", age:25}, {name:"Balerdi", role:"DF", age:26}, {name:"Brassier", role:"DF", age:23}, {name:"Merlin A", role:"DF", age:22}, {name:"Veretout", role:"MF", age:31}, {name:"Kondogbia", role:"MF", age:31}, {name:"Harit", role:"MF", age:27}, {name:"Rabiot", role:"MF", age:29}, {name:"Hojbjerg P", role:"MF", age:29}, {name:"Aubameyang", role:"FW", age:35}, {name:"Greenwood M", role:"FW", age:23}, {name:"Sarr I", role:"FW", age:22}, {name:"Luis Henrique", role:"FW", age:23}],
+            "Lille": [{name:"Chevalier L", role:"GK", age:28}, {name:"Canak", role:"GK", age:22}, {name:"Meunier", role:"DF", age:33}, {name:"Alexsandro", role:"DF", age:25}, {name:"Diakite", role:"DF", age:23}, {name:"Ismaily", role:"DF", age:35}, {name:"Gudmundsson A", role:"DF", age:24}, {name:"Ounas", role:"DF", age:27}, {name:"Andre L", role:"MF", age:24}, {name:"Cabella", role:"MF", age:32}, {name:"Zhegrova", role:"MF", age:25}, {name:"Gomes A", role:"MF", age:23}, {name:"Haraldsson", role:"MF", age:22}, {name:"David J", role:"FW", age:24}, {name:"Bayo M", role:"FW", age:22}, {name:"Nzola", role:"FW", age:27}, {name:"Sahraoui", role:"FW", age:22}],
+            "Lyon": [{name:"Perri", role:"GK", age:21}, {name:"Descamps", role:"GK", age:24}, {name:"Mata A", role:"DF", age:26}, {name:"Niakhate L", role:"DF", age:28}, {name:"Tagliafico", role:"DF", age:32}, {name:"Maitland-Niles", role:"DF", age:27}, {name:"Caleta-Car", role:"DF", age:28}, {name:"Abner", role:"DF", age:24}, {name:"Tolisso", role:"MF", age:30}, {name:"Matic", role:"MF", age:36}, {name:"Caqueret L", role:"MF", age:24}, {name:"Veiga M", role:"MF", age:22}, {name:"Nuamah", role:"MF", age:21}, {name:"Lacazette", role:"FW", age:33}, {name:"Fofana R", role:"FW", age:25}, {name:"Mikautadze", role:"FW", age:24}, {name:"Benrahma", role:"FW", age:29}, {name:"Jeffinho", role:"FW", age:24}],
+            "Nice": [{name:"Bulka", role:"GK", age:25}, {name:"Plagaro", role:"GK", age:25}, {name:"Dante", role:"DF", age:40}, {name:"Bard J", role:"DF", age:22}, {name:"Clauss", role:"DF", age:29}, {name:"Bombito", role:"DF", age:23}, {name:"Atal Y", role:"DF", age:28}, {name:"Ndombele N", role:"DF", age:28}, {name:"Thuram K", role:"MF", age:22}, {name:"Boudaoui", role:"MF", age:24}, {name:"Rosario N", role:"MF", age:28}, {name:"Guessand", role:"MF", age:23}, {name:"Cho GR", role:"MF", age:23}, {name:"Laborde", role:"FW", age:30}, {name:"Moffi", role:"FW", age:25}, {name:"Bouanani", role:"FW", age:22}, {name:"Diop M", role:"FW", age:22}],
+            "Lens": [{name:"Samba B", role:"GK", age:30}, {name:"Farinez", role:"GK", age:27}, {name:"Medina K", role:"DF", age:24}, {name:"Danso K", role:"DF", age:25}, {name:"Gradit", role:"DF", age:31}, {name:"Machado F", role:"DF", age:30}, {name:"Frankowski", role:"DF", age:29}, {name:"Aguilar", role:"DF", age:23}, {name:"Diouf M", role:"MF", age:25}, {name:"Abdul Samed", role:"MF", age:22}, {name:"Chavez E", role:"MF", age:22}, {name:"Fulgini", role:"MF", age:28}, {name:"Sotoca", role:"MF", age:29}, {name:"Wahi E", role:"FW", age:20}, {name:"Said N", role:"FW", age:26}, {name:"Pereira M", role:"FW", age:24}, {name:"Salin", role:"GK", age:34}],
+            "Rennes": [{name:"Mandanda", role:"GK", age:39}, {name:"Gallon", role:"GK", age:26}, {name:"Wooh", role:"DF", age:23}, {name:"Assignon", role:"DF", age:23}, {name:"Truffert", role:"DF", age:22}, {name:"Rodon", role:"DF", age:26}, {name:"Seidu", role:"DF", age:24}, {name:"Belocian", role:"DF", age:18}, {name:"Gronbaek", role:"MF", age:24}, {name:"Matusiwa", role:"MF", age:26}, {name:"Rieder", role:"MF", age:24}, {name:"Desire Doue", role:"MF", age:18}, {name:"Ugochukwu L", role:"MF", age:19}, {name:"Terrier M", role:"FW", age:28}, {name:"Kalimuendo", role:"FW", age:22}, {name:"Gouiri", role:"FW", age:23}, {name:"Abline", role:"FW", age:21}],
+            "Brest": [{name:"Bizot", role:"GK", age:31}, {name:"Lala R", role:"GK", age:28}, {name:"Chardonnet", role:"DF", age:29}, {name:"Coulibaly B", role:"DF", age:25}, {name:"Lala P", role:"DF", age:30}, {name:"Haidara A", role:"DF", age:24}, {name:"Fernandez S", role:"DF", age:29}, {name:"Le Cardinal", role:"DF", age:26}, {name:"Belkebla", role:"MF", age:30}, {name:"Magnetti", role:"MF", age:25}, {name:"Camara P", role:"MF", age:22}, {name:"Honorat B", role:"MF", age:27}, {name:"Del Castillo", role:"FW", age:23}, {name:"Martin E", role:"FW", age:25}, {name:"Pereira Da Costa", role:"FW", age:23}, {name:"Satriano", role:"FW", age:23}],
+            "Reims": [{name:"Diouf P", role:"GK", age:24}, {name:"Rajkovic R", role:"GK", age:28}, {name:"Faes E", role:"DF", age:26}, {name:"Gravillon", role:"DF", age:26}, {name:"Foket", role:"DF", age:31}, {name:"Bade R", role:"DF", age:24}, {name:"Kipre", role:"DF", age:28}, {name:"Locko", role:"DF", age:21}, {name:"Munetsi", role:"MF", age:28}, {name:"Lopy", role:"MF", age:21}, {name:"Teuma", role:"MF", age:30}, {name:"Ito H", role:"MF", age:24}, {name:"Nakamura S", role:"MF", age:24}, {name:"Kebbal", role:"FW", age:30}, {name:"Pape Diouf", role:"FW", age:21}, {name:"Konan", role:"DF", age:28}, {name:"Abdi A", role:"FW", age:27}],
+            "Le Havre": [{name:"Desmas", role:"GK", age:33}, {name:"Remy G", role:"GK", age:26}, {name:"Youan", role:"DF", age:23}, {name:"Operi", role:"DF", age:21}, {name:"Toure S", role:"DF", age:33}, {name:"Lloris H", role:"DF", age:29}, {name:"Bella-Kotchap", role:"DF", age:23}, {name:"Bangoura", role:"DF", age:22}, {name:"Kaasen", role:"MF", age:25}, {name:"Sangante", role:"MF", age:22}, {name:"Casimir", role:"MF", age:22}, {name:"Lopynet", role:"MF", age:23}, {name:"Gboho", role:"FW", age:22}, {name:"Niane E", role:"FW", age:26}, {name:"Toure T", role:"FW", age:29}, {name:"Bayo A", role:"FW", age:25}],
+            "Toulouse": [{name:"Restes", role:"GK", age:20}, {name:"Dupe", role:"GK", age:26}, {name:"Suazo", role:"DF", age:25}, {name:"Nicolaisen", role:"DF", age:25}, {name:"Diallo A", role:"DF", age:22}, {name:"Casseres", role:"DF", age:26}, {name:"Henrique T", role:"DF", age:27}, {name:"Ouedraogo V", role:"DF", age:21}, {name:"Spierings", role:"MF", age:26}, {name:"Aboukhlal", role:"MF", age:23}, {name:"Chainho", role:"MF", age:21}, {name:"Van den Boomen", role:"MF", age:29}, {name:"Ratao", role:"MF", age:27}, {name:"Onaiwu", role:"FW", age:30}, {name:"Magri", role:"FW", age:24}, {name:"Dallinga T", role:"FW", age:23}, {name:"Yann Gboho", role:"FW", age:21}],
+            "Nantes": [{name:"Lafont", role:"GK", age:25}, {name:"Descamps N", role:"GK", age:25}, {name:"Castelletto", role:"DF", age:29}, {name:"Pallois", role:"DF", age:35}, {name:"Traore A", role:"DF", age:27}, {name:"Centonze", role:"DF", age:28}, {name:"Gbele", role:"DF", age:21}, {name:"Merlin A2", role:"DF", age:22}, {name:"Moutoussamy", role:"MF", age:27}, {name:"Chirivella", role:"MF", age:27}, {name:"Lepenant", role:"MF", age:22}, {name:"Blas", role:"MF", age:25}, {name:"Simon M", role:"FW", age:27}, {name:"Ganago", role:"FW", age:25}, {name:"Guessand N", role:"FW", age:23}, {name:"Mohamed J", role:"FW", age:22}],
+            "Montpellier": [{name:"Omlin", role:"GK", age:30}, {name:"Lecomte B", role:"GK", age:31}, {name:"Jullien", role:"DF", age:31}, {name:"Tchaouna", role:"DF", age:20}, {name:"Esteve A", role:"DF", age:23}, {name:"Souquet", role:"DF", age:32}, {name:"Sagnan", role:"DF", age:28}, {name:"Maouassa", role:"DF", age:27}, {name:"Savanier T", role:"MF", age:32}, {name:"Chotard", role:"MF", age:22}, {name:"Al-Tamari M", role:"MF", age:24}, {name:"Nordin", role:"MF", age:29}, {name:"Cabot C", role:"MF", age:28}, {name:"Khazri", role:"FW", age:33}, {name:"Balde O", role:"FW", age:24}, {name:"Doucoure T", role:"FW", age:24}, {name:"Tamari", role:"FW", age:24}],
+            "Saint-Etienne": [{name:"Green B", role:"GK", age:30}, {name:"Moulin", role:"GK", age:35}, {name:"Batubinsika", role:"DF", age:26}, {name:"Boateng L", role:"DF", age:22}, {name:"Trauco", role:"DF", age:32}, {name:"Macon", role:"DF", age:25}, {name:"Petrot", role:"DF", age:27}, {name:"Mitrovic S", role:"DF", age:28}, {name:"Ekwah", role:"MF", age:22}, {name:"Tardieu", role:"MF", age:31}, {name:"Cafaro", role:"MF", age:27}, {name:"Davitashvili", role:"MF", age:22}, {name:"Stassin", role:"FW", age:21}, {name:"Sissoko M", role:"FW", age:29}, {name:"Bouchouari", role:"FW", age:21}, {name:"Lobry", role:"FW", age:23}],
+            "Angers": [{name:"Mendes M", role:"GK", age:22}, {name:"Butelle", role:"GK", age:38}, {name:"Manceau", role:"DF", age:26}, {name:"Doumbia", role:"DF", age:30}, {name:"Appiah", role:"DF", age:25}, {name:"Colin N", role:"DF", age:28}, {name:"Bamba S", role:"DF", age:24}, {name:"Baleba A", role:"DF", age:21}, {name:"Laval", role:"MF", age:28}, {name:"Bentaleb", role:"MF", age:30}, {name:"Abdi H", role:"MF", age:26}, {name:"Mendy F", role:"MF", age:22}, {name:"Cho H", role:"MF", age:22}, {name:"Pereira da Silva", role:"FW", age:26}, {name:"Fofana S", role:"FW", age:21}, {name:"Cornud", role:"FW", age:29}, {name:"Ninga", role:"FW", age:30}],
+            "Auxerre": [{name:"Dreyer", role:"GK", age:26}, {name:"Bertrand-Eymard", role:"GK", age:29}, {name:"Jubal", role:"DF", age:28}, {name:"Jenz", role:"DF", age:25}, {name:"Mensah A", role:"DF", age:24}, {name:"Hein M", role:"DF", age:24}, {name:"Akpa Akpro", role:"DF", age:33}, {name:"Charbonnier", role:"DF", age:33}, {name:"Sakhi", role:"MF", age:26}, {name:"N'Soki", role:"MF", age:27}, {name:"Niang M", role:"MF", age:27}, {name:"Ghislain", role:"MF", age:26}, {name:"Pellenard", role:"MF", age:23}, {name:"Mama Balde", role:"FW", age:29}, {name:"Perrin G", role:"FW", age:22}, {name:"Hein T", role:"FW", age:24}, {name:"Gauthier", role:"FW", age:23}],
+            "Strasbourg": [{name:"Sels S", role:"GK", age:32}, {name:"Kawashima", role:"GK", age:38}, {name:"Sylla E", role:"DF", age:26}, {name:"Lode", role:"DF", age:26}, {name:"Perrin S", role:"DF", age:35}, {name:"Djiku", role:"DF", age:30}, {name:"Delaine", role:"DF", age:29}, {name:"Nanasi", role:"DF", age:22}, {name:"Emegha", role:"MF", age:22}, {name:"Diallo K", role:"MF", age:24}, {name:"Aholou", role:"MF", age:30}, {name:"Douelbe", role:"MF", age:20}, {name:"Santos J", role:"MF", age:21}, {name:"Bahoken", role:"FW", age:31}, {name:"Mundele", role:"FW", age:24}, {name:"Diallo E", role:"FW", age:23}, {name:"Thomasson", role:"FW", age:29}]
         }
     };
     
@@ -345,7 +387,30 @@
         "Mazraoui": 81, "Ugarte": 81, "Rashford": 81, "Doku": 81,
         "Maguire": 80, "Mount": 80, "Garnacho": 80, "Gravenberch": 80,
         "Mainoo": 79, "Hojlund": 79, "Zirkzee": 79,
-        "Guler": 78, "Kelleher": 77, "Antony": 77, "Endrick": 77, "Cubarsi": 76
+        "Kane": 91, "Musiala": 88, "Wirtz": 88, "Kimmich": 87, "Kim Min-Jae": 87,
+        "Openda": 85, "Sesko": 83, "Simons": 85, "Frimpong": 84, "Grimaldo": 83,
+        "Tah": 83, "Schlotterbeck": 83, "Kobel": 83, "Upamecano": 83, "Guirassy": 83,
+        "Boniface": 82, "Adeyemi": 82, "Xhaka": 84, "Goretzka": 83, "Laimer": 82, "Davies": 83,
+        "Kramaric": 81, "Beier": 80, "Gittens": 80, "Sane": 83, "Gnabry": 82,
+        "Ducksch": 79, "Burkardt": 79, "Grifo": 79, "Eggestein": 78,
+        "Hradecky": 84, "Neuer": 82, "Gulacsi": 80, "Trapp": 80, "Atubolu": 78,
+        "Guler": 78, "Kelleher": 77, "Antony": 77, "Endrick": 77, "Cubarsi": 76,
+        "Donnarumma": 88, "Marquinhos": 87, "Hakimi": 86, "Vitinha": 85, "Dembele": 88,
+        "Fabian Ruiz": 85, "Lee Kang-in": 83, "Barcola": 82, "Joao Neves": 83,
+        "Zaire-Emery": 82, "Kolo Muani": 83, "Pacho": 80, "Beraldo": 79, "Hernandez L": 82,
+        "David J": 86, "Lacazette": 82, "Rabiot": 82, "Samba B": 82, "Mandanda": 80,
+        "Minamino": 81, "Ben Yedder": 80, "Embolo": 80, "Balogun F": 81, "Akliouche": 79,
+        "Greenwood M": 81, "Aubameyang": 79, "Moffi": 81, "Laborde": 80, "Restes": 79,
+        "Diouf P": 78, "Pau Lopez": 79, "Bulka": 79, "Chevalier L": 80, "Lafont": 79,
+        "Zhegrova": 80, "Andre L": 81, "Kondogbia": 79, "Veretout": 79, "Harit": 78,
+        "Golovin": 80, "Thuram K": 79, "Caio Henrique": 79, "Vanderson": 78, "Danso K": 79,
+        "Tolisso": 79, "Mikautadze": 80, "Benrahma": 79, "Caqueret L": 78, "Fofana R": 79,
+        "Hojbjerg P": 80, "Desire Doue": 79, "Kalimuendo": 78, "Terrier M": 79,
+        "Perri": 76, "Omlin": 79, "Savanier T": 79, "Munetsi": 77, "Nakamura S": 77,
+        "Ekwah": 77, "Wooh": 77, "Assignon": 77, "Ben Seghir": 78, "Ilenikhena": 77,
+        "Ugochukwu L": 78, "Wahi E": 78, "Emegha": 77, "Majecki": 77, "Bizot": 77,
+        "Safonov": 77, "Gronbaek": 77, "Matusiwa": 77, "Truffert": 77, "Boateng L": 76,
+        "Maycon Cardozo": 82
     };
 
     // ฐานข้อมูลพลังสโมสร (สำหรับนักเตะที่ไม่มีในลิสต์บน จะได้พลังตามระดับสโมสร แบบไม่สุ่ม)
@@ -360,7 +425,16 @@
         "Inter Milan": 84, "AC Milan": 82, "Juventus": 82, "Napoli": 82, "Atalanta": 83,
         "Roma": 80, "Lazio": 79, "Fiorentina": 79, "Bologna": 78, "Torino": 76,
         "Monza": 74, "Genoa": 73, "Cagliari": 73, "Lecce": 72, "Empoli": 72,
-        "Venezia": 71, "Parma": 71, "Como": 72, "Udinese": 73, "Verona": 72
+        "Venezia": 71, "Parma": 71, "Como": 72, "Udinese": 73, "Verona": 72,
+        "Bayern Munich": 87, "Bayer Leverkusen": 84, "Borussia Dortmund": 82, "RB Leipzig": 83,
+        "Stuttgart": 80, "Eintracht Frankfurt": 79, "Freiburg": 78, "Hoffenheim": 77,
+        "Werder Bremen": 77, "Augsburg": 75, "Union Berlin": 76, "Wolfsburg": 76,
+        "Gladbach": 77, "Heidenheim": 75, "Mainz": 75, "Bochum": 73,
+        "St. Pauli": 73, "Holstein Kiel": 72,
+        "PSG": 87, "Monaco": 82, "Marseille": 80, "Lille": 81, "Lyon": 79,
+        "Nice": 78, "Lens": 78, "Rennes": 77, "Brest": 76, "Reims": 74,
+        "Le Havre": 73, "Toulouse": 75, "Nantes": 74, "Montpellier": 73,
+        "Saint-Etienne": 73, "Angers": 72, "Auxerre": 72, "Strasbourg": 73
     };
 
     function getRealisticPower(team, name) {
@@ -445,10 +519,18 @@
         if (sellPrice > 0.9) sellPrice = 0.9;
         let displayPriceK = (sellPrice * 1000).toFixed(0) + "k";
         
-        if (confirm(`บอสต้องการปล่อยตัว ${player.name} ออกจากศูนย์ฝึกในราคา ${displayPriceK} (${sellPrice}M) ใช่หรือไม่?`)) {
+        // หาทีมที่จะมารับ
+        let buyer = getRandomAITeam(myCurrentTeamName);
+        
+        if (confirm(`บอสต้องการปล่อยตัว ${player.name} ออกจากศูนย์ฝึกในราคา ${displayPriceK} (${sellPrice}M)\n\n🏟️ ทีมที่สนใจ: ${buyer.team}\n\nยืนยันหรือไม่?`)) {
             budget = parseFloat((budget + sellPrice).toFixed(1));
+            // อัปเดตทีมให้ดาวรุ่งก่อนเอาออก
+            player.team = buyer.team;
+            player.originalLeague = buyer.league;
+            // ย้ายจาก youthPlayers ไปยัง allPlayers (เข้าทีม AI)
             youthPlayers.splice(idx, 1);
-            logNews(`👦 [YOUTH ACADEMY] สโมสรปล่อยดาวรุ่ง ${player.name} รับเงิน ${displayPriceK}`);
+            allPlayers.push(player);
+            logNews(`👦 [YOUTH ACADEMY] ปล่อยดาวรุ่ง <b>${player.name}</b> ซบ ${buyer.team} รับเงิน ${displayPriceK}`);
             renderYouthAcademy();
             document.getElementById('youth-budget').innerText = budget;
             render();
@@ -631,7 +713,7 @@
         const teamSelect = document.getElementById('market-team-filter');
         teamSelect.innerHTML = '<option value="ALL">ทุกสโมสร</option>';
         let teams = [];
-        if (league === 'ALL') { teams = [...Object.keys(leagueData['PL']), ...Object.keys(leagueData['LALIGA']), ...Object.keys(leagueData['SERIEA'])]; } 
+        if (league === 'ALL') { teams = [...Object.keys(leagueData['PL']), ...Object.keys(leagueData['LALIGA']), ...Object.keys(leagueData['SERIEA']), ...Object.keys(leagueData['BL']), ...Object.keys(leagueData['LIGUE1'])]; } 
         else { teams = Object.keys(leagueData[league]); }
         teams.forEach(t => { teamSelect.innerHTML += `<option value="${t}">${t}</option>`; });
         renderMarket(true);
@@ -696,7 +778,11 @@
         let sellPrice = Math.max(1, Math.floor((p.p - 60) * 1.2 + (32 - p.age) * 0.8)); 
         budget = parseFloat((budget + sellPrice).toFixed(1));
         mySquad = mySquad.filter(x => x.id !== id);
-        addNews(`👋 สโมสรปล่อยตัว ${p.name} ออกจากทีม รับเงินเข้าคลัง ${sellPrice}M`);
+        // กำหนดทีมใหม่ให้นักเตะ
+        let buyer = getRandomAITeam(myCurrentTeamName);
+        p.team = buyer.team;
+        p.originalLeague = buyer.league;
+        addNews(`👋 สโมสรปล่อยตัว ${p.name} ซบ ${buyer.team} รับเงินเข้าคลัง ${sellPrice}M`);
         render();
     }
 
@@ -904,7 +990,7 @@
         if(myG === 0) oppPlayers.forEach(p => { if(p.role === 'GK' || p.role === 'DF') p.stats.cleanSheets++; });
         
         // จำลองทีมที่เหลือแข่งกัน
-        const allLeagues = ["PL", "LALIGA"];
+        const allLeagues = ["PL", "LALIGA", "SERIEA", "BL"];
         allLeagues.forEach(lg => {
             let teamsToSimulate = Object.keys(leagueTable).filter(t => leagueTable[t].league === lg);
             if (lg === myCurrentLeague) {
@@ -1030,41 +1116,123 @@
             let plTeams = Object.keys(leagueTable).filter(t => leagueTable[t].league === 'PL').map(t => ({name: t, ...leagueTable[t]})).sort((a,b) => (b.pts - a.pts) || ((b.gf-b.ga) - (a.gf-a.ga)));
             let laTeams = Object.keys(leagueTable).filter(t => leagueTable[t].league === 'LALIGA').map(t => ({name: t, ...leagueTable[t]})).sort((a,b) => (b.pts - a.pts) || ((b.gf-b.ga) - (a.gf-a.ga)));
             let saTeams = Object.keys(leagueTable).filter(t => leagueTable[t].league === 'SERIEA').map(t => ({name: t, ...leagueTable[t]})).sort((a,b) => (b.pts - a.pts) || ((b.gf-b.ga) - (a.gf-a.ga)));
-            let plChamp = plTeams[0] ? plTeams[0].name : '-'; let laChamp = laTeams[0] ? laTeams[0].name : '-'; let saChamp = saTeams[0] ? saTeams[0].name : '-';
+            let blTeams = Object.keys(leagueTable).filter(t => leagueTable[t].league === 'BL').map(t => ({name: t, ...leagueTable[t]})).sort((a,b) => (b.pts - a.pts) || ((b.gf-b.ga) - (a.gf-a.ga)));
+            let l1Teams = Object.keys(leagueTable).filter(t => leagueTable[t].league === 'LIGUE1').map(t => ({name: t, ...leagueTable[t]})).sort((a,b) => (b.pts - a.pts) || ((b.gf-b.ga) - (a.gf-a.ga)));
+            let plChamp = plTeams[0] ? plTeams[0].name : '-'; let laChamp = laTeams[0] ? laTeams[0].name : '-'; let saChamp = saTeams[0] ? saTeams[0].name : '-'; let blChamp = blTeams[0] ? blTeams[0].name : '-'; let l1Champ = l1Teams[0] ? l1Teams[0].name : '-';
 
             let plPlayers = allPlayers.filter(p => leagueTable[p.team] && leagueTable[p.team].league === 'PL').sort((a,b) => b.stats.goals - a.stats.goals);
             let laPlayers = allPlayers.filter(p => leagueTable[p.team] && leagueTable[p.team].league === 'LALIGA').sort((a,b) => b.stats.goals - a.stats.goals);
             let saPlayers = allPlayers.filter(p => leagueTable[p.team] && leagueTable[p.team].league === 'SERIEA').sort((a,b) => b.stats.goals - a.stats.goals);
+            let blPlayers = allPlayers.filter(p => leagueTable[p.team] && leagueTable[p.team].league === 'BL').sort((a,b) => b.stats.goals - a.stats.goals);
+            let l1Players = allPlayers.filter(p => leagueTable[p.team] && leagueTable[p.team].league === 'LIGUE1').sort((a,b) => b.stats.goals - a.stats.goals);
             let plTopScorer = plPlayers[0];
             let laTopScorer = laPlayers[0];
             let saTopScorer = saPlayers[0];
+            let blTopScorer = blPlayers[0];
+            let l1TopScorer = l1Players[0];
 
             allPlayers.forEach(p => {
                 if(p.team === plChamp) p.stats.trophies.push(`🏆 แชมป์ Premier League (ซีซั่น ${currentSeason})`);
                 if(p.team === laChamp) p.stats.trophies.push(`🏆 แชมป์ La Liga (ซีซั่น ${currentSeason})`);
                 if(p.team === saChamp) p.stats.trophies.push(`🏆 แชมป์ Serie A (ซีซั่น ${currentSeason})`);
+                if(p.team === blChamp) p.stats.trophies.push(`🏆 แชมป์ Bundesliga (ซีซั่น ${currentSeason})`);
+                if(p.team === l1Champ) p.stats.trophies.push(`🏆 แชมป์ Ligue 1 (ซีซั่น ${currentSeason})`);
                 if(plTopScorer && p.id === plTopScorer.id && p.stats.goals > 0) p.stats.trophies.push(`🥇 ดาวซัลโว Premier League ซีซั่น ${currentSeason} (⚽ ${p.stats.goals} ประตู)`);
                 if(laTopScorer && p.id === laTopScorer.id && p.stats.goals > 0) p.stats.trophies.push(`🥇 ดาวซัลโว La Liga ซีซั่น ${currentSeason} (⚽ ${p.stats.goals} ประตู)`);
                 if(saTopScorer && p.id === saTopScorer.id && p.stats.goals > 0) p.stats.trophies.push(`🥇 ดาวซัลโว Serie A ซีซั่น ${currentSeason} (⚽ ${p.stats.goals} ประตู)`);
+                if(blTopScorer && p.id === blTopScorer.id && p.stats.goals > 0) p.stats.trophies.push(`🥇 ดาวซัลโว Bundesliga ซีซั่น ${currentSeason} (⚽ ${p.stats.goals} ประตู)`);
+                if(l1TopScorer && p.id === l1TopScorer.id && p.stats.goals > 0) p.stats.trophies.push(`🥇 ดาวซัลโว Ligue 1 ซีซั่น ${currentSeason} (⚽ ${p.stats.goals} ประตู)`);
                 
                 let avg = p.stats.appearances > 0 ? (p.stats.totalRating / p.stats.appearances) : 0;
                 p.stats.history.push({ season: currentSeason, team: p.team, appearances: p.stats.appearances, goals: p.stats.goals, assists: p.stats.assists, cleanSheets: p.stats.cleanSheets, avgRating: avg });
           
-                if (p.age < 24) {
-                    if (p.stats.appearances > 10) p.p += Math.floor(Math.random() * 3) + 1;
-                    else p.p += Math.floor(Math.random() * 2);
-                } else if (p.age >= 24 && p.age <= 29) {
-                    if (avg > 7.0) p.p += Math.floor(Math.random() * 2);
+                // ===== ระบบพัฒนาตามผลงาน + อายุ =====
+                let appearances = p.stats.appearances;
+                let goals = p.stats.goals;
+                let assists = p.stats.assists;
+                // คะแนนผลงาน: ยิงประตูให้คะแนนสูงสุด ตามด้วย assist และการลงเล่น
+                let perfScore = (goals * 2.5) + (assists * 1.5) + (appearances * 0.4);
+
+                if (p.age < 21) {
+                    // ดาวรุ่ง: พัฒนาเร็วมาก ยิ่งลงเล่นบ่อยหรือทำผลงานยิ่งโตเร็ว
+                    let grow = Math.floor(Math.random() * 3) + 1; // +1 ถึง +3 เป็นฐาน
+                    if (appearances > 15) grow += Math.floor(Math.random() * 2) + 1;
+                    if (perfScore > 15) grow += 1;
+                    p.p += grow;
+                } else if (p.age < 24) {
+                    // เยาวชน: พัฒนาดี ขึ้นกับผลงาน
+                    let grow = Math.floor(Math.random() * 2) + 1;
+                    if (appearances > 10) grow += 1;
+                    if (perfScore > 12) grow += 1;
+                    p.p += grow;
+                } else if (p.age <= 27) {
+                    // ช่วงพีค: พัฒนาช้า ต้องผลงานดีมากถึงจะโต
+                    let grow = 0;
+                    if (appearances > 15 && avg > 7.0) grow = Math.floor(Math.random() * 2) + 1;
+                    else if (appearances > 10 && avg > 6.5) grow = 1;
+                    if (perfScore > 20) grow += 1;
+                    p.p += grow;
+                } else if (p.age <= 30) {
+                    // ผู้ใหญ่เต็มตัว: แทบไม่โต ต้องฟอร์มเยี่ยมมากๆ
+                    if (avg > 7.5 && appearances > 20) p.p += 1;
+                } else if (p.age === 31) {
+                    // เริ่มถดถอย: 40% โอกาสพลังลด
+                    if (Math.random() < 0.4) p.p -= 1;
                 } else if (p.age >= 32) {
+                    // ถดถอยชัดเจน: ลดทุกซีซั่น
                     p.p -= Math.floor(Math.random() * 2) + 1;
                 }
                 if(p.p > 99) p.p = 99;
+                if(p.p < 40) p.p = 40;
 
                 p.stats.appearances = 0; p.stats.goals = 0; p.stats.assists = 0; p.stats.cleanSheets = 0;
                 p.stats.totalRating = 0;
                 p.age++; 
             });
             youthPlayers.forEach(p => p.age++); youthPlayers = youthPlayers.filter(p => p.age <= 20);
+
+            // ===== ระบบแขวนสตั๊ด (AI Retirement) =====
+            // นักเตะ AI นอกทีมเรา: ตัดสินใจแขวนสตั๊ดตามอายุและพลัง
+            let retiredPlayers = [];
+            allPlayers = allPlayers.filter(p => {
+                if (mySquad.find(x => x.id === p.id)) return true; // นักเตะทีมเราจัดการแยก
+                let retireChance = 0;
+                if (p.age >= 39) retireChance = 0.95;
+                else if (p.age >= 37) retireChance = 0.65;
+                else if (p.age >= 35) retireChance = 0.35;
+                else if (p.age >= 33 && p.p < 68) retireChance = 0.15;
+                if (Math.random() < retireChance) {
+                    retiredPlayers.push(p);
+                    addNews(`👟 <b>[แขวนสตั๊ด]</b> ${p.name} (${p.age} ปี ⚡${p.p}) ประกาศอำลาวงการฟุตบอลอย่างเป็นทางการ!`);
+                    return false;
+                }
+                return true;
+            });
+
+            // นักเตะในทีมเรา: ตรวจสอบโอกาสแขวนสตั๊ด
+            let myRetired = [];
+            mySquad.forEach(p => {
+                let retireChance = 0;
+                if (p.age >= 39) retireChance = 0.95;
+                else if (p.age >= 37) retireChance = 0.65;
+                else if (p.age >= 35) retireChance = 0.30;
+                else if (p.age >= 33 && p.p < 68) retireChance = 0.12;
+                if (Math.random() < retireChance) {
+                    myRetired.push(p);
+                    addNews(`👟 <b>[แขวนสตั๊ด - ทีมเรา!]</b> <b>${p.name}</b> (${p.age} ปี ⚡${p.p}) ตัดสินใจแขวนสตั๊ดแล้วครับบอส! ขอบคุณในการร่วมทัพ! 🙏`);
+                }
+            });
+
+            // ลบนักเตะที่แขวนสตั๊ดออกจากระบบ
+            myRetired.forEach(rp => {
+                mySquad = mySquad.filter(p => p.id !== rp.id);
+                xi = xi.filter(p => p.id !== rp.id);
+                allPlayers = allPlayers.filter(p => p.id !== rp.id);
+                retiredPlayers.push(rp);
+            });
+
+            // สุ่มนักเตะใหม่มาทดแทนทุกคนที่แขวนสตั๊ด
+            retiredPlayers.forEach(rp => spawnReplacementPlayer(rp));
 
             document.getElementById('summary-season-num').innerText = currentSeason;
             document.getElementById('summary-content').innerHTML = `
@@ -1080,12 +1248,25 @@
                     <b style="color:#4ade80;">🇮🇹 แชมป์ Serie A:</b> <span style="font-size:18px;">${saChamp}</span><br>
                     <span style="font-size:12px; color:#fbbf24;">🥇 ดาวซัลโว: ${saTopScorer ? saTopScorer.name + ' (' + saTopScorer.team + ') - ⚽ ' + saTopScorer.stats.goals + ' ประตู' : '-'}</span>
                 </div>
+                <div style="background:#0f172a; padding:10px; border-radius:6px; margin-bottom:10px; border-left:4px solid #f59e0b;">
+                    <b style="color:#fbbf24;">🇩🇪 แชมป์ Bundesliga:</b> <span style="font-size:18px;">${blChamp}</span><br>
+                    <span style="font-size:12px; color:#fbbf24;">🥇 ดาวซัลโว: ${blTopScorer ? blTopScorer.name + ' (' + blTopScorer.team + ') - ⚽ ' + blTopScorer.stats.goals + ' ประตู' : '-'}</span>
+                </div>
+                <div style="background:#0f172a; padding:10px; border-radius:6px; margin-bottom:10px; border-left:4px solid #60a5fa;">
+                    <b style="color:#93c5fd;">🇫🇷 แชมป์ Ligue 1:</b> <span style="font-size:18px;">${l1Champ}</span><br>
+                    <span style="font-size:12px; color:#fbbf24;">🥇 ดาวซัลโว: ${l1TopScorer ? l1TopScorer.name + ' (' + l1TopScorer.team + ') - ⚽ ' + l1TopScorer.stats.goals + ' ประตู' : '-'}</span>
+                </div>
             `;
             document.getElementById('season-summary-modal').style.display = 'flex';
             return; 
         }
 
         checkAITransferOffers();
+
+        // AI ซื้อขายกันเองทุก 5 นัด
+        if (currentMatchday % 5 === 0) {
+            simulateAITransfers();
+        }
 
         currentMatchday++;
         document.getElementById('matchday').innerText = currentMatchday;
@@ -1119,7 +1300,7 @@
             let targetPlayer = mySquad[Math.floor(Math.random() * mySquad.length)];
             if (xi.find(x => x.id === targetPlayer.id)) return;
 
-            let randomLeague = Math.random() < 0.33 ? 'PL' : Math.random() < 0.5 ? 'LALIGA' : 'SERIEA';
+            let randomLeague = Math.random() < 0.25 ? 'PL' : Math.random() < 0.33 ? 'LALIGA' : Math.random() < 0.5 ? 'SERIEA' : 'BL';
             let aiTeams = Object.keys(leagueData[randomLeague]);
             let aiTeamName = aiTeams[Math.floor(Math.random() * aiTeams.length)];
             
@@ -1139,6 +1320,65 @@
                     render();
                 }
             }, 400); 
+        }
+    }
+
+    // ============================================
+    // ระบบ AI ซื้อขายนักเตะกันเอง (AI Transfer Market)
+    // ============================================
+    function simulateAITransfers() {
+        const allLeagueKeys = ['PL','LALIGA','SERIEA','BL','LIGUE1'];
+        let numDeals = Math.floor(Math.random() * 4) + 2; // 2-5 ดีลต่อรอบ
+
+        for(let deal = 0; deal < numDeals; deal++) {
+            // สุ่มทีมผู้ขาย (ไม่ใช่ทีมผู้เล่น)
+            let sellerLeague = allLeagueKeys[Math.floor(Math.random() * allLeagueKeys.length)];
+            let sellerTeams = Object.keys(leagueData[sellerLeague]).filter(t => t !== myCurrentTeamName);
+            if(sellerTeams.length === 0) continue;
+            let sellerTeamName = sellerTeams[Math.floor(Math.random() * sellerTeams.length)];
+
+            // หานักเตะจากทีมผู้ขาย (ไม่ใช่นักเตะทีมเรา)
+            let sellCandidates = allPlayers.filter(p => 
+                p.team === sellerTeamName && 
+                !mySquad.find(x => x.id === p.id)
+            );
+            if(sellCandidates.length < 3) continue; // ทีมต้องมีนักเตะอย่างน้อย 3 คน ถึงจะขายได้
+
+            // สุ่มนักเตะที่จะขาย (เน้นนักเตะพลังต่ำ-กลาง ที่ทีมอาจอยากปล่อย)
+            let sortedCandidates = [...sellCandidates].sort((a,b) => a.p - b.p);
+            let pickIndex = Math.floor(Math.random() * Math.min(5, sortedCandidates.length));
+            let soldPlayer = sortedCandidates[pickIndex];
+            if(!soldPlayer) continue;
+
+            // สุ่มทีมผู้ซื้อ
+            let buyerLeague = allLeagueKeys[Math.floor(Math.random() * allLeagueKeys.length)];
+            let buyerTeams = Object.keys(leagueData[buyerLeague]).filter(t => t !== myCurrentTeamName && t !== sellerTeamName);
+            if(buyerTeams.length === 0) continue;
+            
+            // ทีมที่มีนักเตะน้อยจะสนใจซื้อมากกว่า
+            let buyerTeamName = null;
+            let shuffledBuyers = buyerTeams.sort(() => Math.random() - 0.5);
+            for(let bt of shuffledBuyers) {
+                let btCount = allPlayers.filter(p => p.team === bt).length;
+                if(btCount < 28) { buyerTeamName = bt; break; }
+            }
+            if(!buyerTeamName) buyerTeamName = shuffledBuyers[0];
+
+            // ย้ายนักเตะ
+            let transferFee = Math.max(1, Math.floor((soldPlayer.p - 60) * 1.5 + (32 - soldPlayer.age) * 1.0));
+            soldPlayer.team = buyerTeamName;
+            soldPlayer.originalLeague = buyerLeague;
+
+            // แสดงข่าว (โอกาส 60% ที่ข่าวจะถูกแสดง เพื่อไม่ให้ Feed แน่นเกิน)
+            if(Math.random() < 0.6) {
+                let newsTemplate = Math.floor(Math.random() * 4);
+                let newsMsg = '';
+                if(newsTemplate === 0) newsMsg = `🔄 <b>[AI Transfer]</b> <b>${soldPlayer.name}</b> (${soldPlayer.role} ⚡${soldPlayer.p}) อำลา ${sellerTeamName} ซบ <b>${buyerTeamName}</b> ค่าตัว ${transferFee}M`;
+                else if(newsTemplate === 1) newsMsg = `📰 <b>[ตลาดซื้อขาย]</b> ${buyerTeamName} คว้าตัว <b>${soldPlayer.name}</b> จาก ${sellerTeamName} สำเร็จ ${transferFee}M`;
+                else if(newsTemplate === 2) newsMsg = `💼 <b>[ข่าวโลก]</b> ${sellerTeamName} ปล่อยตัว <b>${soldPlayer.name}</b> ให้ ${buyerTeamName} เงินไหลเข้าคลัง ${transferFee}M`;
+                else newsMsg = `✍️ <b>[ย้ายทีม]</b> <b>${soldPlayer.name}</b> เซ็นสัญญากับ ${buyerTeamName} แล้ว! (มาจาก ${sellerTeamName})`;
+                addNews(newsMsg);
+            }
         }
     }
 
@@ -1220,16 +1460,38 @@
         </div>`;
     };
 
+    function getRandomAITeam(excludeTeam) {
+        const allLeagueKeys = ['PL','LALIGA','SERIEA','BL','LIGUE1'];
+        let allTeams = [];
+        allLeagueKeys.forEach(lg => { Object.keys(leagueData[lg]).forEach(t => { if(t !== excludeTeam) allTeams.push({team: t, league: lg}); }); });
+        // ให้ทีมรวยมีโอกาสซื้อมากกว่า (ทีมที่มีนักเตะพลังเฉลี่ยสูง)
+        let weighted = [];
+        allTeams.forEach(({team, league}) => {
+            let teamPlayers = allPlayers.filter(p => p.team === team);
+            let count = teamPlayers.length < 20 ? 3 : teamPlayers.length < 25 ? 2 : 1; // ทีมที่กำลังคนน้อยจะซื้อบ่อยกว่า
+            for(let i=0;i<count;i++) weighted.push({team, league});
+        });
+        if(weighted.length === 0) return allTeams[Math.floor(Math.random()*allTeams.length)];
+        return weighted[Math.floor(Math.random()*weighted.length)];
+    }
+
     function customSellPlayer(id, event) {
         event.stopPropagation();
         const p = mySquad.find(x => x.id === id);
         if(!p) return;
         if(xi.find(x => x.id === id)) return alert("❌ นำนักเตะออกจาก 11 ตัวจริงก่อน ถึงจะทำการขายได้ครับบอส!");
         let sellPrice = Math.max(1, Math.floor((p.p - 60) * 1.5 + (32 - p.age) * 1.0));
-        if(confirm(`บอสต้องการขาย ${p.name} ออกจากสโมสรในราคา ${sellPrice}M ใช่หรือไม่?`)) {
+        
+        // หาทีมที่จะมารับซื้อ
+        let buyer = getRandomAITeam(myCurrentTeamName);
+        
+        if(confirm(`บอสต้องการขาย ${p.name} ออกจากสโมสรในราคา ${sellPrice}M\n\n🏟️ สโมสรที่สนใจ: ${buyer.team}\n\nยืนยันการขายหรือไม่?`)) {
             budget = parseFloat((budget + sellPrice).toFixed(1));
             mySquad = mySquad.filter(x => x.id !== id);
-            addNews(`💸 สโมสรปล่อยตัว ${p.name} รับเงินค่าตัวเข้าคลัง ${sellPrice}M`);
+            // อัปเดตทีมให้นักเตะ
+            p.team = buyer.team;
+            p.originalLeague = buyer.league;
+            addNews(`💸 <b>${p.name}</b> ย้ายซบ <b>${buyer.team}</b> ด้วยค่าตัว ${sellPrice}M สำเร็จแล้ว!`);
             render();
         }
     }
@@ -1242,7 +1504,7 @@
     
     function switchTableLeague(lg) {
         document.querySelectorAll('.league-title-btn').forEach(btn => btn.classList.remove('active'));
-        let tabId = lg === 'PL' ? 'tab-btn-pl' : lg === 'LALIGA' ? 'tab-btn-laliga' : 'tab-btn-seriea';
+        let tabId = lg === 'PL' ? 'tab-btn-pl' : lg === 'LALIGA' ? 'tab-btn-laliga' : lg === 'BL' ? 'tab-btn-bl' : lg === 'LIGUE1' ? 'tab-btn-ligue1' : 'tab-btn-seriea';
         document.getElementById(tabId).classList.add('active');
         
         let sorted = Object.keys(leagueTable).filter(t => leagueTable[t].league === lg).map(t => ({name: t, ...leagueTable[t]})).sort((a,b) => (b.pts - a.pts) || ((b.gf-b.ga) - (a.gf-a.ga)));
@@ -1662,9 +1924,10 @@
         selectNode.innerHTML = ""; // ล้างตัวเลือกเก่า
 
         // แบ่งกลุ่มตามลีกเพื่อให้บอสเลือกดูง่าย
-        ['PL', 'LALIGA'].forEach(lg => {
+        const lgLabels = { 'PL': "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League", 'LALIGA': "🇪🇸 La Liga", 'SERIEA': "🇮🇹 Serie A", 'BL': "🇩🇪 Bundesliga", 'LIGUE1': "🇫🇷 Ligue 1" };
+        ['PL', 'LALIGA', 'SERIEA', 'BL', 'LIGUE1'].forEach(lg => {
             let group = document.createElement('optgroup');
-            group.label = lg === 'PL' ? "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League" : "🇪🇸 La Liga";
+            group.label = lgLabels[lg];
             
             Object.keys(leagueTable).filter(t => leagueTable[t].league === lg).sort().forEach(team => {
                 let opt = document.createElement('option');
@@ -1721,7 +1984,7 @@
         setupGlobalTrophyRooms();
 
         // คำนวณหาแชมป์ของแต่ละลีกเพื่อยัดถ้วยรางวัลใส่ตู้โชว์
-        ['PL', 'LALIGA'].forEach(lg => {
+        ['PL', 'LALIGA', 'SERIEA', 'BL', 'LIGUE1'].forEach(lg => {
             let sorted = Object.keys(leagueTable)
                 .filter(t => leagueTable[t].league === lg)
                 .map(t => ({name: t, ...leagueTable[t]}))
@@ -1818,7 +2081,10 @@
 
         const leagues = {
             'PL': "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League",
-            'LALIGA': "🇪🇸 La Liga"
+            'LALIGA': "🇪🇸 La Liga",
+            'SERIEA': "🇮🇹 Serie A",
+            'BL': "🇩🇪 Bundesliga",
+            'LIGUE1': "🇫🇷 Ligue 1"
         };
 
         Object.keys(leagues).forEach(lg => {
@@ -1914,8 +2180,8 @@
         closeSeasonSummary = function() {
             setupGlobalTrophyRooms();
 
-            // แจกแชมป์พรีเมียร์ลีก และ ลาลีกา ของฤดูกาลนี้
-            ['PL', 'LALIGA'].forEach(lg => {
+            // แจกแชมป์พรีเมียร์ลีก, ลาลีกา, ซีเรียอา, บุนเดสลีกา และ ลีก 1 ของฤดูกาลนี้
+            ['PL', 'LALIGA', 'SERIEA', 'BL', 'LIGUE1'].forEach(lg => {
                 let sortedTeams = Object.keys(leagueTable)
                     .filter(t => leagueTable[t].league === lg)
                     .map(t => ({name: t, ...leagueTable[t]}))
@@ -1925,7 +2191,8 @@
                     let champName = sortedTeams[0].name;
                     if (!leagueTable[champName].trophies) leagueTable[champName].trophies = [];
                     
-                    let leagueNameText = lg === 'PL' ? 'Premier League 🏴󠁧󠁢󠁥󠁮󠁧󠁿' : 'La Liga 🇪🇸';
+                    let leagueNameMap = { 'PL': 'Premier League 🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'LALIGA': 'La Liga 🇪🇸', 'SERIEA': 'Serie A 🇮🇹', 'BL': 'Bundesliga 🇩🇪', 'LIGUE1': 'Ligue 1 🇫🇷' };
+                    let leagueNameText = leagueNameMap[lg] || lg;
                     leagueTable[champName].trophies.unshift(`🏆 แชมป์ ${leagueNameText} (ซีซั่น ${currentSeason})`);
                 }
             });
@@ -2192,6 +2459,671 @@
         setTimeout(injectSkillsToStatsUI, 60);
         setTimeout(injectSkillsToStatsUI, 200);
     });
+</script>
+<script>
+// ====================================================
+// ⭐ UEFA CHAMPIONS LEAGUE SYSTEM - UCL 2026
+// ====================================================
+
+let uclState = {
+    phase: 'not_started', // not_started | group | knockout | done
+    groups: [],           // 8 กลุ่ม x 4 ทีม
+    currentGroupMD: 1,    // แมทช์เดย์ที่ 1-6
+    knockoutRounds: [],   // array ของ fixtures แต่ละรอบ
+    currentKORound: 0,    // 0=R16, 1=QF, 2=SF, 3=Final
+    winner: null
+};
+
+const UCL_KO_NAMES = ['รอบ 16 ทีมสุดท้าย (R16)', 'รอบก่อนรองชนะเลิศ (QF)', 'รอบรองชนะเลิศ (SF)', 'รอบชิงชนะเลิศ ⭐ Final'];
+
+// ---- คัดเลือกทีมเข้า UCL (32 ทีม) ----
+function uclGetQualifiers() {
+    let teams = [];
+    ['PL','LALIGA','SERIEA','BL','LIGUE1'].forEach(lg => {
+        let sorted = Object.keys(leagueTable)
+            .filter(t => leagueTable[t] && leagueTable[t].league === lg)
+            .sort((a,b) => {
+                let pa = leagueTable[a], pb = leagueTable[b];
+                return (pb.pts - pa.pts) || ((pb.gf - pb.ga) - (pa.gf - pa.ga));
+            });
+        teams.push(...sorted.slice(0, 4)); // Top 4 จากแต่ละลีก = 20 ทีม
+    });
+    // ใส่ทีมผู้เล่นก่อนเสมอ
+    if (!teams.includes(myCurrentTeamName)) {
+        teams[teams.length - 1] = myCurrentTeamName;
+    }
+    // เติมให้ครบ 32 ทีม
+    let extras = Object.keys(leagueTable).filter(t => !teams.includes(t)).sort(() => Math.random() - 0.5);
+    teams.push(...extras.slice(0, 32 - teams.length));
+    return teams.slice(0, 32);
+}
+
+// ---- เริ่มต้น UCL ----
+function initUCL() {
+    let qualifiers = uclGetQualifiers().sort(() => Math.random() - 0.5);
+    uclState.groups = [];
+
+    // ตารางการแข่งขัน Round-Robin 4 ทีม 6 แมทช์เดย์ (Home & Away)
+    const scheduleTemplate = [
+        [[0,1],[2,3]], [[0,2],[1,3]], [[0,3],[1,2]],
+        [[1,0],[3,2]], [[2,0],[3,1]], [[3,0],[2,1]]
+    ];
+
+    for (let g = 0; g < 8; g++) {
+        let gTeams = qualifiers.slice(g * 4, g * 4 + 4);
+        let table = {};
+        gTeams.forEach(t => { table[t] = {p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0}; });
+        let matchdays = scheduleTemplate.map(md =>
+            md.map(([i, j]) => ({ home: gTeams[i], away: gTeams[j], played: false, hg: 0, ag: 0 }))
+        );
+        uclState.groups.push({ name: String.fromCharCode(65 + g), teams: gTeams, table, matchdays });
+    }
+
+    uclState.phase = 'group';
+    uclState.currentGroupMD = 1;
+    uclState.knockoutRounds = [];
+    uclState.currentKORound = 0;
+    uclState.winner = null;
+
+    let ug = uclGetUserGroup();
+    addNews(`⭐ [UCL] เริ่มต้น UEFA Champions League แล้ว! ทีมเราอยู่ <b>กลุ่ม ${ug ? ug.name : '?'}</b>`);
+    openUCLModal();
+}
+
+function uclGetUserGroup() {
+    return uclState.groups.find(g => g.teams.includes(myCurrentTeamName));
+}
+
+function uclGetGroupStandings(group) {
+    return Object.entries(group.table)
+        .map(([name, s]) => ({name, ...s, gd: s.gf - s.ga}))
+        .sort((a, b) => b.pts - a.pts || b.gd - a.gd || b.gf - a.gf);
+}
+
+// ---- จำลองแมทช์ AI (ไม่มีผู้เล่น) ----
+function uclSimMatch(fixture, group) {
+    if (fixture.played) return;
+    let t1 = fixture.home, t2 = fixture.away;
+    let t1p = allPlayers.filter(p => p.team===t1 && p.ban===0 && p.injury===0).sort((a,b)=>b.p-a.p).slice(0,11);
+    let t2p = allPlayers.filter(p => p.team===t2 && p.ban===0 && p.injury===0).sort((a,b)=>b.p-a.p).slice(0,11);
+    if (t1p.length < 11) t1p = allPlayers.filter(p => p.team===t1).slice(0,11);
+    if (t2p.length < 11) t2p = allPlayers.filter(p => p.team===t2).slice(0,11);
+    let pow1 = t1p.length ? t1p.reduce((s,p)=>s+p.p,0)/t1p.length : 72;
+    let pow2 = t2p.length ? t2p.reduce((s,p)=>s+p.p,0)/t2p.length : 72;
+    let g1 = 0, g2 = 0;
+    for (let m = 1; m <= 90; m++) {
+        if (Math.random() < Math.max(0.003, pow1*0.00032 + (pow1-pow2)*0.0001)) g1++;
+        if (Math.random() < Math.max(0.003, pow2*0.00032 + (pow2-pow1)*0.0001)) g2++;
+    }
+    // น็อคเอาต์ต้องมีผู้ชนะ
+    if (!group && g1 === g2) { if (Math.random() > 0.5) g1++; else g2++; }
+    fixture.hg = g1; fixture.ag = g2; fixture.played = true;
+    // อัปเดตตาราง
+    if (group) {
+        let tb = group.table;
+        if (!tb[t1] || !tb[t2]) return;
+        tb[t1].p++; tb[t2].p++;
+        tb[t1].gf+=g1; tb[t1].ga+=g2; tb[t2].gf+=g2; tb[t2].ga+=g1;
+        if (g1>g2) { tb[t1].w++; tb[t2].l++; tb[t1].pts+=3; }
+        else if (g1<g2) { tb[t1].l++; tb[t2].w++; tb[t2].pts+=3; }
+        else { tb[t1].d++; tb[t2].d++; tb[t1].pts++; tb[t2].pts++; }
+    }
+    // อัปเดตสถิตินักเตะ
+    t1p.forEach(p => { if(p.stats) p.stats.appearances++; });
+    t2p.forEach(p => { if(p.stats) p.stats.appearances++; });
+    for (let j=0; j<g1; j++) { let s=pickScorer(t1p); if(s&&s.stats) s.stats.goals++; }
+    for (let j=0; j<g2; j++) { let s=pickScorer(t2p); if(s&&s.stats) s.stats.goals++; }
+    if (g2===0) t1p.forEach(p => { if((p.role==='GK'||p.role==='DF')&&p.stats) p.stats.cleanSheets++; });
+    if (g1===0) t2p.forEach(p => { if((p.role==='GK'||p.role==='DF')&&p.stats) p.stats.cleanSheets++; });
+}
+
+// ---- ประมวลผลแมทช์เดย์ในรอบแบ่งกลุ่ม ----
+function processUCLGroupMD() {
+    let mdIdx = uclState.currentGroupMD - 1;
+    // จำลองทุกนัดที่ยังไม่ได้เล่น (รวม AI ที่ไม่ใช่ทีมเรา)
+    uclState.groups.forEach(group => {
+        group.matchdays[mdIdx].forEach(f => { if (!f.played) uclSimMatch(f, group); });
+    });
+    if (uclState.currentGroupMD >= 6) {
+        uclAdvanceToKnockout();
+    } else {
+        uclState.currentGroupMD++;
+        addNews(`⭐ [UCL] จบแมทช์เดย์ ${uclState.currentGroupMD - 1} แล้ว! แมทช์เดย์ ${uclState.currentGroupMD} กำลังจะมาถึง`);
+    }
+    render();
+    openUCLModal();
+}
+
+// ---- เลื่อนเข้ารอบน็อคเอาต์ ----
+function uclAdvanceToKnockout() {
+    let tops = [], seconds = [];
+    uclState.groups.forEach(group => {
+        let s = uclGetGroupStandings(group);
+        tops.push(s[0]?.name || null);
+        seconds.push(s[1]?.name || null);
+        addNews(`⭐ [UCL กลุ่ม ${group.name}] ผ่านเข้ารอบ: <b>${s[0]?.name}</b> (1st) & <b>${s[1]?.name}</b> (2nd)`);
+    });
+    // จับคู่: Top กลุ่ม N vs Second กลุ่ม N+1 (สลับกัน)
+    let r16 = [];
+    for (let i = 0; i < 8; i += 2) {
+        if (tops[i] && seconds[i+1]) r16.push({home: tops[i],   away: seconds[i+1], played: false, hg:0, ag:0});
+        if (tops[i+1] && seconds[i]) r16.push({home: tops[i+1], away: seconds[i],   played: false, hg:0, ag:0});
+    }
+    uclState.phase = 'knockout';
+    uclState.knockoutRounds = [r16];
+    uclState.currentKORound = 0;
+    let ug = uclGetUserGroup();
+    if (ug) {
+        let standings = uclGetGroupStandings(ug);
+        let userIn = standings[0]?.name === myCurrentTeamName || standings[1]?.name === myCurrentTeamName;
+        addNews(userIn ? `✅ [UCL] ทีมเราผ่านรอบแบ่งกลุ่มเข้า <b>รอบ 16 ทีม</b> สำเร็จ!` : `❌ [UCL] ทีมเราตกรอบแบ่งกลุ่ม UCL อย่างน่าเสียดาย`);
+    }
+}
+
+// ---- ประมวลผลน็อคเอาต์ (Live Match) ----
+function processUCLKO(liveHG, liveAG) {
+    let fixtures = uclState.knockoutRounds[uclState.currentKORound];
+    let userF = fixtures.find(f => f.home===myCurrentTeamName || f.away===myCurrentTeamName);
+    let winners = [];
+    fixtures.forEach(f => {
+        if (f === userF && liveHG !== undefined) {
+            let hg = liveHG, ag = liveAG;
+            if (hg === ag) {
+                if (Math.random() > 0.5) hg++; else ag++;
+                addNews(`🎯 [UCL] ดวลจุดโทษ! ${hg>ag ? f.home : f.away} เอาชนะผ่านเข้ารอบต่อไป!`);
+            }
+            f.hg = hg; f.ag = ag; f.played = true;
+            let w = hg > ag ? f.home : f.away;
+            winners.push(w);
+            if (w === myCurrentTeamName) {
+                let prizes = [15, 20, 25, 50];
+                let prize = prizes[uclState.currentKORound] || 15;
+                budget = parseFloat((budget + prize).toFixed(1));
+                addNews(`✅ [UCL] ทีมเราผ่าน ${UCL_KO_NAMES[uclState.currentKORound]}! รับเงินรางวัล <b>${prize}M</b>`);
+            } else {
+                addNews(`❌ [UCL] ทีมเราตกรอบ ${UCL_KO_NAMES[uclState.currentKORound]} อย่างน่าเสียดาย`);
+            }
+        } else {
+            if (!f.played) uclSimMatch(f, null);
+            winners.push(f.hg > f.ag ? f.home : f.away);
+        }
+    });
+    let isFinal = fixtures.length === 1;
+    if (isFinal) {
+        uclState.winner = winners[0];
+        uclState.phase = 'done';
+        allPlayers.forEach(p => {
+            if (p.team === uclState.winner) p.stats.trophies.push(`⭐ แชมป์ UEFA Champions League (ซีซั่น ${currentSeason})`);
+        });
+        if (leagueTable[uclState.winner]) {
+            if (!leagueTable[uclState.winner].trophies) leagueTable[uclState.winner].trophies = [];
+            leagueTable[uclState.winner].trophies.push(`⭐ แชมป์ UCL (ซีซั่น ${currentSeason})`);
+        }
+        addNews(`⭐ [UCL] 🎉 <b>${uclState.winner}</b> ผงาดแชมป์ UEFA Champions League ฤดูกาล ${currentSeason}!`);
+        if (uclState.winner === myCurrentTeamName) {
+            budget = parseFloat((budget + 100).toFixed(1));
+            alert("🎉 ยินดีด้วยบอส! สโมสรเราคว้าแชมป์ UEFA Champions League สำเร็จ!\nรับเงินอัดฉีดสุดยิ่งใหญ่ 100M เข้าคลัง!");
+        }
+    } else {
+        let next = [];
+        for (let i = 0; i < winners.length; i += 2) {
+            if (winners[i] && winners[i+1]) next.push({home: winners[i], away: winners[i+1], played: false, hg:0, ag:0});
+        }
+        uclState.knockoutRounds.push(next);
+        uclState.currentKORound++;
+        addNews(`⭐ [UCL] เข้าสู่ <b>${UCL_KO_NAMES[uclState.currentKORound]}</b> แล้ว!`);
+    }
+    render();
+    openUCLModal();
+}
+
+// ---- จำลองผลน็อคเอาต์ทั้งหมด (เมื่อทีมเราตกรอบ) ----
+function uclSimAllKO() {
+    let fixtures = uclState.knockoutRounds[uclState.currentKORound];
+    if (!fixtures) return;
+    fixtures.forEach(f => { if (!f.played) uclSimMatch(f, null); });
+    let winners = fixtures.map(f => f.hg > f.ag ? f.home : f.away);
+    let isFinal = fixtures.length === 1;
+    if (isFinal) {
+        uclState.winner = winners[0]; uclState.phase = 'done';
+        allPlayers.forEach(p => { if(p.team===uclState.winner) p.stats.trophies.push(`⭐ แชมป์ UEFA Champions League (ซีซั่น ${currentSeason})`); });
+        if (leagueTable[uclState.winner]) { if(!leagueTable[uclState.winner].trophies) leagueTable[uclState.winner].trophies=[]; leagueTable[uclState.winner].trophies.push(`⭐ แชมป์ UCL (ซีซั่น ${currentSeason})`); }
+        addNews(`⭐ [UCL] 🎉 <b>${uclState.winner}</b> ผงาดแชมป์ UEFA Champions League ฤดูกาล ${currentSeason}!`);
+    } else {
+        let next = [];
+        for (let i = 0; i < winners.length; i += 2) {
+            if (winners[i] && winners[i+1]) next.push({home: winners[i], away: winners[i+1], played: false, hg:0, ag:0});
+        }
+        uclState.knockoutRounds.push(next);
+        uclState.currentKORound++;
+        addNews(`⭐ [UCL] เข้าสู่ <b>${UCL_KO_NAMES[uclState.currentKORound]}</b> แล้ว!`);
+    }
+    render();
+    openUCLModal();
+}
+
+// ---- Live Match สำหรับ UCL ----
+function startUCLLive(homeTeam, awayTeam, isGroup) {
+    if (xi.length < 11) return alert("⚠️ จัดตัวจริงให้ครบ 11 คนก่อนลงแข่ง UCL ครับบอส!");
+    document.getElementById('ucl-modal').style.display = 'none';
+
+    let oppName = homeTeam === myCurrentTeamName ? awayTeam : homeTeam;
+    let myPow = xi.reduce((s,p)=>s+p.p,0) / xi.length;
+    let oppP = allPlayers.filter(p=>p.team===oppName&&p.ban===0&&p.injury===0).sort((a,b)=>b.p-a.p).slice(0,11);
+    if (oppP.length < 11) oppP = allPlayers.filter(p=>p.team===oppName).slice(0,11);
+    let oppPow = oppP.length ? oppP.reduce((s,p)=>s+p.p,0)/oppP.length : 70;
+
+    currentMatchScorers = []; currentMatchAssisters = [];
+    let events = [], myG = 0, oppG = 0;
+
+    for (let m = 1; m <= 90; m++) {
+        let mc = Math.max(0.005, myPow * 0.00035 + (myPow - oppPow) * 0.00015);
+        let oc = Math.max(0.005, oppPow * 0.00035 + (oppPow - myPow) * 0.00015);
+        if (Math.random() < mc) {
+            myG++;
+            let s = pickScorer(xi); currentMatchScorers.push(s);
+            let pa = xi.filter(x=>x.id!==s.id&&x.role!=='GK');
+            if (pa.length && Math.random() < 0.7) currentMatchAssisters.push(pa[Math.floor(Math.random()*pa.length)]);
+            events.push({min:m, isHome: homeTeam===myCurrentTeamName, type:'goal', html:`<span class="event-goal">⭐ <b>[UCL GOAL]</b> ${s.name} (${s.role}) ${getGoalDescription(s.role)}</span>`});
+        }
+        if (Math.random() < oc) {
+            oppG++;
+            let s = pickScorer(oppP); currentMatchScorers.push(s);
+            let pa = oppP.filter(x=>x.id!==s.id&&x.role!=='GK');
+            if (pa.length && Math.random() < 0.7) currentMatchAssisters.push(pa[Math.floor(Math.random()*pa.length)]);
+            events.push({min:m, isHome: homeTeam!==myCurrentTeamName, type:'goal', html:`<span class="event-goal">⭐ <b>[UCL GOAL]</b> [${oppName}] ${s.name} (${s.role}) ${getGoalDescription(s.role)}</span>`});
+        }
+        // เหตุการณ์ใบแดง/บาดเจ็บใน UCL
+        [...xi, ...oppP].forEach(p => {
+            let rand = Math.random();
+            if (rand < 0.004 && !p.newBan) {
+                p.newBan = 3;
+                let prefix = p.team === myCurrentTeamName ? "" : `[${oppName}] `;
+                events.push({min: m, isHome: p.team===myCurrentTeamName, type:'red', html:`<span class="event-red">🟥 <b>[ใบแดง UCL!]</b> ${prefix}${p.name} โดนไล่ออก! (แบน 3 นัด)</span>`});
+            }
+        });
+    }
+    events.sort((a, b) => a.min - b.min);
+
+    let roundLabel = isGroup
+        ? `UCL กลุ่ม ${uclGetUserGroup()?.name || '?'} – แมทช์เดย์ ${uclState.currentGroupMD}`
+        : `UCL ${UCL_KO_NAMES[uclState.currentKORound]}`;
+    document.getElementById('live-matchday-title').innerText = `⭐ ${roundLabel}`;
+    document.getElementById('live-home-name').innerText = homeTeam;
+    document.getElementById('live-away-name').innerText = awayTeam;
+    document.getElementById('live-score-display').innerText = "0 - 0";
+    document.getElementById('live-events-log').innerHTML = `<div style='color:#facc15;font-weight:bold;text-align:center;'>⭐ UEFA Champions League – เกมแห่งฝัน เริ่มต้นแล้ว!</div><br>`;
+    document.getElementById('live-close-btn').style.display = 'none';
+    document.getElementById('live-match-modal').style.display = 'flex';
+
+    let sec = 0, hS = 0, aS = 0;
+    let timer = setInterval(() => {
+        sec++;
+        let gm = Math.min(sec * 6, 90);
+        document.getElementById('live-game-minute').innerText = gm;
+        events.forEach(ev => {
+            if (ev.min > (gm-6) && ev.min <= gm && !ev.shown) {
+                ev.shown = true;
+                if (ev.type === 'goal') {
+                    if (ev.isHome) hS++; else aS++;
+                    document.getElementById('live-score-display').innerText = `${hS} - ${aS}`;
+                }
+                document.getElementById('live-events-log').innerHTML = ev.html + "<br>" + document.getElementById('live-events-log').innerHTML;
+            }
+        });
+        if (sec >= 15) {
+            clearInterval(timer);
+            document.getElementById('live-game-minute').innerText = '90 (จบเกม)';
+            // อัปเดต ban/injury
+            [...xi, ...oppP].forEach(p => {
+                if (p.newBan) { p.ban = p.newBan; p.newBan = 0; }
+                if (p.newInjury) { p.injury = p.newInjury; p.newInjury = 0; }
+            });
+            document.getElementById('live-close-btn').style.display = 'block';
+            document.getElementById('live-close-btn').onclick = () => {
+                document.getElementById('live-match-modal').style.display = 'none';
+                allPlayers.forEach(p => {
+                    if (p.ban > 0) p.ban--;
+                    if (p.injury > 0) p.injury--;
+                    if (p.newBan) { p.ban = p.newBan; p.newBan = 0; }
+                    if (p.newInjury) { p.injury = p.newInjury; p.newInjury = 0; }
+                });
+                xi = xi.filter(p => p.ban === 0 && p.injury === 0);
+                // อัปเดตสถิตินักเตะ
+                xi.forEach(p => p.stats.appearances++);
+                currentMatchScorers.forEach(p => { if(p.stats) p.stats.goals++; });
+                currentMatchAssisters.forEach(p => { if(p.stats) p.stats.assists++; });
+                let myGoals = homeTeam === myCurrentTeamName ? hS : aS;
+                let oppGoals = homeTeam === myCurrentTeamName ? aS : hS;
+                if (oppGoals === 0) xi.forEach(p => { if((p.role==='GK'||p.role==='DF')) p.stats.cleanSheets++; });
+                if (myGoals === 0) oppP.forEach(p => { if((p.role==='GK'||p.role==='DF')&&p.stats) p.stats.cleanSheets++; });
+                addNews(`⭐ [UCL] ${myCurrentTeamName} ${myGoals>oppGoals?'ชนะ':myGoals<oppGoals?'พ่าย':'เสมอ'} ${oppName} <b>${myGoals}-${oppGoals}</b>`);
+                if (isGroup) {
+                    // อัปเดตตารางกลุ่ม
+                    let ug = uclGetUserGroup();
+                    if (ug) {
+                        let tb = ug.table;
+                        if (tb[myCurrentTeamName] && tb[oppName]) {
+                            tb[myCurrentTeamName].p++; tb[oppName].p++;
+                            tb[myCurrentTeamName].gf += myGoals; tb[myCurrentTeamName].ga += oppGoals;
+                            tb[oppName].gf += oppGoals; tb[oppName].ga += myGoals;
+                            if (myGoals > oppGoals) { tb[myCurrentTeamName].w++; tb[oppName].l++; tb[myCurrentTeamName].pts += 3; }
+                            else if (myGoals < oppGoals) { tb[myCurrentTeamName].l++; tb[oppName].w++; tb[oppName].pts += 3; }
+                            else { tb[myCurrentTeamName].d++; tb[oppName].d++; tb[myCurrentTeamName].pts++; tb[oppName].pts++; }
+                        }
+                        // ทำเครื่องหมายนัดที่เล่นแล้ว
+                        let mdIdx = uclState.currentGroupMD - 1;
+                        let uf = ug.matchdays[mdIdx].find(f => f.home===myCurrentTeamName || f.away===myCurrentTeamName);
+                        if (uf) { uf.hg = hS; uf.ag = aS; uf.played = true; }
+                    }
+                    processUCLGroupMD();
+                } else {
+                    processUCLKO(hS, aS);
+                }
+            };
+        }
+    }, 1000);
+}
+
+// ====================================================
+// ⭐ UCL MODAL UI
+// ====================================================
+document.body.insertAdjacentHTML('beforeend', `
+<div id="ucl-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,15,0.96); z-index:1004; align-items:center; justify-content:center; overflow-y:auto; padding:20px 0;">
+    <div class="modal-content" style="width:760px; border:2px solid #facc15; background:#1e293b; max-height:90vh; overflow-y:auto; box-shadow:0 0 40px rgba(250,204,21,0.3);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:12px;border-bottom:1px solid #334155;">
+            <div>
+                <h2 style="color:#facc15;margin:0;font-size:20px;">⭐ UEFA Champions League</h2>
+                <div style="color:#94a3b8;font-size:11px;margin-top:3px;">การแข่งขันสโมสรยอดเยี่ยมแห่งยุโรป</div>
+            </div>
+            <button onclick="document.getElementById('ucl-modal').style.display='none'" style="background:#475569;padding:6px 14px;border:none;color:white;border-radius:4px;cursor:pointer;font-weight:bold;">✕ ปิด</button>
+        </div>
+        <div id="ucl-body"></div>
+    </div>
+</div>
+`);
+
+function openUCLModal() {
+    document.getElementById('ucl-modal').style.display = 'flex';
+    renderUCLModal();
+}
+
+function renderUCLModal() {
+    let b = document.getElementById('ucl-body');
+    if (uclState.phase === 'not_started') {
+        b.innerHTML = `<div style="text-align:center;padding:40px 20px;">
+            <div style="font-size:64px;margin-bottom:10px;">⭐</div>
+            <h3 style="color:#facc15;font-size:18px;margin-bottom:8px;">UEFA Champions League</h3>
+            <p style="color:#94a3b8;font-size:13px;margin-bottom:20px;">32 ทีมชั้นนำจาก 5 ลีกใหญ่ทั่วยุโรป<br>รอบแบ่งกลุ่ม 6 แมทช์เดย์ → รอบ 16 ทีม → QF → SF → Final</p>
+            <div style="background:#0f172a;padding:12px;border-radius:8px;margin-bottom:20px;font-size:12px;color:#94a3b8;">
+                💰 เงินรางวัล: ผ่านR16 +15M | QF +20M | SF +25M | <b style="color:#facc15;">แชมป์ +100M</b>
+            </div>
+            <button onclick="initUCL()" style="background:#facc15;color:#000;padding:14px 30px;font-size:16px;font-weight:bold;border:none;border-radius:8px;cursor:pointer;letter-spacing:0.5px;">🏆 เริ่ม UCL ซีซั่นนี้!</button>
+        </div>`;
+        return;
+    }
+    if (uclState.phase === 'done') {
+        b.innerHTML = `<div style="text-align:center;padding:40px;background:radial-gradient(circle,#1a2a0a,#0f172a);border-radius:8px;">
+            <div style="font-size:70px;animation:none;">🏆</div>
+            <div style="color:#facc15;font-size:13px;margin:10px 0 4px;">แชมป์ UEFA Champions League – ซีซั่น ${currentSeason}</div>
+            <div style="font-size:26px;font-weight:bold;color:white;padding:10px 20px;background:rgba(250,204,21,0.1);border:1px solid #facc15;border-radius:6px;display:inline-block;margin:8px;">${uclState.winner}</div>
+        </div>`;
+        return;
+    }
+    if (uclState.phase === 'group') uclRenderGroup(b);
+    else if (uclState.phase === 'knockout') uclRenderKnockout(b);
+}
+
+function uclRenderGroup(b) {
+    let ug = uclGetUserGroup();
+    let mdIdx = uclState.currentGroupMD - 1;
+    let userF = ug ? ug.matchdays[mdIdx].find(f => f.home===myCurrentTeamName || f.away===myCurrentTeamName) : null;
+    let userFPlayed = !userF || userF.played;
+
+    let html = `<div style="text-align:center;background:#0f172a;padding:10px;border-radius:6px;margin-bottom:14px;">
+        <span style="color:#facc15;font-weight:bold;font-size:13px;">🗓️ รอบแบ่งกลุ่ม – แมทช์เดย์ ${uclState.currentGroupMD} / 6</span>
+        <div style="margin-top:4px;display:flex;justify-content:center;gap:6px;">${[1,2,3,4,5,6].map(i=>`<span style="width:22px;height:22px;border-radius:50%;background:${i<uclState.currentGroupMD?'#22c55e':i===uclState.currentGroupMD?'#facc15':'#334155'};color:${i===uclState.currentGroupMD?'#000':'white'};font-size:10px;font-weight:bold;display:inline-flex;align-items:center;justify-content:center;">${i}</span>`).join('')}</div>
+    </div>`;
+
+    // กลุ่มของทีมเรา (ไฮไลต์)
+    if (ug) {
+        let s = uclGetGroupStandings(ug);
+        html += `<div style="background:#0a1628;border:2px solid #facc15;border-radius:8px;padding:12px;margin-bottom:14px;">
+            <div style="font-weight:bold;color:#facc15;margin-bottom:10px;font-size:13px;">⭐ กลุ่ม ${ug.name} – ทีมของคุณ</div>
+            <table style="width:100%;font-size:11px;margin-bottom:10px;"><thead><tr style="color:#94a3b8;">
+                <th style="text-align:left;padding:4px;">ทีม</th><th>แข่ง</th><th>W</th><th>D</th><th>L</th><th>GD</th><th style="color:#facc15;">แต้ม</th>
+            </tr></thead><tbody>`;
+        s.forEach((t, i) => {
+            let isMe = t.name === myCurrentTeamName;
+            html += `<tr style="${isMe?'background:rgba(250,204,21,0.12);font-weight:bold;':''}">
+                <td style="text-align:left;padding:5px 3px;"><span style="color:${i<2?'#22c55e':'#64748b'};margin-right:5px;">${i<2?'✅':'  '}</span>${t.name}${isMe?' 🌟':''}</td>
+                <td style="text-align:center;">${t.p}</td><td style="text-align:center;">${t.w}</td><td style="text-align:center;">${t.d}</td><td style="text-align:center;">${t.l}</td>
+                <td style="text-align:center;color:${t.gd>0?'#22c55e':t.gd<0?'#ef4444':'#94a3b8'};">${t.gd>=0?'+':''}${t.gd}</td>
+                <td style="text-align:center;font-weight:bold;color:#facc15;">${t.pts}</td>
+            </tr>`;
+        });
+        html += `</tbody></table>`;
+
+        if (userF && !userF.played) {
+            html += `<div style="background:#0f172a;border-radius:6px;padding:12px;text-align:center;">
+                <div style="color:#94a3b8;font-size:11px;margin-bottom:6px;">นัดของทีมเรา – แมทช์เดย์ ${uclState.currentGroupMD}</div>
+                <div style="font-size:15px;font-weight:bold;margin-bottom:10px;">${userF.home} <span style="color:#facc15;margin:0 10px;">VS</span> ${userF.away}</div>
+                <button onclick="startUCLLive('${userF.home}','${userF.away}',true)" style="padding:11px 24px;background:#facc15;color:#000;font-weight:bold;border:none;border-radius:6px;cursor:pointer;font-size:13px;">⚽ แข่งขัน UCL นัดนี้!</button>
+            </div>`;
+        } else if (userF && userF.played) {
+            let myScoreStr = userF.home===myCurrentTeamName ? `${userF.hg} - ${userF.ag}` : `${userF.ag} - ${userF.hg}`;
+            html += `<div style="text-align:center;padding:8px;font-size:12px;color:#22c55e;">✅ เล่นแล้ว: ${myCurrentTeamName} ${myScoreStr} ${userF.home===myCurrentTeamName?userF.away:userF.home}</div>`;
+        }
+        if (userFPlayed) {
+            html += `<div style="text-align:center;margin-top:10px;">
+                <button onclick="processUCLGroupMD()" style="padding:9px 22px;background:#3b82f6;color:white;font-weight:bold;border:none;border-radius:6px;cursor:pointer;font-size:13px;">⏩ ดำเนินต่อไปยังแมทช์เดย์ถัดไป</button>
+            </div>`;
+        }
+        html += `</div>`;
+    }
+
+    // กลุ่มอื่นๆ
+    html += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">`;
+    uclState.groups.filter(g => g !== ug).forEach(group => {
+        let s = uclGetGroupStandings(group);
+        html += `<div style="background:#0f172a;border:1px solid #334155;border-radius:6px;padding:8px;">
+            <div style="font-weight:bold;color:#facc15;font-size:11px;margin-bottom:5px;">กลุ่ม ${group.name}</div>`;
+        s.forEach((t,i) => {
+            html += `<div style="font-size:10px;display:flex;justify-content:space-between;align-items:center;padding:2px 0;border-bottom:1px solid #1e293b;">
+                <span style="color:${i<2?'#22c55e':'#64748b'}">${i<2?'✅':' '} ${t.name}</span>
+                <span style="color:#facc15;font-weight:bold;font-size:11px;">${t.pts}</span>
+            </div>`;
+        });
+        html += `</div>`;
+    });
+    html += `</div>`;
+    b.innerHTML = html;
+}
+
+function uclRenderKnockout(b) {
+    let fixtures = uclState.knockoutRounds[uclState.currentKORound];
+    if (!fixtures) { b.innerHTML='<div style="color:#94a3b8;text-align:center;padding:20px;">ไม่มีข้อมูลการแข่งขัน</div>'; return; }
+    let roundName = UCL_KO_NAMES[uclState.currentKORound] || 'รอบน็อคเอาต์';
+    let userF = fixtures.find(f => f.home===myCurrentTeamName || f.away===myCurrentTeamName);
+    let userIn = !!userF;
+
+    let html = `<div style="text-align:center;background:linear-gradient(135deg,#1a2a0a,#0f172a);padding:12px;border-radius:8px;margin-bottom:14px;border:1px solid #facc15;">
+        <div style="color:#facc15;font-weight:bold;font-size:15px;">⚡ ${roundName}</div>
+        <div style="color:#94a3b8;font-size:11px;margin-top:4px;">${fixtures.length} คู่ · ผู้ชนะในแต่ละคู่ผ่านเข้ารอบต่อไป</div>
+    </div>`;
+
+    if (userIn && userF && !userF.played) {
+        html += `<div style="background:#0a1628;border:2px solid #facc15;border-radius:8px;padding:15px;margin-bottom:14px;text-align:center;">
+            <div style="color:#94a3b8;font-size:11px;margin-bottom:8px;">⚽ นัดของทีมเรา</div>
+            <div style="font-size:17px;font-weight:bold;margin-bottom:12px;">${userF.home} <span style="color:#facc15;margin:0 12px;">VS</span> ${userF.away}</div>
+            <button onclick="startUCLLive('${userF.home}','${userF.away}',false)" style="padding:12px 28px;background:#facc15;color:#000;font-weight:bold;border:none;border-radius:6px;cursor:pointer;font-size:14px;">⚽ แข่งขัน UCL!</button>
+        </div>`;
+    } else if (!userIn) {
+        html += `<div style="background:rgba(239,68,68,0.08);border:1px solid #ef4444;border-radius:6px;padding:10px;margin-bottom:12px;text-align:center;color:#f87171;font-size:12px;">❌ ทีมเราตกรอบแล้ว – ยังสามารถชมการแข่งขัน UCL ต่อได้</div>
+        <div style="text-align:center;margin-bottom:14px;"><button onclick="uclSimAllKO()" style="padding:10px 22px;background:#3b82f6;color:white;font-weight:bold;border:none;border-radius:6px;cursor:pointer;font-size:13px;">⏩ จำลองผลรอบนี้และดำเนินต่อ</button></div>`;
+    }
+
+    // Bracket
+    html += `<div style="display:grid;grid-template-columns:${fixtures.length>4?'1fr 1fr':'1fr 1fr'};gap:8px;">`;
+    fixtures.forEach(f => {
+        let isUF = f.home===myCurrentTeamName || f.away===myCurrentTeamName;
+        let winner = f.played ? (f.hg>f.ag ? f.home : f.away) : null;
+        html += `<div style="background:#0f172a;border:1px solid ${isUF?'#facc15':'#334155'};border-radius:6px;padding:10px;text-align:center;font-size:12px;">
+            <div style="font-weight:bold;padding:3px;${f.played&&winner===f.home?'color:#22c55e;':''}">${f.home}</div>
+            <div style="color:${f.played?'#22c55e':'#facc15'};font-size:${f.played?'18px':'14px'};font-weight:bold;margin:5px 0;">${f.played?`${f.hg} – ${f.ag}`:'VS'}</div>
+            <div style="font-weight:bold;padding:3px;${f.played&&winner===f.away?'color:#22c55e;':''}">${f.away}</div>
+            ${f.played&&winner?`<div style="font-size:10px;color:#22c55e;margin-top:5px;border-top:1px dashed #334155;padding-top:4px;">✅ ${winner}</div>`:''}
+        </div>`;
+    });
+    html += `</div>`;
+    b.innerHTML = html;
+}
+
+// ---- ฝังปุ่ม UCL ใน Navbar ----
+setTimeout(() => {
+    let nav = document.querySelector('.header-box > div > div:nth-child(3)');
+    if (nav) {
+        let btn = document.createElement('button');
+        btn.innerHTML = '⭐ UCL';
+        btn.style.cssText = 'background:#facc15;color:#000;font-weight:bold;margin-left:5px;padding:6px 10px;border:none;border-radius:4px;cursor:pointer;';
+        btn.onclick = openUCLModal;
+        nav.appendChild(btn);
+    }
+    // รีเซ็ต UCL ทุกซีซั่น
+    const _origCSS = closeSeasonSummary;
+    closeSeasonSummary = function() {
+        _origCSS();
+        uclState.phase = 'not_started';
+        addNews('⭐ [UCL] ซีซั่นใหม่เริ่มต้น! กดปุ่ม <b>⭐ UCL</b> ใน Navbar เพื่อเริ่มการแข่งขัน UCL ใหม่');
+    };
+}, 900);
+</script><script>
+// ====================================================
+// 💾 SAVE & LOAD SYSTEM (ระบบบันทึกและโหลดเกม)
+// ====================================================
+
+// 1. ฟังก์ชันบันทึกเกม (Save Game)
+function saveGame() {
+    if (!myCurrentTeamName) {
+        alert("⚠️ ยังไม่ได้เริ่มเกมเลยครับบอส!");
+        return;
+    }
+    
+    // รวบรวมตัวแปรสำคัญของเกมทั้งหมดเข้าด้วยกัน
+    const gameState = {
+        allPlayers: allPlayers,
+        youthPlayers: youthPlayers,
+        leagueTable: leagueTable,
+        myCurrentTeamName: myCurrentTeamName,
+        myCurrentLeague: myCurrentLeague,
+        budget: budget,
+        mySquad: mySquad,
+        xi: xi,
+        schedule: schedule,
+        currentMatchday: currentMatchday,
+        currentSeason: currentSeason,
+        idCounter: idCounter,
+        youthIdCounter: youthIdCounter,
+        cupState: typeof cupState !== 'undefined' ? cupState : null,
+        uclState: typeof uclState !== 'undefined' ? uclState : null
+    };
+    
+    try {
+        // บันทึกลง LocalStorage ของเบราว์เซอร์
+        localStorage.setItem('dlm2026_save_data', JSON.stringify(gameState));
+        alert("💾 บันทึกเกมสำเร็จแล้วครับบอส! สามารถปิดเว็บแล้วกลับมาโหลดเล่นต่อได้ตลอดเวลา");
+    } catch (e) {
+        alert("❌ เกิดข้อผิดพลาดในการบันทึกเกม (พื้นที่จัดเก็บเบราว์เซอร์อาจเต็ม): " + e);
+    }
+}
+
+// 2. ฟังก์ชันโหลดเกม (Load Game)
+function loadGame() {
+    const saveData = localStorage.getItem('dlm2026_save_data');
+    if (!saveData) {
+        alert("⚠️ ไม่พบข้อมูลเซฟเกมเก่าครับบอส! กรุณาเริ่มเกมใหม่");
+        return;
+    }
+    
+    try {
+        const gameState = JSON.parse(saveData);
+        
+        // คืนค่าข้อมูลทั้งหมดกลับเข้าสู่ระบบเกม
+        allPlayers = gameState.allPlayers;
+        youthPlayers = gameState.youthPlayers;
+        leagueTable = gameState.leagueTable;
+        myCurrentTeamName = gameState.myCurrentTeamName;
+        myCurrentLeague = gameState.myCurrentLeague;
+        budget = gameState.budget;
+        mySquad = gameState.mySquad;
+        xi = gameState.xi;
+        schedule = gameState.schedule;
+        currentMatchday = gameState.currentMatchday;
+        currentSeason = gameState.currentSeason;
+        idCounter = gameState.idCounter;
+        youthIdCounter = gameState.youthIdCounter;
+        
+        if (gameState.cupState && typeof cupState !== 'undefined') {
+            cupState = gameState.cupState;
+        }
+        if (gameState.uclState && typeof uclState !== 'undefined') {
+            uclState = gameState.uclState;
+        }
+
+        // ปิดหน้าจอตั้งค่า และเปิดหน้าจอเกม
+        document.getElementById('setup-screen').style.display = 'none';
+        document.getElementById('game-screen').style.display = 'block';
+        
+        // อัปเดตตัวเลข UI เบื้องต้น
+        document.getElementById('season-num').innerText = currentSeason;
+        document.getElementById('matchday').innerText = currentMatchday;
+        document.getElementById('btn-match-num').innerText = currentMatchday;
+        
+        // สั่งให้ระบบวาดหน้าจอ (Render) ใหม่ทั้งหมดจากข้อมูลที่โหลดมา
+        render();
+        if (typeof renderYouthAcademy === 'function') renderYouthAcademy();
+        if (typeof setupGlobalTrophyRooms === 'function') setupGlobalTrophyRooms();
+        
+        if (typeof addNews === 'function') {
+            addNews("💾 โหลดเซฟเกมเรียบร้อย! ยินดีต้อนรับกลับมาสานต่อความยิ่งใหญ่ครับบอส!");
+        }
+        
+        alert("✅ โหลดเกมสำเร็จ! ยินดีต้อนรับกลับสู่การคุมทีม " + myCurrentTeamName);
+        
+    } catch (e) {
+        alert("❌ เซฟเกมอาจจะเสียหาย หรือไฟล์มีปัญหาครับ: " + e);
+    }
+}
+
+// 3. ฝังปุ่ม Save และ Load ลงในหน้าจอแบบอัตโนมัติ (โดยไม่ต้องแก้ HTML)
+setTimeout(() => {
+    // 3.1 แทรกปุ่ม "โหลดเกม" ในหน้าแรก (Setup Screen)
+    const setupScreen = document.getElementById('setup-screen');
+    if (setupScreen) {
+        const loadBtn = document.createElement('button');
+        loadBtn.innerHTML = "📂 โหลดเซฟเกมล่าสุด";
+        loadBtn.style.cssText = "font-size: 18px; padding: 10px 25px; background: #3b82f6; border-radius: 6px; width: 100%; max-width: 300px; margin-top: 10px; border: none; color: white; cursor: pointer; font-weight: bold; display: block; margin-left: auto; margin-right: auto;";
+        loadBtn.onclick = loadGame;
+        setupScreen.appendChild(loadBtn);
+    }
+
+    // 3.2 แทรกปุ่ม "บันทึกเกม" แถบเมนูด้านบนในหน้าเล่นเกม (Header Nav)
+    let navContainer = document.querySelector('.header-box > div > div:nth-child(3)');
+    if (!navContainer) {
+        // เผื่อโครงสร้างเพี้ยน หาจากปุ่มตลาดซื้อขาย
+        let marketBtn = document.querySelector('button[onclick*="Market"]');
+        if (marketBtn) navContainer = marketBtn.parentElement;
+    }
+    
+    if (navContainer) {
+        const saveBtn = document.createElement('button');
+        saveBtn.innerHTML = "💾 บันทึกเกม";
+        saveBtn.style.cssText = "background: #64748b; color: white; margin-left: 5px; padding: 6px 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;";
+        saveBtn.onclick = saveGame;
+        navContainer.appendChild(saveBtn);
+    }
+}, 1500); // ตั้งดีเลย์ 1.5 วินาที เพื่อรอให้ปุ่มอื่นๆ (อย่าง UCL, FA Cup) สร้างเสร็จก่อนแล้วค่อยไปต่อท้าย
+
 </script>
 </body>
 </html>
